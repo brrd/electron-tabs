@@ -1,0 +1,17 @@
+{
+  "name": "electron-tabs",
+  "version": "0.1.0",
+  "description": "Tabs for electron applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "tab",
+    "tabs",
+    "webview"
+  ],
+  "author": "brrd",
+  "license": "MIT"
+}
