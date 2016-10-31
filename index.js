@@ -108,9 +108,8 @@ class Tab {
         this.setIcon(this.iconURL);
         this.setButtons();
 
-        tab.addEventListener("click", this.activate.bind(this), false);
+        tab.addEventListener("click", this.tabClickHandler.bind(this), false);
         this.tabGroup.tabContainer.appendChild(this.tab);
-        // TODO: handle middle click
     }
 
     initWebview () {
@@ -155,6 +154,14 @@ class Tab {
             button.classList.add(`${tabClass}-button-close`);
             button.innerHTML = "&#x274c;";
             button.addEventListener("click", this.close.bind(this), false);
+        }
+    }
+
+    tabClickHandler (e) {
+        if (e.which === 1) {
+            this.activate();
+        } else if (e.which === 2) {
+            this.close();
         }
     }
 
