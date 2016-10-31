@@ -139,7 +139,7 @@ class Tab {
     }
 
     flash (flag) {
-        if (flag) {
+        if (flag !== false) {
             this.tab.classList.add("flash");
         } else {
             this.tab.classList.remove("flash");
