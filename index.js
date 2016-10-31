@@ -86,17 +86,28 @@ class Tab {
         this.iconURL = args.iconURL;
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
+        this.tabElements = {};
         this.initTab();
         this.initWebview();
     }
 
     initTab () {
-        this.tab = document.createElement("div");
+        let tabClass = this.tabGroup.options.tabClass;
+
+        // Create tab element
+        let tab = this.tab = document.createElement("div");
+        tab.classList.add(tabClass);
+        for (let el of ["icon", "title", "buttons"]) {
+            let span = tab.appendChild(document.createElement("span"));
+            span.classList.add(`${tabClass}-${el}`);
+            this.tabElements[el] = span;
+        }
+
         this.setTitle(this.title);
-        this.tab.classList.add(this.tabGroup.options.tabClass);
-        this.tab.addEventListener("click", this.activate.bind(this), false);
+        this.setIcon(this.iconURL);
+
+        tab.addEventListener("click", this.activate.bind(this), false);
         this.tabGroup.tabContainer.appendChild(this.tab);
-        // TODO: icon
         // TODO: close button
         // TODO: handle middle click
     }
@@ -114,17 +125,25 @@ class Tab {
     }
 
     setTitle (title) {
+        let span = this.tabElements.title;
+        span.innerHTML = title;
         this.title = title;
-        this.tab.innerHTML = title;
     }
 
     getTitle () {
-        return this.tab.innerHTML;
+        return this.title;
     }
 
     setIcon (iconURL) {
         this.iconURL = iconURL;
-        this.tab.setAttribute("data-icon", iconURL);
+        let span = this.tabElements.icon;
+        if (iconURL) {
+            span.innerHTML = `<img src="${iconURL}" />`;
+        }
+    }
+
+    getIcon () {
+        return this.iconURL;
     }
 
     activate () {
