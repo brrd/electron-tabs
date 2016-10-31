@@ -31,7 +31,8 @@ class TabGroup {
             tabContainerSelector: args.tabContainerSelector || ".tabs-tabcontainer",
             viewContainerSelector: args.viewContainerSelector || ".tabs-viewcontainer",
             tabClass: args.tabClass || "tabs-tab",
-            viewClass: args.viewClass || "tabs-view"
+            viewClass: args.viewClass || "tabs-view",
+            closeButtonText: args.closeButtonText || "&#x274c;"
         };
         this.tabContainer = document.querySelector(options.tabContainerSelector);
         this.viewContainer = document.querySelector(options.viewContainerSelector);
@@ -152,7 +153,7 @@ class Tab {
         if (this.closable) {
             let button = container.appendChild(document.createElement("button"));
             button.classList.add(`${tabClass}-button-close`);
-            button.innerHTML = "&#x274c;";
+            button.innerHTML = this.tabGroup.options.closeButtonText;
             button.addEventListener("click", this.close.bind(this), false);
         }
     }
