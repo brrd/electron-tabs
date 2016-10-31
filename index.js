@@ -84,6 +84,7 @@ class Tab {
         this.id = id;
         this.title = args.title;
         this.iconURL = args.iconURL;
+        this.closable = args.closable === false ? false : true;
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
         this.tabElements = {};
@@ -105,10 +106,10 @@ class Tab {
 
         this.setTitle(this.title);
         this.setIcon(this.iconURL);
+        this.setButtons();
 
         tab.addEventListener("click", this.activate.bind(this), false);
         this.tabGroup.tabContainer.appendChild(this.tab);
-        // TODO: close button
         // TODO: handle middle click
     }
 
@@ -144,6 +145,17 @@ class Tab {
 
     getIcon () {
         return this.iconURL;
+    }
+
+    setButtons () {
+        let container = this.tabElements.buttons;
+        let tabClass = this.tabGroup.options.tabClass;
+        if (this.closable) {
+            let button = container.appendChild(document.createElement("button"));
+            button.classList.add(`${tabClass}-button-close`);
+            button.innerHTML = "&#x274c;";
+            button.addEventListener("click", this.close.bind(this), false);
+        }
     }
 
     activate () {
