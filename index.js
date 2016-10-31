@@ -189,7 +189,8 @@ class Tab {
         // TODO: move
     }
 
-    close () {
+    close (force) {
+        if (!this.closable && !force) return;
         let tabGroup = this.tabGroup;
         tabGroup.tabContainer.removeChild(this.tab);
         tabGroup.viewContainer.removeChild(this.webview);
