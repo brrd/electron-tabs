@@ -27,12 +27,14 @@ if (!document) {
 
 class TabGroup {
     constructor (args) {
-        this.tabContainerSelector = args.tabContainerSelector || ".tabs-tabcontainer";
-        this.tabContainer = document.querySelector(this.tabContainerSelector);
-        this.viewContainerSelector = args.viewContainerSelector || ".tabs-viewcontainer";
-        this.viewContainer = document.querySelector(this.viewContainerSelector);
-        this.tabClass = args.tabClass || "tabs-tab";
-        this.viewClass = args.viewClass || "tabs-view";
+        let options = this.options = {
+            tabContainerSelector: args.tabContainerSelector || ".tabs-tabcontainer",
+            viewContainerSelector: args.viewContainerSelector || ".tabs-viewcontainer",
+            tabClass: args.tabClass || "tabs-tab",
+            viewClass: args.viewClass || "tabs-view"
+        };
+        this.tabContainer = document.querySelector(options.tabContainerSelector);
+        this.viewContainer = document.querySelector(options.viewContainerSelector);
         this.tabs = [];
         this.newTabId = 0;
     }
@@ -91,7 +93,7 @@ class Tab {
     initTab () {
         this.tab = document.createElement("div");
         this.setTitle(this.title);
-        this.tab.classList.add(this.tabGroup.tabClass);
+        this.tab.classList.add(this.tabGroup.options.tabClass);
         this.tab.addEventListener("click", this.activate.bind(this), false);
         this.tabGroup.tabContainer.appendChild(this.tab);
         // TODO: icon
@@ -101,7 +103,7 @@ class Tab {
 
     initWebview () {
         this.webview = document.createElement("webview");
-        this.webview.classList.add(this.tabGroup.viewClass);
+        this.webview.classList.add(this.tabGroup.options.viewClass);
         if (this.webviewAttributes) {
             let attrs = this.webviewAttributes;
             for (let key in attrs) {
