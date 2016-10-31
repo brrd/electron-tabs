@@ -151,10 +151,11 @@ class Tab {
     }
 
     close () {
-        this.tabContainer.removeChild(this.tab);
-        this.tabGroup.viewContainer.removeChild(this.webview);
-        this.tabGroup.removeTab(this);
-        this.tabGroup.activateRecentTab();
+        let tabGroup = this.tabGroup;
+        tabGroup.tabContainer.removeChild(this.tab);
+        tabGroup.viewContainer.removeChild(this.webview);
+        tabGroup.removeTab(this);
+        tabGroup.activateRecentTab();
     }
 }
 
