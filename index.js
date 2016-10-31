@@ -27,10 +27,12 @@ if (!document) {
 
 class TabGroup {
     constructor (args) {
-        this.tabContainerSelector = args.tabContainerSelector;
+        this.tabContainerSelector = args.tabContainerSelector || ".tabs-tabcontainer";
         this.tabContainer = document.querySelector(this.tabContainerSelector);
-        this.viewContainerSelector = args.viewContainerSelector;
+        this.viewContainerSelector = args.viewContainerSelector || ".tabs-viewcontainer";
         this.viewContainer = document.querySelector(this.viewContainerSelector);
+        this.tabClass = args.tabClass || "tabs-tab";
+        this.viewClass = args.viewClass || "tabs-view";
         this.tabs = [];
         this.newTabId = 0;
     }
@@ -89,14 +91,17 @@ class Tab {
     initTab () {
         this.tab = document.createElement("div");
         this.setTitle(this.title);
+        this.tab.classList.add(this.tabGroup.tabClass);
         this.tab.addEventListener("click", this.activate.bind(this), false);
         this.tabGroup.tabContainer.appendChild(this.tab);
+        // TODO: icon
         // TODO: close button
         // TODO: handle middle click
     }
 
     initWebview () {
         this.webview = document.createElement("webview");
+        this.webview.classList.add(this.tabGroup.viewClass);
         if (this.webviewAttributes) {
             let attrs = this.webviewAttributes;
             for (let key in attrs) {
