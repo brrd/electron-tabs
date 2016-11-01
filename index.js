@@ -203,6 +203,16 @@ class Tab extends EventEmitter {
         this.emit("active", this);
     }
 
+    show () {
+        if (this.isClosed) return;
+        this.tab.classList.add("visible");
+    }
+
+    hide () {
+        if (this.isClosed) return;
+        this.tab.classList.remove("visible");
+    }
+
     flash (flag) {
         if (this.isClosed) return;
         if (flag !== false) {
