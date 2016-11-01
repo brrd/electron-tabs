@@ -143,6 +143,7 @@ class Tab extends EventEmitter {
     }
 
     setTitle (title) {
+        if (this.isClosed) return;
         let span = this.tabElements.title;
         span.innerHTML = title;
         this.title = title;
@@ -150,10 +151,12 @@ class Tab extends EventEmitter {
     }
 
     getTitle () {
+        if (this.isClosed) return;
         return this.title;
     }
 
     setIcon (iconURL) {
+        if (this.isClosed) return;
         this.iconURL = iconURL;
         let span = this.tabElements.icon;
         if (iconURL) {
@@ -163,6 +166,7 @@ class Tab extends EventEmitter {
     }
 
     getIcon () {
+        if (this.isClosed) return;
         return this.iconURL;
     }
 
@@ -178,6 +182,7 @@ class Tab extends EventEmitter {
     }
 
     tabClickHandler (e) {
+        if (this.isClosed) return;
         if (e.which === 1) {
             this.activate();
         } else if (e.which === 2) {
@@ -186,6 +191,7 @@ class Tab extends EventEmitter {
     }
 
     activate () {
+        if (this.isClosed) return;
         let activeTab = this.tabGroup.getActiveTab();
         if (activeTab) {
             activeTab.tab.classList.remove("active");
@@ -198,6 +204,7 @@ class Tab extends EventEmitter {
     }
 
     flash (flag) {
+        if (this.isClosed) return;
         if (flag !== false) {
             this.tab.classList.add("flash");
             this.emit("flash-start", this);
@@ -212,7 +219,8 @@ class Tab extends EventEmitter {
     }
 
     close (force) {
-        if (!this.closable && !force) return;
+        if (this.isClosed || (!this.closable && !force)) return;
+        this.isClosed = true;
         let tabGroup = this.tabGroup;
         tabGroup.tabContainer.removeChild(this.tab);
         tabGroup.viewContainer.removeChild(this.webview);
