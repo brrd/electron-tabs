@@ -63,6 +63,15 @@ class TabGroup extends EventEmitter {
         return tab;
     }
 
+    getTab (id) {
+        for (let i in this.tabs) {
+            if (this.tabs[i].id === id) {
+                return this.tabs[i];
+            }
+        }
+        return null;
+    }
+
     getActiveTab () {
         if (this.tabs.length === 0) return null;
         return this.tabs[0];
