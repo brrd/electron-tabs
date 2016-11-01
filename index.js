@@ -76,12 +76,14 @@ class TabGroup extends EventEmitter {
         if (triggerEvent) {
             this.emit("tab-removed", tab, this);
         }
+        return this;
     }
 
     setActiveTab (tab) {
         this.removeTab(tab);
         this.tabs.unshift(tab);
         this.emit("tab-active", tab, this);
+        return this;
     }
 
     getActiveTab () {
@@ -90,8 +92,10 @@ class TabGroup extends EventEmitter {
     }
 
     activateRecentTab (tab) {
-        if (this.tabs.length === 0) return null;
-        this.tabs[0].activate();
+        if (this.tabs.length > 0) {
+            this.tabs[0].activate();
+        }
+        return this;
     }
 }
 
@@ -148,6 +152,7 @@ class Tab extends EventEmitter {
         span.innerHTML = title;
         this.title = title;
         this.emit("title-changed", title, this);
+        return this;
     }
 
     getTitle () {
@@ -163,6 +168,7 @@ class Tab extends EventEmitter {
             span.innerHTML = `<img src="${iconURL}" />`;
         }
         this.emit("icon-changed", iconURL, this);
+        return this;
     }
 
     getIcon () {
@@ -201,16 +207,19 @@ class Tab extends EventEmitter {
         this.tab.classList.add("active");
         this.webview.classList.add("visible");
         this.emit("active", this);
+        return this;
     }
 
     show () {
         if (this.isClosed) return;
         this.tab.classList.add("visible");
+        return this;
     }
 
     hide () {
         if (this.isClosed) return;
         this.tab.classList.remove("visible");
+        return this;
     }
 
     flash (flag) {
@@ -222,6 +231,7 @@ class Tab extends EventEmitter {
             this.tab.classList.remove("flash");
             this.emit("flash-end", this);
         }
+        return this;
     }
 
     move (index) {
