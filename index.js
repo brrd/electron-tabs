@@ -57,12 +57,8 @@ class TabGroup {
         let id = this.newTabId;
         this.newTabId++;
         let tab = new Tab(this, id, args);
-        this.pushTab(tab);
-        return tab;
-    }
-
-    pushTab (tab) {
         this.tabs.push(tab);
+        return tab;
     }
 
     removeTab (tab) {
@@ -77,18 +73,17 @@ class TabGroup {
 
     setActiveTab (tab) {
         this.removeTab(tab);
-        this.pushTab(tab);
+        this.tabs.unshift(tab);
     }
 
     getActiveTab () {
-        if (this.tabs.length < 1) return null;
-        return this.tabs[this.tabs.length - 1];
+        if (this.tabs.length === 0) return null;
+        return this.tabs[0];
     }
 
     activateRecentTab (tab) {
-        let recentTab = this.tabs[this.tabs.length - 1];
-        if (!recentTab) return;
-        recentTab.activate();
+        if (this.tabs.length === 0) return null;
+        this.tabs[0].activate();
     }
 }
 
