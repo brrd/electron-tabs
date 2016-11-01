@@ -222,7 +222,11 @@ class Tab extends EventEmitter {
         tabGroup.viewContainer.removeChild(this.webview);
         TabGroupPrivate.removeTab.bind(tabGroup)(this, true);
         this.emit("close", this);
-        TabGroupPrivate.activateRecentTab.bind(tabGroup)();
+
+        let activeTab = this.tabGroup.getActiveTab();
+        if (activeTab.id === this.id) {
+            TabGroupPrivate.activateRecentTab.bind(tabGroup)();
+        }
     }
 }
 
