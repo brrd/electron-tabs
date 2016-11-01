@@ -26,21 +26,34 @@ if (!document) {
 })();
 
 class TabGroup {
-    constructor (args) {
+    constructor (args = {}) {
         let options = this.options = {
             tabContainerSelector: args.tabContainerSelector || ".tabs-tabcontainer",
+            buttonsContainerSelector: args.buttonsContainerSelector || ".tabs-buttonscontainer",
             viewContainerSelector: args.viewContainerSelector || ".tabs-viewcontainer",
             tabClass: args.tabClass || "tabs-tab",
             viewClass: args.viewClass || "tabs-view",
-            closeButtonText: args.closeButtonText || "&#x274c;"
+            closeButtonText: args.closeButtonText || "&#x274c;",
+            newTab: args.newTab,
+            newTabButtonText: args.newTabButton || "+"
         };
         this.tabContainer = document.querySelector(options.tabContainerSelector);
         this.viewContainer = document.querySelector(options.viewContainerSelector);
         this.tabs = [];
         this.newTabId = 0;
+        this.initNewTabButton();
     }
 
-    addTab (args) {
+    initNewTabButton () {
+        if (!this.options.newTab) return;
+        let container = document.querySelector(this.options.buttonsContainerSelector);
+        let button = container.appendChild(document.createElement("button"));
+        button.classList.add(`${this.options.tabClass}-button-new`);
+        button.innerHTML = this.options.newTabButtonText;
+        button.addEventListener("click", this.addTab.bind(this, undefined), false);
+    }
+
+    addTab (args = this.options.newTab) {
         let id = this.newTabId;
         this.newTabId++;
         let tab = new Tab(this, id, args);
