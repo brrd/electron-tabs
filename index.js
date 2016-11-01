@@ -182,28 +182,36 @@ class Tab extends EventEmitter {
         return this;
     }
 
-    show () {
+    show (flag) {
         if (this.isClosed) return;
-        this.tab.classList.add("visible");
+        if (flag !== false) {
+            this.tab.classList.add("visible");
+            this.emit("visible", this);
+        } else {
+            this.tab.classList.remove("visible");
+            this.emit("hidden", this);
+        }
         return this;
     }
 
     hide () {
-        if (this.isClosed) return;
-        this.tab.classList.remove("visible");
-        return this;
+        return this.show(false);
     }
 
     flash (flag) {
         if (this.isClosed) return;
         if (flag !== false) {
             this.tab.classList.add("flash");
-            this.emit("flash-start", this);
+            this.emit("flash", this);
         } else {
             this.tab.classList.remove("flash");
-            this.emit("flash-end", this);
+            this.emit("unflash", this);
         }
         return this;
+    }
+
+    unflash () {
+        return this.flash(false);
     }
 
     close (force) {
