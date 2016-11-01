@@ -38,13 +38,17 @@ class TabGroup extends EventEmitter {
             viewClass: args.viewClass || "tabs-view",
             closeButtonText: args.closeButtonText || "&#x274c;",
             newTab: args.newTab,
-            newTabButtonText: args.newTabButton || "+"
+            newTabButtonText: args.newTabButton || "+",
+            ready: args.ready
         };
         this.tabContainer = document.querySelector(options.tabContainerSelector);
         this.viewContainer = document.querySelector(options.viewContainerSelector);
         this.tabs = [];
         this.newTabId = 0;
         this.initNewTabButton();
+        if (typeof this.options.ready === "function") {
+            this.options.ready(this);
+        }
     }
 
     initNewTabButton () {
@@ -115,6 +119,9 @@ class Tab extends EventEmitter {
         this.tabElements = {};
         this.initTab();
         this.initWebview();
+        if (typeof args.ready === "function") {
+            args.ready(this);
+        }
     }
 
     initTab () {
