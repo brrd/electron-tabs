@@ -45,19 +45,10 @@ class TabGroup extends EventEmitter {
         this.viewContainer = document.querySelector(options.viewContainerSelector);
         this.tabs = [];
         this.newTabId = 0;
-        this.initNewTabButton();
+        TabGroupPrivate.initNewTabButton.bind(this)();
         if (typeof this.options.ready === "function") {
             this.options.ready(this);
         }
-    }
-
-    initNewTabButton () {
-        if (!this.options.newTab) return;
-        let container = document.querySelector(this.options.buttonsContainerSelector);
-        let button = container.appendChild(document.createElement("button"));
-        button.classList.add(`${this.options.tabClass}-button-new`);
-        button.innerHTML = this.options.newTabButtonText;
-        button.addEventListener("click", this.addTab.bind(this, undefined), false);
     }
 
     addTab (args = this.options.newTab) {
@@ -72,7 +63,23 @@ class TabGroup extends EventEmitter {
         return tab;
     }
 
-    removeTab (tab, triggerEvent) {
+    getActiveTab () {
+        if (this.tabs.length === 0) return null;
+        return this.tabs[0];
+    }
+}
+
+const TabGroupPrivate = {
+    initNewTabButton: function () {
+        if (!this.options.newTab) return;
+        let container = document.querySelector(this.options.buttonsContainerSelector);
+        let button = container.appendChild(document.createElement("button"));
+        button.classList.add(`${this.options.tabClass}-button-new`);
+        button.innerHTML = this.options.newTabButtonText;
+        button.addEventListener("click", this.addTab.bind(this, undefined), false);
+    },
+
+    removeTab: function (tab, triggerEvent) {
         let id = tab.id;
         for (let i in this.tabs) {
             if (this.tabs[i].id === id) {
@@ -84,27 +91,22 @@ class TabGroup extends EventEmitter {
             this.emit("tab-removed", tab, this);
         }
         return this;
-    }
+    },
 
-    setActiveTab (tab) {
-        this.removeTab(tab);
+    setActiveTab: function (tab) {
+        TabGroupPrivate.removeTab.bind(this)(tab);
         this.tabs.unshift(tab);
         this.emit("tab-active", tab, this);
         return this;
-    }
+    },
 
-    getActiveTab () {
-        if (this.tabs.length === 0) return null;
-        return this.tabs[0];
-    }
-
-    activateRecentTab (tab) {
+    activateRecentTab: function (tab) {
         if (this.tabs.length > 0) {
             this.tabs[0].activate();
         }
         return this;
     }
-}
+};
 
 class Tab extends EventEmitter {
     constructor (tabGroup, id, args) {
@@ -117,43 +119,11 @@ class Tab extends EventEmitter {
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
         this.tabElements = {};
-        this.initTab();
-        this.initWebview();
+        TabPrivate.initTab.bind(this)();
+        TabPrivate.initWebview.bind(this)();
         if (typeof args.ready === "function") {
             args.ready(this);
         }
-    }
-
-    initTab () {
-        let tabClass = this.tabGroup.options.tabClass;
-
-        // Create tab element
-        let tab = this.tab = document.createElement("div");
-        tab.classList.add(tabClass);
-        for (let el of ["icon", "title", "buttons"]) {
-            let span = tab.appendChild(document.createElement("span"));
-            span.classList.add(`${tabClass}-${el}`);
-            this.tabElements[el] = span;
-        }
-
-        this.setTitle(this.title);
-        this.setIcon(this.iconURL);
-        this.setButtons();
-
-        tab.addEventListener("click", this.tabClickHandler.bind(this), false);
-        this.tabGroup.tabContainer.appendChild(this.tab);
-    }
-
-    initWebview () {
-        this.webview = document.createElement("webview");
-        this.webview.classList.add(this.tabGroup.options.viewClass);
-        if (this.webviewAttributes) {
-            let attrs = this.webviewAttributes;
-            for (let key in attrs) {
-                this.webview.setAttribute(key, attrs[key]);
-            }
-        }
-        this.tabGroup.viewContainer.appendChild(this.webview);
     }
 
     setTitle (title) {
@@ -186,26 +156,6 @@ class Tab extends EventEmitter {
         return this.iconURL;
     }
 
-    setButtons () {
-        let container = this.tabElements.buttons;
-        let tabClass = this.tabGroup.options.tabClass;
-        if (this.closable) {
-            let button = container.appendChild(document.createElement("button"));
-            button.classList.add(`${tabClass}-button-close`);
-            button.innerHTML = this.tabGroup.options.closeButtonText;
-            button.addEventListener("click", this.close.bind(this), false);
-        }
-    }
-
-    tabClickHandler (e) {
-        if (this.isClosed) return;
-        if (e.which === 1) {
-            this.activate();
-        } else if (e.which === 2) {
-            this.close();
-        }
-    }
-
     activate () {
         if (this.isClosed) return;
         let activeTab = this.tabGroup.getActiveTab();
@@ -213,7 +163,7 @@ class Tab extends EventEmitter {
             activeTab.tab.classList.remove("active");
             activeTab.webview.classList.remove("visible");
         }
-        this.tabGroup.setActiveTab(this);
+        TabGroupPrivate.setActiveTab.bind(this.tabGroup)(this);
         this.tab.classList.add("active");
         this.webview.classList.add("visible");
         this.emit("active", this);
@@ -244,20 +194,73 @@ class Tab extends EventEmitter {
         return this;
     }
 
-    move (index) {
-        // TODO: move
-    }
-
     close (force) {
         if (this.isClosed || (!this.closable && !force)) return;
         this.isClosed = true;
         let tabGroup = this.tabGroup;
         tabGroup.tabContainer.removeChild(this.tab);
         tabGroup.viewContainer.removeChild(this.webview);
-        tabGroup.removeTab(this, true);
+        TabGroupPrivate.removeTab.bind(tabGroup)(this, true);
         this.emit("close", this);
-        tabGroup.activateRecentTab();
+        TabGroupPrivate.activateRecentTab.bind(tabGroup)();
     }
 }
+
+const TabPrivate = {
+    initTab: function () {
+        let tabClass = this.tabGroup.options.tabClass;
+
+        // Create tab element
+        let tab = this.tab = document.createElement("div");
+        tab.classList.add(tabClass);
+        for (let el of ["icon", "title", "buttons"]) {
+            let span = tab.appendChild(document.createElement("span"));
+            span.classList.add(`${tabClass}-${el}`);
+            this.tabElements[el] = span;
+        }
+
+        this.setTitle(this.title);
+        this.setIcon(this.iconURL);
+        TabPrivate.initTabButtons.bind(this)();
+        TabPrivate.initTabClickHandler.bind(this)();
+
+        this.tabGroup.tabContainer.appendChild(this.tab);
+    },
+
+    initTabButtons: function () {
+        let container = this.tabElements.buttons;
+        let tabClass = this.tabGroup.options.tabClass;
+        if (this.closable) {
+            let button = container.appendChild(document.createElement("button"));
+            button.classList.add(`${tabClass}-button-close`);
+            button.innerHTML = this.tabGroup.options.closeButtonText;
+            button.addEventListener("click", this.close.bind(this), false);
+        }
+    },
+
+    initTabClickHandler: function () {
+        const tabClickHandler = function (e) {
+            if (this.isClosed) return;
+            if (e.which === 1) {
+                this.activate();
+            } else if (e.which === 2) {
+                this.close();
+            }
+        };
+        this.tab.addEventListener("click", tabClickHandler.bind(this), false);
+    },
+
+    initWebview: function () {
+        this.webview = document.createElement("webview");
+        this.webview.classList.add(this.tabGroup.options.viewClass);
+        if (this.webviewAttributes) {
+            let attrs = this.webviewAttributes;
+            for (let key in attrs) {
+                this.webview.setAttribute(key, attrs[key]);
+            }
+        }
+        this.tabGroup.viewContainer.appendChild(this.webview);
+    }
+};
 
 module.exports = TabGroup;
