@@ -1,3 +1,5 @@
+const EventEmitter = require("events");
+
 if (!document) {
     throw Error("electron-tabs module must be called in renderer process");
 }
@@ -25,8 +27,9 @@ if (!document) {
     document.getElementsByTagName("head")[0].appendChild(styleTag);
 })();
 
-class TabGroup {
+class TabGroup extends EventEmitter {
     constructor (args = {}) {
+        super();
         let options = this.options = {
             tabContainerSelector: args.tabContainerSelector || ".tabs-tabcontainer",
             buttonsContainerSelector: args.buttonsContainerSelector || ".tabs-buttonscontainer",
@@ -58,10 +61,11 @@ class TabGroup {
         this.newTabId++;
         let tab = new Tab(this, id, args);
         this.tabs.push(tab);
+        this.emit("tab-added", tab, this);
         return tab;
     }
 
-    removeTab (tab) {
+    removeTab (tab, triggerEvent) {
         let id = tab.id;
         for (let i in this.tabs) {
             if (this.tabs[i].id === id) {
@@ -69,11 +73,15 @@ class TabGroup {
                 break;
             }
         }
+        if (triggerEvent) {
+            this.emit("tab-removed", tab, this);
+        }
     }
 
     setActiveTab (tab) {
         this.removeTab(tab);
         this.tabs.unshift(tab);
+        this.emit("tab-active", tab, this);
     }
 
     getActiveTab () {
@@ -87,8 +95,9 @@ class TabGroup {
     }
 }
 
-class Tab {
+class Tab extends EventEmitter {
     constructor (tabGroup, id, args) {
+        super();
         this.tabGroup = tabGroup;
         this.id = id;
         this.title = args.title;
@@ -137,6 +146,7 @@ class Tab {
         let span = this.tabElements.title;
         span.innerHTML = title;
         this.title = title;
+        this.emit("title-changed", title, this);
     }
 
     getTitle () {
@@ -149,6 +159,7 @@ class Tab {
         if (iconURL) {
             span.innerHTML = `<img src="${iconURL}" />`;
         }
+        this.emit("icon-changed", iconURL, this);
     }
 
     getIcon () {
@@ -183,13 +194,16 @@ class Tab {
         this.tabGroup.setActiveTab(this);
         this.tab.classList.add("active");
         this.webview.classList.add("visible");
+        this.emit("active", this);
     }
 
     flash (flag) {
         if (flag !== false) {
             this.tab.classList.add("flash");
+            this.emit("flash-start", this);
         } else {
             this.tab.classList.remove("flash");
+            this.emit("flash-end", this);
         }
     }
 
@@ -202,7 +216,8 @@ class Tab {
         let tabGroup = this.tabGroup;
         tabGroup.tabContainer.removeChild(this.tab);
         tabGroup.viewContainer.removeChild(this.webview);
-        tabGroup.removeTab(this);
+        tabGroup.removeTab(this, true);
+        this.emit("close", this);
         tabGroup.activateRecentTab();
     }
 }
