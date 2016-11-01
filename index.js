@@ -57,6 +57,9 @@ class TabGroup extends EventEmitter {
     }
 
     addTab (args = this.options.newTab) {
+        if (typeof args === "function") {
+            args = args(this);
+        }
         let id = this.newTabId;
         this.newTabId++;
         let tab = new Tab(this, id, args);
