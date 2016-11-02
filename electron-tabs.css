@@ -22,6 +22,15 @@
     border: 1px solid #aaa;
     border-bottom: none;
     background: linear-gradient(to bottom, rgba(234,234,234,1) 0%,rgba(204,204,204,1) 100%);
+    font: caption;
+    font-size: 14px;
+    background-color: #ccc;
+    cursor: default;
+}
+
+/* Dragula */
+.etabs-tab.gu-mirror {
+    padding-bottom: 0;
 }
 
 .etabs-tab:first-child {
