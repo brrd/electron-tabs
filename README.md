@@ -149,6 +149,37 @@ The following events are available:
 * `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
 
+## Drag and drop support
+
+Electron-tabs is compatible with [Dragula](https://github.com/bevacqua/dragula) so you can easily make your tabs draggable.
+
+Install Dragula:
+
+```
+npm install dragula --save
+```
+
+Don't forget to add a link to its stylesheet in the header:
+
+```html
+<link rel="stylesheet" href="node_modules/dist/dragula.css">
+```
+
+Then call Dragula in your script once tabGroup is ready:
+
+```javascript
+const TabGroup = require("electron-tabs");
+const dragula = require("dragula");
+
+var tabGroup = new TabGroup({
+    ready: function (tabGroup) {
+        dragula([tabGroup.tabContainer], {
+			direction: "horizontal"
+		});
+    }
+});
+```
+
 ## License
 
 The MIT License (MIT) - Copyright (c) 2016 Thomas Brouard
