@@ -15,9 +15,9 @@ $ npm install --save electron-tabs
 Add the following elements in the page HTML:
 
 ```html
-<div class="tabs-tabcontainer"></div>
-<div class="tabs-buttonscontainer"></div>
-<div class="tabs-viewcontainer"></div>
+<div class="etabs-tabs"></div>
+<div class="etabs-buttons"></div>
+<div class="etabs-views"></div>
 ```
 
 And call the module in the renderer process:
@@ -47,11 +47,11 @@ Represents the main tab container.
 
 `options` must be an object. The following options are available:
 
-* `tabContainerSelector` (default: `".tabs-tabcontainer"`): CSS selector to target the element where tabs are inserted.
-* `buttonsContainerSelector` (default: `".tabs-buttonscontainer"`): CSS selector to target the element where the "New Tab" button are inserted.
-* `viewContainerSelector` (default: `".tabs-viewcontainer"`): CSS selector to target the element where the view are inserted.
-* `tabClass` (default: `"tabs-tab"`): class to add to tab elements.
-* `viewClass` (default: `"tabs-view"`): class to add to webview elements.
+* `tabContainerSelector` (default: `".etabs-tabs"`): CSS selector to target the element where tabs are inserted.
+* `buttonsContainerSelector` (default: `".etabs-buttons"`): CSS selector to target the element where the "New Tab" button are inserted.
+* `viewContainerSelector` (default: `".etabs-views"`): CSS selector to target the element where the view are inserted.
+* `tabClass` (default: `"etabs-tab"`): class to add to tab elements.
+* `viewClass` (default: `"etabs-view"`): class to add to webview elements.
 * `closeButtonText` (default: `"&#x274c;"`): "close tab" button text.
 * `newTabButtonText` (default: `"+"`): "New Tab" button text.
 * `newTab` (default: `undefined`): arguments to use when `.addTab()` is called without parameters. It can be an object or a function which returns an object. It determines the options to use when the "New Tab" button is triggered. If you leave it undefined then the "New Tab" button won't be displayed.

@@ -31,11 +31,11 @@ class TabGroup extends EventEmitter {
     constructor (args = {}) {
         super();
         let options = this.options = {
-            tabContainerSelector: args.tabContainerSelector || ".tabs-tabcontainer",
-            buttonsContainerSelector: args.buttonsContainerSelector || ".tabs-buttonscontainer",
-            viewContainerSelector: args.viewContainerSelector || ".tabs-viewcontainer",
-            tabClass: args.tabClass || "tabs-tab",
-            viewClass: args.viewClass || "tabs-view",
+            tabContainerSelector: args.tabContainerSelector || ".etabs-tabs",
+            buttonsContainerSelector: args.buttonsContainerSelector || ".etabs-buttons",
+            viewContainerSelector: args.viewContainerSelector || ".etabs-views",
+            tabClass: args.tabClass || "etabs-tab",
+            viewClass: args.viewClass || "etabs-view",
             closeButtonText: args.closeButtonText || "&#x274c;",
             newTab: args.newTab,
             newTabButtonText: args.newTabButton || "+",
