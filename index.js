@@ -278,6 +278,7 @@ const TabPrivate = {
         const tabMouseDownHandler = function (e) {
             if (this.isClosed) return;
             if (e.which === 1) {
+                if (e.target.matches("button")) return;
                 this.activate();
             }
         };
