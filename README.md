@@ -4,6 +4,8 @@
 
 **WARNING: this module is in development and is not stable yet. Don't use it in your app.**
 
+![Electron Tab Demo](screenshot.jpg)
+
 ## Installation
 
 ```
