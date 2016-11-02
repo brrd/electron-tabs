@@ -133,6 +133,9 @@ class Tab extends EventEmitter {
         if (args.visible !== false) {
             this.show();
         }
+        if (args.active === true) {
+            this.activate();
+        }
         if (typeof args.ready === "function") {
             args.ready(this);
         }
