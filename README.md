@@ -14,11 +14,13 @@ $ npm install --save electron-tabs
 
 ## Usage
 
-Add the following elements in the page HTML:
+Add the following elements to the app page:
 
 ```html
-<div class="etabs-tabs"></div>
-<div class="etabs-buttons"></div>
+<div class="etabs-tabgroup">
+    <div class="etabs-tabs"></div>
+    <div class="etabs-buttons"></div>
+</div>
 <div class="etabs-views"></div>
 ```
 
@@ -37,6 +39,12 @@ let tab = tabGroup.addTab({
     src: "http://electron.atom.io",
     visible: true
 });
+```
+
+If you don't want to write your own styles, you can also insert the sample electron-tabs stylesheet in the page header:
+
+```html
+<link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
 ```
 
 ## API
@@ -140,7 +148,6 @@ The following events are available:
 * `tab.on("flash", (tab) => { ... });`
 * `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
-
 
 ## License
 
