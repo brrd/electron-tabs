@@ -66,7 +66,7 @@ Add a new tab to the tab group and returns a `Tab` instance.
 * `iconURL`: optional URL to the tab icon.
 * `closable` (default: `true`): if set to `true` the close button won't be displayed and the user won't be able to close the tab. See also `tab.close()`.
 * `webviewAttributes`: attributes to add to the webview tag. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#tag-attributes).
-* `visible` (default: `false`): set this to `true` if you want to display the tab once it is loaded. Otherwise you will need to call `tab.show()`.
+* `visible` (default: `true`): set this to `false` if you don't want to display the tab once it is loaded. If set to `false` then you will need to call `tab.show()` to display the tab.
 * `ready`: a callback function to call once the tab is ready. The `Tab` instance is passed as the only parameter.
 
 #### `tabGroup.getTab(id)`

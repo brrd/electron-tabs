@@ -130,7 +130,7 @@ class Tab extends EventEmitter {
         this.tabElements = {};
         TabPrivate.initTab.bind(this)();
         TabPrivate.initWebview.bind(this)();
-        if (args.visible) {
+        if (args.visible !== false) {
             this.show();
         }
         if (typeof args.ready === "function") {
