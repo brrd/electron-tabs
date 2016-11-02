@@ -266,15 +266,22 @@ const TabPrivate = {
     },
 
     initTabClickHandler: function () {
+        // Click
         const tabClickHandler = function (e) {
             if (this.isClosed) return;
-            if (e.which === 1) {
-                this.activate();
-            } else if (e.which === 2) {
+            if (e.which === 2) {
                 this.close();
             }
         };
         this.tab.addEventListener("click", tabClickHandler.bind(this), false);
+        // Mouse down
+        const tabMouseDownHandler = function (e) {
+            if (this.isClosed) return;
+            if (e.which === 1) {
+                this.activate();
+            }
+        };
+        this.tab.addEventListener("mousedown", tabMouseDownHandler.bind(this), false);
     },
 
     initWebview: function () {
