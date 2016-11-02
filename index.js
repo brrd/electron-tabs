@@ -38,7 +38,7 @@ class TabGroup extends EventEmitter {
             viewClass: args.viewClass || "etabs-view",
             closeButtonText: args.closeButtonText || "&#10006;",
             newTab: args.newTab,
-            newTabButtonText: args.newTabButton || "&#65291;",
+            newTabButtonText: args.newTabButtonText || "&#65291;",
             ready: args.ready
         };
         this.tabContainer = document.querySelector(options.tabContainerSelector);
