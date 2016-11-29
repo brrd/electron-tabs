@@ -160,13 +160,12 @@ class Tab extends EventEmitter {
         this.iconURL = iconURL;
         let span = this.tabElements.icon;
         if (iconURL) {
-			console.log(iconURL);
             if(iconURL.startsWith("fa-")) {
-				span.innerHTML = `<i class="fa ${iconURL}"></i>`;
-			}
-			else {
-				span.innerHTML = `<img src="${iconURL}" />`;
-			}
+	        span.innerHTML = `<i class="fa ${iconURL}"></i>`;
+	    }
+	    else {
+	        span.innerHTML = `<img src="${iconURL}" />`;
+	    }
         }
         this.emit("icon-changed", iconURL, this);
         return this;
