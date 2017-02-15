@@ -5,7 +5,7 @@ if (!document) {
 }
 
 // Inject styles
-(function () {
+(function() {
     const styles = `
         webview {
             display: flex;
@@ -28,7 +28,7 @@ if (!document) {
 })();
 
 class TabGroup extends EventEmitter {
-    constructor (args = {}) {
+    constructor(args = {}) {
         super();
         let options = this.options = {
             tabContainerSelector: args.tabContainerSelector || ".etabs-tabs",
@@ -51,7 +51,7 @@ class TabGroup extends EventEmitter {
         }
     }
 
-    addTab (args = this.options.newTab) {
+    addTab(args = this.options.newTab) {
         if (typeof args === "function") {
             args = args(this);
         }
@@ -63,7 +63,7 @@ class TabGroup extends EventEmitter {
         return tab;
     }
 
-    getTab (id) {
+    getTab(id) {
         for (let i in this.tabs) {
             if (this.tabs[i].id === id) {
                 return this.tabs[i];
@@ -72,14 +72,14 @@ class TabGroup extends EventEmitter {
         return null;
     }
 
-    getActiveTab () {
+    getActiveTab() {
         if (this.tabs.length === 0) return null;
         return this.tabs[0];
     }
 }
 
 const TabGroupPrivate = {
-    initNewTabButton: function () {
+    initNewTabButton: function() {
         if (!this.options.newTab) return;
         let container = document.querySelector(this.options.buttonsContainerSelector);
         let button = container.appendChild(document.createElement("button"));
@@ -88,7 +88,7 @@ const TabGroupPrivate = {
         button.addEventListener("click", this.addTab.bind(this, undefined), false);
     },
 
-    removeTab: function (tab, triggerEvent) {
+    removeTab: function(tab, triggerEvent) {
         let id = tab.id;
         for (let i in this.tabs) {
             if (this.tabs[i].id === id) {
@@ -102,14 +102,14 @@ const TabGroupPrivate = {
         return this;
     },
 
-    setActiveTab: function (tab) {
+    setActiveTab: function(tab) {
         TabGroupPrivate.removeTab.bind(this)(tab);
         this.tabs.unshift(tab);
         this.emit("tab-active", tab, this);
         return this;
     },
 
-    activateRecentTab: function (tab) {
+    activateRecentTab: function(tab) {
         if (this.tabs.length > 0) {
             this.tabs[0].activate();
         }
@@ -118,12 +118,13 @@ const TabGroupPrivate = {
 };
 
 class Tab extends EventEmitter {
-    constructor (tabGroup, id, args) {
+    constructor(tabGroup, id, args) {
         super();
         this.tabGroup = tabGroup;
         this.id = id;
         this.title = args.title;
         this.iconURL = args.iconURL;
+        this.icon = args.icon;
         this.closable = args.closable === false ? false : true;
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
@@ -141,7 +142,7 @@ class Tab extends EventEmitter {
         }
     }
 
-    setTitle (title) {
+    setTitle(title) {
         if (this.isClosed) return;
         let span = this.tabElements.title;
         span.innerHTML = title;
@@ -150,28 +151,34 @@ class Tab extends EventEmitter {
         return this;
     }
 
-    getTitle () {
+    getTitle() {
         if (this.isClosed) return;
         return this.title;
     }
 
-    setIcon (iconURL) {
+    setIcon(iconURL, icon) {
         if (this.isClosed) return;
         this.iconURL = iconURL;
+        this.icon = icon;
         let span = this.tabElements.icon;
         if (iconURL) {
             span.innerHTML = `<img src="${iconURL}" />`;
+            this.emit("icon-changed", iconURL, this);
+        } else if (icon) {
+            span.innerHTML = `<i class="${icon}"></i>`;
+            this.emit("icon-changed", icon, this);
         }
-        this.emit("icon-changed", iconURL, this);
+
         return this;
     }
 
-    getIcon () {
+    getIcon() {
         if (this.isClosed) return;
-        return this.iconURL;
+        if (this.iconURL) return this.iconURL;
+        return this.icon;
     }
 
-    activate () {
+    activate() {
         if (this.isClosed) return;
         let activeTab = this.tabGroup.getActiveTab();
         if (activeTab) {
@@ -185,7 +192,7 @@ class Tab extends EventEmitter {
         return this;
     }
 
-    show (flag) {
+    show(flag) {
         if (this.isClosed) return;
         if (flag !== false) {
             this.tab.classList.add("visible");
@@ -197,11 +204,11 @@ class Tab extends EventEmitter {
         return this;
     }
 
-    hide () {
+    hide() {
         return this.show(false);
     }
 
-    flash (flag) {
+    flash(flag) {
         if (this.isClosed) return;
         if (flag !== false) {
             this.tab.classList.add("flash");
@@ -213,11 +220,11 @@ class Tab extends EventEmitter {
         return this;
     }
 
-    unflash () {
+    unflash() {
         return this.flash(false);
     }
 
-    close (force) {
+    close(force) {
         if (this.isClosed || (!this.closable && !force)) return;
         this.isClosed = true;
         let tabGroup = this.tabGroup;
@@ -234,7 +241,7 @@ class Tab extends EventEmitter {
 }
 
 const TabPrivate = {
-    initTab: function () {
+    initTab: function() {
         let tabClass = this.tabGroup.options.tabClass;
 
         // Create tab element
@@ -247,14 +254,14 @@ const TabPrivate = {
         }
 
         this.setTitle(this.title);
-        this.setIcon(this.iconURL);
+        this.setIcon(this.iconURL, this.icon);
         TabPrivate.initTabButtons.bind(this)();
         TabPrivate.initTabClickHandler.bind(this)();
 
         this.tabGroup.tabContainer.appendChild(this.tab);
     },
 
-    initTabButtons: function () {
+    initTabButtons: function() {
         let container = this.tabElements.buttons;
         let tabClass = this.tabGroup.options.tabClass;
         if (this.closable) {
@@ -265,9 +272,9 @@ const TabPrivate = {
         }
     },
 
-    initTabClickHandler: function () {
+    initTabClickHandler: function() {
         // Click
-        const tabClickHandler = function (e) {
+        const tabClickHandler = function(e) {
             if (this.isClosed) return;
             if (e.which === 2) {
                 this.close();
@@ -275,7 +282,7 @@ const TabPrivate = {
         };
         this.tab.addEventListener("click", tabClickHandler.bind(this), false);
         // Mouse down
-        const tabMouseDownHandler = function (e) {
+        const tabMouseDownHandler = function(e) {
             if (this.isClosed) return;
             if (e.which === 1) {
                 if (e.target.matches("button")) return;
@@ -285,7 +292,7 @@ const TabPrivate = {
         this.tab.addEventListener("mousedown", tabMouseDownHandler.bind(this), false);
     },
 
-    initWebview: function () {
+    initWebview: function() {
         this.webview = document.createElement("webview");
         this.webview.classList.add(this.tabGroup.options.viewClass);
         if (this.webviewAttributes) {
