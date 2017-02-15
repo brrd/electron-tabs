@@ -72,6 +72,7 @@ Add a new tab to the tab group and returns a `Tab` instance.
 * `title`: tab title.
 * `src`: URL to the page which will be loaded into the view. This is actually the same than `options.webview.src`.
 * `iconURL`: optional URL to the tab icon.
+* `icon`: optional code for a tab icon. Can be used with symbol libraries (example with Font Awesome: `icon: 'fa fa-icon-name'`). This attribute is ignored if an `iconURL` was given.
 * `closable` (default: `true`): if set to `true` the close button won't be displayed and the user won't be able to close the tab. See also `tab.close()`.
 * `webviewAttributes`: attributes to add to the webview tag. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#tag-attributes).
 * `visible` (default: `true`): set this to `false` if you don't want to display the tab once it is loaded. If set to `false` then you will need to call `tab.show()` to display the tab.
