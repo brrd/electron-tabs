@@ -38,7 +38,7 @@ class TabGroup extends EventEmitter {
             viewClass: args.viewClass || "etabs-view",
             closeButtonText: args.closeButtonText || "&#10006;",
             newTab: args.newTab,
-            newTabButtonText: args.newTabButtonText || "&#65291;",
+            newTabButtonText: args.newTabButton || "&#65291;",
             ready: args.ready
         };
         this.tabContainer = document.querySelector(options.tabContainerSelector);
@@ -163,20 +163,23 @@ class Tab extends EventEmitter {
         let span = this.tabElements.icon;
         if (iconURL) {
             span.innerHTML = `<img src="${iconURL}" />`;
-	    this.emit("icon-changed", iconURL, this);
-	} else if (icon) {
-	    span.innerHTML = `<i class="fa ${icon}"></i>`;
-	    this.emit("icon-changed", icon, this);
-	}
-	    
+		} else if (icon) {
+				span.innerHTML = `<i class="${icon}"></i>`;
+		}
+
+        this.emit("icon-changed", iconURL, this);
         return this;
     }
 
     getIcon () {
         if (this.isClosed) return;
-        if(this.iconURL) return this.iconURL;
-	return this.icon;
+        return this.icon;
     }
+	
+	getIconUrl () {
+		if (this.isClosed) return ;
+		return this.iconURL;
+	}
 
     activate () {
         if (this.isClosed) return;
