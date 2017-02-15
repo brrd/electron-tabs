@@ -124,7 +124,7 @@ class Tab extends EventEmitter {
         this.id = id;
         this.title = args.title;
         this.iconURL = args.iconURL;
-		this.icon = args.icon;
+	this.icon = args.icon;
         this.closable = args.closable === false ? false : true;
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
@@ -158,14 +158,16 @@ class Tab extends EventEmitter {
 
     setIcon (iconURL, icon) {
         if (this.isClosed) return;
+	    
         this.iconURL = iconURL;
-		this.icon = icon;
+	this.icon = icon;
         let span = this.tabElements.icon;
+	    
         if (iconURL) {
-            span.innerHTML = `<img src="${iconURL}" />`;
-		} else if (icon) {
-				span.innerHTML = `<i class="${icon}"></i>`;
-		}
+        	span.innerHTML = `<img src="${iconURL}" />`;
+	} else if (icon) {
+		span.innerHTML = `<i class="${icon}"></i>`;
+	}
 
         this.emit("icon-changed", iconURL, this);
         return this;
