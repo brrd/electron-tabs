@@ -38,7 +38,7 @@ class TabGroup extends EventEmitter {
             viewClass: args.viewClass || "etabs-view",
             closeButtonText: args.closeButtonText || "&#10006;",
             newTab: args.newTab,
-            newTabButtonText: args.newTabButton || "&#65291;",
+            newTabButtonText: args.newTabButtonText || "&#65291;",
             ready: args.ready
         };
         this.tabContainer = document.querySelector(options.tabContainerSelector);
@@ -124,7 +124,7 @@ class Tab extends EventEmitter {
         this.id = id;
         this.title = args.title;
         this.iconURL = args.iconURL;
-	this.icon = args.icon;
+		this.icon = args.icon;
         this.closable = args.closable === false ? false : true;
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
@@ -158,30 +158,25 @@ class Tab extends EventEmitter {
 
     setIcon (iconURL, icon) {
         if (this.isClosed) return;
-	    
         this.iconURL = iconURL;
-	this.icon = icon;
+		this.icon = icon;
         let span = this.tabElements.icon;
-	    
         if (iconURL) {
-        	span.innerHTML = `<img src="${iconURL}" />`;
+            span.innerHTML = `<img src="${iconURL}" />`;
+	    this.emit("icon-changed", iconURL, this);
 	} else if (icon) {
-		span.innerHTML = `<i class="${icon}"></i>`;
+	    span.innerHTML = `<i class="${icon}"></i>`;
+	    this.emit("icon-changed", icon, this);
 	}
-
-        this.emit("icon-changed", iconURL, this);
+	    
         return this;
     }
 
     getIcon () {
         if (this.isClosed) return;
-        return this.icon;
+        if(this.iconURL) return this.iconURL;
+		return this.icon;
     }
-	
-	getIconUrl () {
-		if (this.isClosed) return ;
-		return this.iconURL;
-	}
 
     activate () {
         if (this.isClosed) return;
