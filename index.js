@@ -124,6 +124,7 @@ class Tab extends EventEmitter {
         this.id = id;
         this.title = args.title;
         this.iconURL = args.iconURL;
+        this.icon = args.icon;
         this.closable = args.closable === false ? false : true;
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
@@ -155,20 +156,26 @@ class Tab extends EventEmitter {
         return this.title;
     }
 
-    setIcon (iconURL) {
+    setIcon (iconURL, icon) {
         if (this.isClosed) return;
         this.iconURL = iconURL;
+        this.icon = icon;
         let span = this.tabElements.icon;
         if (iconURL) {
             span.innerHTML = `<img src="${iconURL}" />`;
+            this.emit("icon-changed", iconURL, this);
+        } else if (icon) {
+            span.innerHTML = `<i class="${icon}"></i>`;
+            this.emit("icon-changed", icon, this);
         }
-        this.emit("icon-changed", iconURL, this);
+
         return this;
     }
 
     getIcon () {
         if (this.isClosed) return;
-        return this.iconURL;
+        if (this.iconURL) return this.iconURL;
+        return this.icon;
     }
 
     activate () {
@@ -247,7 +254,7 @@ const TabPrivate = {
         }
 
         this.setTitle(this.title);
-        this.setIcon(this.iconURL);
+        this.setIcon(this.iconURL, this.icon);
         TabPrivate.initTabButtons.bind(this)();
         TabPrivate.initTabClickHandler.bind(this)();
 
