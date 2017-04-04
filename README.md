@@ -123,6 +123,10 @@ Toggle the "flash" class on the tab. `tab.unflash()` is an alias to `tab.flash(f
 
 Close the tab (and activate another tab if relevant). When `force` is set to `true` the tab will be closed even if it is not `closable`.
 
+#### Prevent a tab from closing after it was created
+
+Use the `closing` event and set the `closable` property to false
+
 ### Access webview element
 
 You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#methods).
@@ -148,6 +152,7 @@ The following events are available:
 * `tab.on("flash", (tab) => { ... });`
 * `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
+* `tab.on("closing", (tab) => { ... });`
 
 ## Drag and drop support
 
