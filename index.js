@@ -268,7 +268,7 @@ const TabPrivate = {
             let button = container.appendChild(document.createElement("button"));
             button.classList.add(`${tabClass}-button-close`);
             button.innerHTML = this.tabGroup.options.closeButtonText;
-            button.addEventListener("click", this.close.bind(this), false);
+            button.addEventListener("click", this.close.bind(this, false), false);
         }
     },
 
@@ -294,13 +294,13 @@ const TabPrivate = {
 
     initWebview: function () {
         this.webview = document.createElement("webview");
-        
+
         const tabWebviewDidFinishLoadHandler = function (e) {
             this.emit("webview-ready", this);
         };
 
         this.webview.addEventListener("did-finish-load", tabWebviewDidFinishLoadHandler.bind(this), false);
-        
+
         this.webview.classList.add(this.tabGroup.options.viewClass);
         if (this.webviewAttributes) {
             let attrs = this.webviewAttributes;
@@ -308,7 +308,7 @@ const TabPrivate = {
                 this.webview.setAttribute(key, attrs[key]);
             }
         }
-        
+
         this.tabGroup.viewContainer.appendChild(this.webview);
     }
 };
