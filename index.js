@@ -268,7 +268,7 @@ const TabPrivate = {
             let button = container.appendChild(document.createElement("button"));
             button.classList.add(`${tabClass}-button-close`);
             button.innerHTML = this.tabGroup.options.closeButtonText;
-            button.addEventListener("click", this.close.bind(this), false);
+            button.addEventListener("click", this.close.bind(this, false), false);
         }
     },
 
