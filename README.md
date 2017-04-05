@@ -148,6 +148,7 @@ The following events are available:
 * `tab.on("flash", (tab) => { ... });`
 * `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
+* `tab.on("closing", (tab) => { ... });`
 
 ## Drag and drop support
 

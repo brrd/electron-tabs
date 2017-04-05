@@ -225,6 +225,7 @@ class Tab extends EventEmitter {
     }
 
     close (force) {
+        this.emit("closing", this);
         if (this.isClosed || (!this.closable && !force)) return;
         this.isClosed = true;
         let tabGroup = this.tabGroup;
