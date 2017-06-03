@@ -123,6 +123,7 @@ class Tab extends EventEmitter {
         this.tabGroup = tabGroup;
         this.id = id;
         this.title = args.title;
+        this.badge = args.badge;
         this.iconURL = args.iconURL;
         this.icon = args.icon;
         this.closable = args.closable === false ? false : true;
@@ -155,7 +156,27 @@ class Tab extends EventEmitter {
         if (this.isClosed) return;
         return this.title;
     }
+  
+    setBadge (badge) {
+        if (this.isClosed) return;
+        let span = this.tabElements.badge;
+        span.innerHTML = badge;
+        this.badge = badge;
+  
+        if (!badge) {
+            span.classList.add('hidden');
+        } else {
+            span.classList.remove('hidden');
+        }
 
+        this.emit("badge-changed", badge, this);
+    }
+    
+    getBadge () {
+      if (this.isClosed) return;
+      return this.badge;
+    }
+  
     setIcon (iconURL, icon) {
         if (this.isClosed) return;
         this.iconURL = iconURL;
@@ -248,13 +269,14 @@ const TabPrivate = {
         // Create tab element
         let tab = this.tab = document.createElement("div");
         tab.classList.add(tabClass);
-        for (let el of ["icon", "title", "buttons"]) {
+        for (let el of ["icon", "title", "buttons", "badge"]) {
             let span = tab.appendChild(document.createElement("span"));
             span.classList.add(`${tabClass}-${el}`);
             this.tabElements[el] = span;
         }
 
         this.setTitle(this.title);
+        this.setBadge(this.badge);
         this.setIcon(this.iconURL, this.icon);
         TabPrivate.initTabButtons.bind(this)();
         TabPrivate.initTabClickHandler.bind(this)();
