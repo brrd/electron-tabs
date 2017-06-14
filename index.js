@@ -59,6 +59,7 @@ class TabGroup extends EventEmitter {
         this.newTabId++;
         let tab = new Tab(this, id, args);
         this.tabs.push(tab);
+        // Don't call tab.activate() before a tab is referenced in this.tabs
         if (args.active === true) {
             tab.activate();
         }
