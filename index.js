@@ -59,6 +59,9 @@ class TabGroup extends EventEmitter {
         this.newTabId++;
         let tab = new Tab(this, id, args);
         this.tabs.push(tab);
+        if (args.active === true) {
+            tab.activate();
+        }
         this.emit("tab-added", tab, this);
         return tab;
     }
@@ -133,9 +136,6 @@ class Tab extends EventEmitter {
         TabPrivate.initWebview.bind(this)();
         if (args.visible !== false) {
             this.show();
-        }
-        if (args.active === true) {
-            this.activate();
         }
         if (typeof args.ready === "function") {
             args.ready(this);
