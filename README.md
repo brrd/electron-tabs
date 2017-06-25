@@ -71,6 +71,7 @@ Add a new tab to the tab group and returns a `Tab` instance.
 
 * `title`: tab title.
 * `src`: URL to the page which will be loaded into the view. This is actually the same than `options.webview.src`.
+* `badge`: optional text to put into a badge, badge will be hidden if it's falsey
 * `iconURL`: optional URL to the tab icon.
 * `icon`: optional code for a tab icon. Can be used with symbol libraries (example with Font Awesome: `icon: 'fa fa-icon-name'`). This attribute is ignored if an `iconURL` was given.
 * `closable` (default: `true`): if set to `true` the close button won't be displayed and the user won't be able to close the tab. See also `tab.close()`.
@@ -98,6 +99,14 @@ Set tab title.
 #### `tab.getTitle()`
 
 Get current tab title.
+
+#### `tab.setBadge(badge)`
+
+Set tab badge.
+
+#### `tab.getBadge()`
+
+Get current tab badge.
 
 #### `tab.setIcon (iconURL, icon)`
 
