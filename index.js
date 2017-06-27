@@ -161,13 +161,13 @@ class Tab extends EventEmitter {
     setBadge (badge) {
         if (this.isClosed) return;
         let span = this.tabElements.badge;
-        span.innerHTML = badge;
         this.badge = badge;
   
-        if (!badge) {
-            span.classList.add('hidden');
-        } else {
+        if (badge) {
+            span.innerHTML = badge;
             span.classList.remove('hidden');
+        } else {
+            span.classList.add('hidden');
         }
 
         this.emit("badge-changed", badge, this);
