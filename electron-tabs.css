@@ -33,7 +33,7 @@
     padding-bottom: 0;
 }
 
-.etabs-tab:first-child {
+.etabs-tab:not(:first-child) {
     border-left: none;
 }
 
