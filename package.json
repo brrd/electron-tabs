@@ -8,6 +8,7 @@
     "url": "https://github.com/brrd/electron-tabs"
   },
   "scripts": {
+    "demo": "electron ./demo",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,5 +18,8 @@
     "webview"
   ],
   "author": "brrd",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.6.11"
+  }
 }
