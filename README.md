@@ -10,6 +10,12 @@
 $ npm install --save electron-tabs
 ```
 
+## Demo
+
+```
+$ npm run demo
+```
+
 ## Usage
 
 Add the following elements to the app page:
