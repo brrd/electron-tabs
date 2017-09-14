@@ -94,6 +94,20 @@ Retrieve an instance of `Tab` from its `id` (return `null` if not found).
 
 Return the currently active tab (otherwise return `null`).
 
+#### `tabGroup.getTabs()`
+
+Return all registered tabs.
+
+#### `tabGroup.eachTab(fn, thisArg)`
+
+Loop through the list of tabs in `tabGroup` and execute the `fn` function for each tab. `fn` is called with the following parameters:
+
+* `currentTab`: the current tab object.
+* `index`: the index of the current tab being processed.
+* `tabs`: the full array of tabs (similar to `tabGroup.getTabs()`).
+
+`thisArg` (optional) is the value to use as `this` when executing `fn`.
+
 ### Tab
 
 Instances of `Tab` are returned by the `tabGroup.addTab()` method.

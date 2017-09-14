@@ -76,6 +76,15 @@ class TabGroup extends EventEmitter {
         return null;
     }
 
+    getTabs () {
+      return this.tabs;
+    }
+
+    eachTab (fn) {
+      this.tabs.forEach(fn);
+      return this;
+    }
+
     getActiveTab () {
         if (this.tabs.length === 0) return null;
         return this.tabs[0];
@@ -157,12 +166,12 @@ class Tab extends EventEmitter {
         if (this.isClosed) return;
         return this.title;
     }
-  
+
     setBadge (badge) {
         if (this.isClosed) return;
         let span = this.tabElements.badge;
         this.badge = badge;
-  
+
         if (badge) {
             span.innerHTML = badge;
             span.classList.remove('hidden');
@@ -172,12 +181,12 @@ class Tab extends EventEmitter {
 
         this.emit("badge-changed", badge, this);
     }
-    
+
     getBadge () {
       if (this.isClosed) return;
       return this.badge;
     }
-  
+
     setIcon (iconURL, icon) {
         if (this.isClosed) return;
         this.iconURL = iconURL;
@@ -318,13 +327,13 @@ const TabPrivate = {
 
     initWebview: function () {
         this.webview = document.createElement("webview");
-        
+
         const tabWebviewDidFinishLoadHandler = function (e) {
             this.emit("webview-ready", this);
         };
 
         this.webview.addEventListener("did-finish-load", tabWebviewDidFinishLoadHandler.bind(this), false);
-        
+
         this.webview.classList.add(this.tabGroup.options.viewClass);
         if (this.webviewAttributes) {
             let attrs = this.webviewAttributes;
@@ -332,7 +341,7 @@ const TabPrivate = {
                 this.webview.setAttribute(key, attrs[key]);
             }
         }
-        
+
         this.tabGroup.viewContainer.appendChild(this.webview);
     }
 };
