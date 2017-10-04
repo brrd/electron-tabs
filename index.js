@@ -210,6 +210,7 @@ class Tab extends EventEmitter {
         TabGroupPrivate.setActiveTab.bind(this.tabGroup)(this);
         this.tab.classList.add("active");
         this.webview.classList.add("visible");
+        this.webview.focus();
         this.emit("active", this);
         return this;
     }
