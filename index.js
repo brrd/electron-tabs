@@ -271,6 +271,27 @@ class Tab extends EventEmitter {
             TabGroupPrivate.activateRecentTab.bind(tabGroup)();
         }
     }
+
+    getPosition () {
+        let i = 0;
+        let tab = this.tab;
+        while ((tab = tab.previousSibling) != null) i++;
+        return i;
+    }
+
+    setPosition (newPosition) {
+        let tabContainer = this.tabGroup.tabContainer;
+        let tabs = tabContainer.children;
+        let oldPosition = this.getPosition();
+
+        if (newPosition > oldPosition) {
+            newPosition++;
+        }
+
+        tabContainer.insertBefore(tabs[oldPosition], tabs[newPosition]);
+
+        return this;
+    }
 }
 
 const TabPrivate = {
