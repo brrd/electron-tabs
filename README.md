@@ -156,7 +156,7 @@ tab.setPosition(-1);
 
 #### `tab.getPosition(fromRight)`
 
-Get the tab position. If `fromRight` is true, then the index returned is negative and is the offset from the right.
+Get the tab position. If `fromRight` is true the index returned is negative and is the offset from the right.
 
 #### `tab.activate()`
 
