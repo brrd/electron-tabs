@@ -136,6 +136,14 @@ Set tab icon (a iconURL or an icon must be given).
 
 Get current tab icon URL / icon.
 
+#### `tab.setPosition(newPosition)`
+
+Move tab to the specified position.
+
+#### `tab.getPosition()`
+
+Get the tab position.
+
 #### `tab.activate()`
 
 Activate this tab. The class "active" is added to the active tab.
