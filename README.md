@@ -136,6 +136,28 @@ Set tab icon (a iconURL or an icon must be given).
 
 Get current tab icon URL / icon.
 
+#### `tab.setPosition(newPosition)`
+
+Move tab to the specified position. A negative value is an offset from the right.
+
+To move a tab to the leftmost position:
+
+```javascript
+tab.setPosition(1);
+```
+
+> Note: a position of 0 also moves the tab to the leftmost position
+
+To move a tab to the rightmost position:
+
+```javascript
+tab.setPosition(-1);
+```
+
+#### `tab.getPosition(fromRight)`
+
+Get the tab position. If `fromRight` is true the index returned is negative and is the offset from the right.
+
 #### `tab.activate()`
 
 Activate this tab. The class "active" is added to the active tab.

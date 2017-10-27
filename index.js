@@ -209,6 +209,51 @@ class Tab extends EventEmitter {
         return this.icon;
     }
 
+    setPosition (newPosition) {
+        let tabContainer = this.tabGroup.tabContainer;
+        let tabs = tabContainer.children;
+        let oldPosition = this.getPosition();
+
+        if (newPosition < 0) {
+            newPosition += tabContainer.childElementCount;
+
+            if (newPosition < 0) {
+                newPosition = 0;
+            }
+        } else {
+            if (newPosition > tabContainer.childElementCount) {
+                newPosition = tabContainer.childElementCount;
+            }
+
+            // Make 1 be leftmost position
+            newPosition--;
+        }
+
+        if (newPosition > oldPosition) {
+            newPosition++;
+        }
+
+        tabContainer.insertBefore(tabs[oldPosition], tabs[newPosition]);
+
+        return this;
+    }
+
+    getPosition (fromRight) {
+        let position = 0;
+        let tab = this.tab;
+        while ((tab = tab.previousSibling) != null) position++;
+
+        if (fromRight === true) {
+            position -= this.tabGroup.tabContainer.childElementCount;
+        }
+
+        if (position === 0) {
+            position = 1;
+        }
+
+        return position;
+    }
+
     activate () {
         if (this.isClosed) return;
         let activeTab = this.tabGroup.getActiveTab();
