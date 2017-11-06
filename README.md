@@ -96,7 +96,27 @@ Retrieve an instance of `Tab` from this `id` (return `null` if not found).
 
 #### `tabGroup.getTabByPosition(position)`
 
-Retrieve an instance of `Tab` from this `position` (return `null` if not found).
+Retrieve an instance of `Tab` from this `position` (return `null` if not found). A negative value is an offset from the right.
+
+To get the tab in the leftmost position:
+
+```javascript
+tabGroup.getTabByPosition(1);
+```
+
+To get the tab in the rightmost position:
+
+```javascript
+tabGroup.getTabByPosition(-1);
+```
+
+> Note: Position 0 does not contain a tab.
+
+#### `tabGroup.getTabByRelPosition(position)`
+
+Retrieve an instance of `Tab` from this `position` relative to the active tab (return `null` if not found).
+`tabGroup.getNextTab()` is an alias to `tabGroup.getTabByRelPosition(1)`.
+`tabGroup.getPreviousTab()` is an alias to `tabGroup.getTabByRelPosition(-1)`.
 
 #### `tabGroup.getActiveTab()`
 
@@ -146,21 +166,7 @@ Get current tab icon URL / icon.
 
 #### `tab.setPosition(newPosition)`
 
-Move tab to the specified position. A negative value is an offset from the right.
-
-To move a tab to the leftmost position:
-
-```javascript
-tab.setPosition(1);
-```
-
-> Note: a position of 0 also moves the tab to the leftmost position
-
-To move a tab to the rightmost position:
-
-```javascript
-tab.setPosition(-1);
-```
+Move tab to the specified position. If `position` is 0 then `null` is returned and nothing happens. See [`tabGroup.getTabByPosition`](#tabgroupgettabbypositionposition) for information about positions.
 
 #### `tab.getPosition(fromRight)`
 
