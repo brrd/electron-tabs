@@ -67,15 +67,7 @@ class TabGroup extends EventEmitter {
         return tab;
     }
 
-    getTab (id, idIsPosition) {
-        if (idIsPosition !== true) {
-            return this.getTabById(id);
-        } else {
-            return this.getTabByPosition(id);
-        }
-    }
-
-    getTabById (id) {
+    getTab (id) {
         for (let i in this.tabs) {
             if (this.tabs[i].id === id) {
                 return this.tabs[i];
