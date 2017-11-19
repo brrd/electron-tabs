@@ -86,11 +86,7 @@ Add a new tab to the tab group and returns a `Tab` instance.
 * `active` (default: `false`): set this to `true` if you want to activate the tab once it is loaded. Otherwise you will need to call `tab.activate()`.
 * `ready`: a callback function to call once the tab is ready. The `Tab` instance is passed as the only parameter.
 
-#### `tabGroup.getTab(id, idIsPosition)`
-
-If `idIsPosition` is true `id` is passed to `tabGroup.getTabByPosition`. Otherwise, `id` is passed to `tabGroup.getTabById`.
-
-#### `tabGroup.getTabById(id)`
+#### `tabGroup.getTab(id)`
 
 Retrieve an instance of `Tab` from this `id` (return `null` if not found).
 
