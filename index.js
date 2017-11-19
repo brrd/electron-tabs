@@ -236,9 +236,6 @@ class Tab extends EventEmitter {
     }
 
     setPosition (newPosition) {
-        if (newPosition === 0 || newPosition === undefined) {
-            return null;
-        }
         let tabContainer = this.tabGroup.tabContainer;
         let tabs = tabContainer.children;
         let oldPosition = this.getPosition() - 1;
