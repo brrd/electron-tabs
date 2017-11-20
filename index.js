@@ -76,6 +76,32 @@ class TabGroup extends EventEmitter {
         return null;
     }
 
+    getTabByPosition (position) {
+        let fromRight = position < 0;
+        for (let i in this.tabs) {
+            if (this.tabs[i].getPosition(fromRight) === position) {
+                return this.tabs[i];
+            }
+        }
+        return null;
+    }
+
+    getTabByRelPosition (position) {
+        position = this.getActiveTab().getPosition() + position;
+        if (position <= 0) {
+            return null;
+        }
+        return this.getTabByPosition(position);
+    }
+
+    getNextTab () {
+        return this.getTabByRelPosition(1);
+    }
+
+    getPreviousTab () {
+        return this.getTabByRelPosition(-1);
+    }
+
     getTabs () {
       return this.tabs;
     }
@@ -212,7 +238,7 @@ class Tab extends EventEmitter {
     setPosition (newPosition) {
         let tabContainer = this.tabGroup.tabContainer;
         let tabs = tabContainer.children;
-        let oldPosition = this.getPosition();
+        let oldPosition = this.getPosition() - 1;
 
         if (newPosition < 0) {
             newPosition += tabContainer.childElementCount;
@@ -247,8 +273,8 @@ class Tab extends EventEmitter {
             position -= this.tabGroup.tabContainer.childElementCount;
         }
 
-        if (position === 0) {
-            position = 1;
+        if (position >= 0) {
+            position++;
         }
 
         return position;
