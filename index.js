@@ -8,12 +8,10 @@ if (!document) {
 (function () {
     const styles = `
         webview {
-            visibility: hidden;
             width: 0px;
             height: 0px;
         }
         webview.visible {
-            visibility: visible;
             width: 100%;
             height: 100%;
             top: 0;
