@@ -17,7 +17,12 @@
     //const TabGroup = require('electron-tabs') normally but for demo :
     const TabGroup = require("../index");
 
-    let tabGroup = new TabGroup();
+    let tabGroup = new TabGroup({
+        newTab: {
+            title: 'New Tab',
+            icon: 'fa fa-search'
+        }
+    });
 
     tabGroup.addTab({
         title: 'Google',

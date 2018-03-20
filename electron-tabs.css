@@ -10,7 +10,6 @@
 }
 
 .etabs-tabs {
-    float: left;
 }
 
 .etabs-tab {
@@ -40,6 +39,7 @@
 
 .etabs-tab.visible {
     display: inline-block;
+    float: left;
 }
 
 .etabs-tab.active {
