@@ -51,6 +51,9 @@ If you don't want to write your own styles, you can also insert the sample elect
 <link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
 ```
 
+### Note
+Please note, there is a known issue in some versions of Electron that prevents the process to completely shut down and it remains hanging in Background Processes (Windows 10). If you encounter that issue please use the workaround provided at https://github.com/electron/electron/issues/13939
+
 ## API
 
 ### Tab Group
