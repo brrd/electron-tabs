@@ -376,14 +376,14 @@ const TabPrivate = {
     },
 
     initTabClickHandler: function () {
-        // Click
+        // Mouse up
         const tabClickHandler = function (e) {
             if (this.isClosed) return;
             if (e.which === 2) {
                 this.close();
             }
         };
-        this.tab.addEventListener("click", tabClickHandler.bind(this), false);
+        this.tab.addEventListener("mouseup", tabClickHandler.bind(this), false);
         // Mouse down
         const tabMouseDownHandler = function (e) {
             if (this.isClosed) return;
