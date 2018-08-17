@@ -101,11 +101,11 @@ class TabGroup extends EventEmitter {
     }
 
     getTabs () {
-      return this.slice().tabs;
+      return this.tabs.slice();
     }
 
     eachTab (fn) {
-      this.tabs.slice().forEach(fn);
+      this.getTabs().forEach(fn);
       return this;
     }
 
