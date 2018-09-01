@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events';
 import {WebviewTag} from 'electron';
 
-class ElectronTabs extends EventEmitter {
+declare class ElectronTabs extends EventEmitter {
   constructor(options?: ElectronTabs.TabGroupOptions);
   addTab(options?: ElectronTabs.TabOptions): ElectronTabs.Tab;
   getTab(id: string): ElectronTabs.Tab | null;
@@ -16,7 +16,7 @@ class ElectronTabs extends EventEmitter {
   tabContainer: HTMLElement;
 }
 
-namespace ElectronTabs {
+declare namespace ElectronTabs {
   export interface TabGroupOptions {
     tabContainerSelector?: string;
     buttonsContainerSelector?: string;
