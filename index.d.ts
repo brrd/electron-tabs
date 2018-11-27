@@ -4,7 +4,7 @@ import {WebviewTag} from 'electron';
 declare class ElectronTabs extends EventEmitter {
   constructor(options?: ElectronTabs.TabGroupOptions);
   addTab(options?: ElectronTabs.TabOptions): ElectronTabs.Tab;
-  getTab(id: string): ElectronTabs.Tab | null;
+  getTab(id: number): ElectronTabs.Tab | null;
   getTabByPosition(position: number): ElectronTabs.Tab | null;
   getTabByRelPosition(position: number): ElectronTabs.Tab | null;
   getActiveTab(): ElectronTabs.Tab | null;
