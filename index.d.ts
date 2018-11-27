@@ -43,6 +43,7 @@ declare namespace ElectronTabs {
   }
 
   export interface Tab extends EventEmitter {
+    id: number;
     setTitle(title: string): void;
     getTitle(): string;
     setBadge(badge: string): void;
