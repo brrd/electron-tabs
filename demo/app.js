@@ -6,7 +6,12 @@ app.setName('electron-tabs-demo');
 
 app.on('ready', function () {
 
-    const mainWindow = new electron.BrowserWindow();
+    const mainWindow = new electron.BrowserWindow({
+      webPreferences: {
+        nodeIntegration: true,
+        webviewTag: true
+      }
+    });
     mainWindow.loadURL('file://' + __dirname + '/electron-tabs.html');
     mainWindow.on('ready-to-show', function () {
         mainWindow.show();
