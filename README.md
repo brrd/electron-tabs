@@ -207,6 +207,7 @@ The following events are available:
 * `tab.on("title-changed", (title, tab) => { ... });`
 * `tab.on("icon-changed", (icon, tab) => { ... });`
 * `tab.on("active", (tab) => { ... });`
+* `tab.on("inactive", (tab) => { ... });`
 * `tab.on("visible", (tab) => { ... });`
 * `tab.on("hidden", (tab) => { ... });`
 * `tab.on("flash", (tab) => { ... });`
