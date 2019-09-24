@@ -284,6 +284,7 @@ class Tab extends EventEmitter {
         if (activeTab) {
             activeTab.tab.classList.remove("active");
             activeTab.webview.classList.remove("visible");
+            activeTab.emit("inactive", activeTab);
         }
         TabGroupPrivate.setActiveTab.bind(this.tabGroup)(this);
         this.tab.classList.add("active");
