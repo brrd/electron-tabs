@@ -181,6 +181,7 @@ class Tab extends EventEmitter {
         if (this.isClosed) return;
         let span = this.tabElements.title;
         span.innerHTML = title;
+        span.title = title;
         this.title = title;
         this.emit("title-changed", title, this);
         return this;
@@ -418,3 +419,4 @@ const TabPrivate = {
 };
 
 module.exports = TabGroup;
+
