@@ -181,6 +181,7 @@ class Tab extends EventEmitter {
         if (this.isClosed) return;
         let span = this.tabElements.title;
         span.innerHTML = title;
+        span.title = title;
         this.title = title;
         this.emit("title-changed", title, this);
         return this;
@@ -284,6 +285,7 @@ class Tab extends EventEmitter {
         if (activeTab) {
             activeTab.tab.classList.remove("active");
             activeTab.webview.classList.remove("visible");
+            activeTab.emit("inactive", activeTab);
         }
         TabGroupPrivate.setActiveTab.bind(this.tabGroup)(this);
         this.tab.classList.add("active");
@@ -417,3 +419,4 @@ const TabPrivate = {
 };
 
 module.exports = TabGroup;
+
