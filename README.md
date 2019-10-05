@@ -189,7 +189,7 @@ Close the tab (and activate another tab if relevant). When `force` is set to `tr
 
 ### Access webview element
 
-You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#methods).
+You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](https://electronjs.org/docs/api/webview-tag#methods).
 
 ```javascript
 let webview = tab.webview;
