@@ -8,16 +8,17 @@ if (!document) {
 (function () {
     const styles = `
         webview {
-            width: 0px;
-            height: 0px;
-        }
-        webview.visible {
             width: 100%;
             height: 100%;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
+            position: absolute;
+            visibility: hidden;
+        }
+        webview.visible {
+            visibility: visible;
         }
     `;
     let styleTag = document.createElement("style");
