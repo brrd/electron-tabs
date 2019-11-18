@@ -80,6 +80,7 @@ Add a new tab to the tab group and returns a `Tab` instance.
 
 * `title`: tab title.
 * `src`: URL to the page which will be loaded into the view. This is actually the same than `options.webview.src`.
+* `textId`: optional text id to associate with this tab
 * `badge`: optional text to put into a badge, badge will be hidden if it's falsey
 * `iconURL`: optional URL to the tab icon.
 * `icon`: optional code for a tab icon. Can be used with symbol libraries (example with Font Awesome: `icon: 'fa fa-icon-name'`). This attribute is ignored if an `iconURL` was given.
@@ -92,6 +93,10 @@ Add a new tab to the tab group and returns a `Tab` instance.
 #### `tabGroup.getTab(id)`
 
 Retrieve an instance of `Tab` from this `id` (return `null` if not found).
+
+#### `tabGroup.getTabByTextId(textId)`
+
+Retrieve an instance of `Tab` from this `textId` (return `null` if not found).
 
 #### `tabGroup.getTabByPosition(position)`
 

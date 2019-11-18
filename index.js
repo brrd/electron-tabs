@@ -75,6 +75,15 @@ class TabGroup extends EventEmitter {
         return null;
     }
 
+    getTabByTextId (textId) {
+        for (let i in this.tabs) {
+            if (this.tabs[i].textId === textId) {
+                return this.tabs[i];
+            }
+        }
+        return null;
+    }
+
     getTabByPosition (position) {
         let fromRight = position < 0;
         for (let i in this.tabs) {
@@ -160,6 +169,7 @@ class Tab extends EventEmitter {
         super();
         this.tabGroup = tabGroup;
         this.id = id;
+        this.textId = args.textId;
         this.title = args.title;
         this.badge = args.badge;
         this.iconURL = args.iconURL;
@@ -176,6 +186,11 @@ class Tab extends EventEmitter {
         if (typeof args.ready === "function") {
             args.ready(this);
         }
+    }
+
+    setTextId (textId) {
+        this.textId = textId;
+        return this;
     }
 
     setTitle (title) {
