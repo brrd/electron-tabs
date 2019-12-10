@@ -168,6 +168,7 @@ class Tab extends EventEmitter {
         this.webviewAttributes = args.webviewAttributes || {};
         this.webviewAttributes.src = args.src;
         this.tabElements = {};
+        this.allowClose = true;
         TabPrivate.initTab.bind(this)();
         TabPrivate.initWebview.bind(this)();
         if (args.visible !== false) {
@@ -328,8 +329,17 @@ class Tab extends EventEmitter {
         return this.flash(false);
     }
 
+    cancelClose () {
+        this.allowClose = false;
+    }
+
     close (force) {
-        this.emit("closing", this);
+        this.emit("closing", this, force);
+        if (!this.allowClose && !force) {
+            this.allowClose = !this.allowClose;
+            return;
+        }
+
         if (this.isClosed || (!this.closable && !force)) return;
         this.isClosed = true;
         let tabGroup = this.tabGroup;

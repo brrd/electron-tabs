@@ -183,13 +183,24 @@ Toggle the "visible" class on the tab. `tab.hide()` is an alias to `tab.show(fal
 
 Toggle the "flash" class on the tab. `tab.unflash()` is an alias to `tab.flash(false)`.
 
+#### `tab.cancelClose()`
+
+Sets allowClose to false to cancel the next close attempt, useful for cancelling a close attempt from the closing event:
+```javascript
+tab.on("closing", function(tab, force) {
+    if (force || !confirm('Are you sure you wish to close this tab?')) {
+        tab.cancelClose();
+    }
+});
+```
+
 #### `tab.close(force)`
 
-Close the tab (and activate another tab if relevant). When `force` is set to `true` the tab will be closed even if it is not `closable`.
+Close the tab (and activate another tab if relevant). When `force` is set to `true` the tab will be closed even if it is not `closable` or `allowClose` was set to false.
 
 ### Access webview element
 
-You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](https://electronjs.org/docs/api/webview-tag#methods).
+You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#methods).
 
 ```javascript
 let webview = tab.webview;
@@ -213,7 +224,7 @@ The following events are available:
 * `tab.on("flash", (tab) => { ... });`
 * `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
-* `tab.on("closing", (tab) => { ... });`
+* `tab.on("closing", (tab, force) => { ... });`
 
 ## Drag and drop support
 
