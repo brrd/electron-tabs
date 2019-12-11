@@ -128,6 +128,22 @@
     height: calc(100vh - 33px);
 }
 
-.etab-view {
-    position: relative;
+.etabs-views webview {
+    width: 0;
+    height: 0;
+    top: 32px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    visibility: hidden;
+}
+
+.etabs-views webview.visible {
+    width: 100%;
+    height: calc(100vh - 32px);
+    visibility: visible;
+}
+
+.etabs-view {
 }

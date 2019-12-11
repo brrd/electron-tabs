@@ -4,28 +4,6 @@ if (!document) {
     throw Error("electron-tabs module must be called in renderer process");
 }
 
-// Inject styles
-(function () {
-    const styles = `
-        webview {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            position: absolute;
-            visibility: hidden;
-        }
-        webview.visible {
-            visibility: visible;
-        }
-    `;
-    let styleTag = document.createElement("style");
-    styleTag.innerHTML = styles;
-    document.getElementsByTagName("head")[0].appendChild(styleTag);
-})();
-
 class TabGroup extends EventEmitter {
     constructor (args = {}) {
         super();
