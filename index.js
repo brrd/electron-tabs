@@ -179,9 +179,9 @@ class Tab extends EventEmitter {
 
         if (badge) {
             span.innerHTML = badge;
-            span.classList.remove('hidden');
+            span.classList.remove("hidden");
         } else {
-            span.classList.add('hidden');
+            span.classList.add("hidden");
         }
 
         this.emit("badge-changed", badge, this);
