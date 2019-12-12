@@ -4,28 +4,6 @@ if (!document) {
     throw Error("electron-tabs module must be called in renderer process");
 }
 
-// Inject styles
-(function () {
-    const styles = `
-        webview {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            position: absolute;
-            visibility: hidden;
-        }
-        webview.visible {
-            visibility: visible;
-        }
-    `;
-    let styleTag = document.createElement("style");
-    styleTag.innerHTML = styles;
-    document.getElementsByTagName("head")[0].appendChild(styleTag);
-})();
-
 class TabGroup extends EventEmitter {
     constructor (args = {}) {
         super();
@@ -102,12 +80,12 @@ class TabGroup extends EventEmitter {
     }
 
     getTabs () {
-      return this.tabs.slice();
+        return this.tabs.slice();
     }
 
     eachTab (fn) {
-      this.getTabs().forEach(fn);
-      return this;
+        this.getTabs().forEach(fn);
+        return this;
     }
 
     getActiveTab () {
@@ -209,8 +187,8 @@ class Tab extends EventEmitter {
     }
 
     getBadge () {
-      if (this.isClosed) return;
-      return this.badge;
+        if (this.isClosed) return;
+        return this.badge;
     }
 
     setIcon (iconURL, icon) {
@@ -420,4 +398,3 @@ const TabPrivate = {
 };
 
 module.exports = TabGroup;
-
