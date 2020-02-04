@@ -403,6 +403,12 @@ const TabPrivate = {
 
     this.webview.addEventListener("did-finish-load", tabWebviewDidFinishLoadHandler.bind(this), false);
 
+    this.webview.addEventListener("dom-ready", function () {
+      // Remove this once https://github.com/electron/electron/issues/14474 is fixed
+      tab.webview.blur(); 
+      tab.webview.focus(); 
+    });
+
     this.webview.classList.add(this.tabGroup.options.viewClass);
     if (this.webviewAttributes) {
       let attrs = this.webviewAttributes;
