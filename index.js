@@ -31,7 +31,7 @@ class TabGroup extends EventEmitter {
       viewContainerSelector: args.viewContainerSelector || ".etabs-views",
       tabClass: args.tabClass || "etabs-tab",
       viewClass: args.viewClass || "etabs-view",
-      closeButtonText: args.closeButtonText || "&#10006;",
+      closeButtonText: args.closeButtonText || "&#215;",
       newTab: args.newTab,
       newTabButtonText: args.newTabButtonText || "&#65291;",
       ready: args.ready
