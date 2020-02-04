@@ -18,12 +18,23 @@ $ npm run demo
 
 ## Usage
 
-Add the following elements to the app page:
+Electron-tabs uses webviews, so you first need to use the following `webPreferences` options in the main process:
+
+```js
+const mainWindow = new electron.BrowserWindow({
+  webPreferences: {
+    nodeIntegration: true,
+    webviewTag: true
+  }
+});
+```
+
+Then add the following elements to the app page:
 
 ```html
 <div class="etabs-tabgroup">
-    <div class="etabs-tabs"></div>
-    <div class="etabs-buttons"></div>
+  <div class="etabs-tabs"></div>
+  <div class="etabs-buttons"></div>
 </div>
 <div class="etabs-views"></div>
 ```
@@ -34,14 +45,14 @@ And call the module in the renderer process:
 const TabGroup = require("electron-tabs");
 ```
 
-Then you can initialize a tab group and add tabs to it:
+Now you can initialize a tab group and add tabs to it:
 
 ```javascript
 let tabGroup = new TabGroup();
 let tab = tabGroup.addTab({
-    title: "Electron",
-    src: "http://electron.atom.io",
-    visible: true
+  title: "Electron",
+  src: "http://electron.atom.io",
+  visible: true
 });
 ```
 
@@ -52,6 +63,7 @@ If you don't want to write your own styles, you can also insert the sample elect
 ```
 
 ### Note
+
 Please note, there is a known issue in some versions of Electron that prevents the process to completely shut down and it remains hanging in Background Processes (Windows 10). If you encounter that issue please use the workaround provided at https://github.com/electron/electron/issues/13939
 
 ## API
@@ -238,11 +250,11 @@ const TabGroup = require("electron-tabs");
 const dragula = require("dragula");
 
 var tabGroup = new TabGroup({
-    ready: function (tabGroup) {
-        dragula([tabGroup.tabContainer], {
-			direction: "horizontal"
-		});
-    }
+  ready: function (tabGroup) {
+    dragula([tabGroup.tabContainer], {
+      direction: "horizontal"
+    });
+  }
 });
 ```
 
