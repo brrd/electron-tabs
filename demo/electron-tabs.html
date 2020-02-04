@@ -2,38 +2,38 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="../electron-tabs.css">
+  <link rel="stylesheet" href="../electron-tabs.css">
 </head>
 <body style="margin:0">
 
 <div class="etabs-tabgroup">
-    <div class="etabs-tabs"></div>
-    <div class="etabs-buttons"></div>
+  <div class="etabs-tabs"></div>
+  <div class="etabs-buttons"></div>
 </div>
 <div class="etabs-views"></div>
 
 
 <script>
-    //const TabGroup = require('electron-tabs') normally but for demo :
-    const TabGroup = require("../index");
+  //const TabGroup = require('electron-tabs') normally but for demo :
+  const TabGroup = require("../index");
 
-    let tabGroup = new TabGroup({
-        newTab: {
-            title: 'New Tab'
-        }
-    });
+  let tabGroup = new TabGroup({
+    newTab: {
+      title: 'New Tab'
+    }
+  });
 
-    tabGroup.addTab({
-        title: 'Google',
-        src: 'http://google.com',
-    });
+  tabGroup.addTab({
+    title: 'Google',
+    src: 'http://google.com',
+  });
 
-    tabGroup.addTab({
-        title: "Electron",
-        src: "http://electron.atom.io",
-        visible: true,
-        active: true
-    });
+  tabGroup.addTab({
+    title: "Electron",
+    src: "http://electron.atom.io",
+    visible: true,
+    active: true
+  });
 
 </script>
 </body>
