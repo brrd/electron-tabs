@@ -395,7 +395,7 @@ const TabPrivate = {
   },
 
   initWebview: function () {
-    this.webview = document.createElement("webview");
+    const webview = this.webview = document.createElement("webview");
 
     const tabWebviewDidFinishLoadHandler = function (e) {
       this.emit("webview-ready", this);
@@ -405,8 +405,8 @@ const TabPrivate = {
 
     this.webview.addEventListener("dom-ready", function () {
       // Remove this once https://github.com/electron/electron/issues/14474 is fixed
-      tab.webview.blur(); 
-      tab.webview.focus(); 
+      webview.blur(); 
+      webview.focus(); 
     });
 
     this.webview.classList.add(this.tabGroup.options.viewClass);
