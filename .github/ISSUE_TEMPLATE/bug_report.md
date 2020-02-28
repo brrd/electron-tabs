@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-**Before posting your issue, please make sure it is not related to Electron or the `<webview>` tag by checking Electron issues (https://github.com/electron/electron/issues).**
+<!-- Before posting your issue, please make sure it is not related to Electron or the `<webview>` tag by checking Electron issues (https://github.com/electron/electron/issues). -->
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -20,7 +20,6 @@ A clear and concise description of what you expected to happen.
 
 **Please complete the following information**
  - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
  - electron-tabs version [e.g. 0.12.0]
  - Electron version [e.g. 8.0.0]
 
