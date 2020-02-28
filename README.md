@@ -216,6 +216,7 @@ The following events are available:
 * `tabGroup.on("tab-removed", (tab, tabGroup) => { ... });`
 * `tabGroup.on("tab-active", (tab, tabGroup) => { ... });`
 * `tab.on("webview-ready", (tab) => { ... });`
+* `tab.on("webview-dom-ready", (tab) => { ... });`
 * `tab.on("title-changed", (title, tab) => { ... });`
 * `tab.on("icon-changed", (icon, tab) => { ... });`
 * `tab.on("active", (tab) => { ... });`
