@@ -413,7 +413,9 @@ const TabPrivate = {
     if (this.webviewAttributes) {
       let attrs = this.webviewAttributes;
       for (let key in attrs) {
-        this.webview.setAttribute(key, attrs[key]);
+        const attr = attrs[key];
+        if (attr === false) continue;
+        this.webview.setAttribute(key, attr);
       }
     }
 
