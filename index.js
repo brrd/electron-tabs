@@ -10,10 +10,10 @@ if (!document) {
     webview {
       position: absolute;
       visibility: hidden;
-    }
-    webview.visible {
       width: 100%;
       height: 100%;
+    }
+    webview.visible {
       visibility: visible;
     }
   `;
