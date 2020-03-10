@@ -342,14 +342,20 @@ class Tab extends EventEmitter {
   }
 
   close (force) {
-    this.emit("closing", this);
-    if (this.isClosed || (!this.closable && !force)) return;
+    const abortController = new AbortController();
+    const abort = () => abortController.abort();
+    this.emit("closing", this, abort);
+
+    const abortSignal = abortController.signal;
+    if (this.isClosed || (!this.closable && !force) || abortSignal.aborted) return;
+
     this.isClosed = true;
     let tabGroup = this.tabGroup;
     tabGroup.tabContainer.removeChild(this.tab);
     tabGroup.viewContainer.removeChild(this.webview);
     let activeTab = this.tabGroup.getActiveTab();
     TabGroupPrivate.removeTab.bind(tabGroup)(this, true);
+
     this.emit("close", this);
 
     if (activeTab.id === this.id) {
