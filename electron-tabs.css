@@ -7,6 +7,11 @@
   font-size: 14px;
   -webkit-user-select: none;
   user-select: none;
+  display: none;
+}
+
+.etabs-tabgroup.visible {
+	display: block;
 }
 
 .etabs-tabs {

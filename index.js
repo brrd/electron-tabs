@@ -34,6 +34,7 @@ class TabGroup extends EventEmitter {
       closeButtonText: args.closeButtonText || "&#215;",
       newTab: args.newTab,
       newTabButtonText: args.newTabButtonText || "&#65291;",
+      visibilityThreshold: args.visibilityThreshold || 0,
       ready: args.ready
     };
     this.tabContainer = document.querySelector(options.tabContainerSelector);
@@ -41,6 +42,7 @@ class TabGroup extends EventEmitter {
     this.tabs = [];
     this.newTabId = 0;
     TabGroupPrivate.initNewTabButton.bind(this)();
+    TabGroupPrivate.initVisibility.bind(this)();
     if (typeof this.options.ready === "function") {
       this.options.ready(this);
     }
@@ -120,6 +122,21 @@ const TabGroupPrivate = {
     button.classList.add(`${this.options.tabClass}-button-new`);
     button.innerHTML = this.options.newTabButtonText;
     button.addEventListener("click", this.addTab.bind(this, undefined), false);
+  },
+
+  initVisibility: function () {
+    function toggleTabsVisibility(tab, tabGroup) {
+      var visibilityThreshold = this.options.visibilityThreshold;
+      var el = tabGroup.tabContainer.parentNode;
+      if (this.tabs.length >= visibilityThreshold) {
+        el.classList.add("visible");
+      } else {
+        el.classList.remove("visible");
+      }
+    }
+
+    this.on("tab-added", toggleTabsVisibility);
+    this.on("tab-removed", toggleTabsVisibility);
   },
 
   removeTab: function (tab, triggerEvent) {

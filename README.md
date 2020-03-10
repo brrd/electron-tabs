@@ -84,6 +84,7 @@ Represents the main tab container.
 * `closeButtonText` (default: `"&#10006;"`): "close tab" button text.
 * `newTabButtonText` (default: `"&#65291;"`): "New Tab" button text.
 * `newTab` (default: `undefined`): arguments to use when `.addTab()` is called without parameters. It can be an object or a function which returns an object. It determines the options to use when the "New Tab" button is triggered. If you leave it undefined then the "New Tab" button won't be displayed.
+* `visibilityThreshold` (default: `0`): the minimum number of tabs necessary for the tabGroup to be displayed. `0` means tabGround will always remain visible.
 * `ready` (default: `undefined`): a callback function to call once the tab group is ready. The `TabGroup` instance is passed as the only parameter.
 
 #### `tabGroup.addTab(options)`
