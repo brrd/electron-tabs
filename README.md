@@ -196,6 +196,10 @@ Toggle the "visible" class on the tab. `tab.hide()` is an alias to `tab.show(fal
 
 Toggle the "flash" class on the tab. `tab.unflash()` is an alias to `tab.flash(false)`.
 
+#### `tab.hasClass(classname)`
+
+Return `true` if the tab element has the specified classname. Useful for checking if a tab is "active", "visible" of "flash".
+
 #### `tab.close(force)`
 
 Close the tab (and activate another tab if relevant). When `force` is set to `true` the tab will be closed even if it is not `closable`.

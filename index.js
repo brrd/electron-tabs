@@ -341,6 +341,10 @@ class Tab extends EventEmitter {
     return this.flash(false);
   }
 
+  hasClass (classname) {
+    return this.tab.classList.contains(classname);
+  }
+
   close (force) {
     const abortController = new AbortController();
     const abort = () => abortController.abort();
