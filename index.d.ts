@@ -39,6 +39,7 @@ declare namespace ElectronTabs {
     webviewAttributes?: {[key: string]: any};
     visible?: boolean;
     active?: boolean;
+    additionalTabClass?: string;
     ready?: (tab: Tab) => void;
   }
 
