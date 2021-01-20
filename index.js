@@ -180,6 +180,7 @@ class Tab extends EventEmitter {
     this.closable = args.closable === false ? false : true;
     this.webviewAttributes = args.webviewAttributes || {};
     this.webviewAttributes.src = args.src;
+    this.additionalTabClass = args.additionalTabClass;
     this.tabElements = {};
     TabPrivate.initTab.bind(this)();
     TabPrivate.initWebview.bind(this)();
@@ -375,6 +376,9 @@ const TabPrivate = {
     // Create tab element
     let tab = this.tab = document.createElement("div");
     tab.classList.add(tabClass);
+    if(this.additionalTabClass) {
+      tab.classList.add(this.additionalTabClass);
+    }
     for (let el of ["icon", "title", "buttons", "badge"]) {
       let span = tab.appendChild(document.createElement("span"));
       span.classList.add(`${tabClass}-${el}`);

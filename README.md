@@ -101,6 +101,7 @@ Add a new tab to the tab group and returns a `Tab` instance.
 * `visible` (default: `true`): set this to `false` if you don't want to display the tab once it is loaded. If set to `false` then you will need to call `tab.show()` to display the tab.
 * `active` (default: `false`): set this to `true` if you want to activate the tab once it is loaded. Otherwise you will need to call `tab.activate()`.
 * `ready`: a callback function to call once the tab is ready. The `Tab` instance is passed as the only parameter.
+*  `additionalTabClass`: optional css class which is added to a single tab. 
 
 #### `tabGroup.getTab(id)`
 
