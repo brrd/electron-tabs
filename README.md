@@ -23,7 +23,6 @@ Electron-tabs uses webviews, so you first need to use the following `webPreferen
 ```js
 const mainWindow = new electron.BrowserWindow({
   webPreferences: {
-    nodeIntegration: true,
     webviewTag: true
   }
 });

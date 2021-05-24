@@ -1,5 +1,3 @@
-const EventEmitter = require("events");
-
 if (!document) {
   throw Error("electron-tabs module must be called in renderer process");
 }
@@ -21,6 +19,19 @@ if (!document) {
   styleTag.innerHTML = styles;
   document.getElementsByTagName("head")[0].appendChild(styleTag);
 })();
+
+/**
+ * This makes the browser EventTarget API work similar to EventEmitter
+ */
+class EventEmitter extends EventTarget {
+  emit (type, ...args) {
+    this.dispatchEvent(new CustomEvent(type, { detail: args }));
+  }
+
+  on (type, fn) {
+    this.addEventListener(type, ({ detail }) => fn.apply(this, detail));
+  }
+}
 
 class TabGroup extends EventEmitter {
   constructor (args = {}) {
@@ -126,8 +137,8 @@ const TabGroupPrivate = {
 
   initVisibility: function () {
     function toggleTabsVisibility(tab, tabGroup) {
-      var visibilityThreshold = this.options.visibilityThreshold;
-      var el = tabGroup.tabContainer.parentNode;
+      let visibilityThreshold = this.options.visibilityThreshold;
+      let el = tabGroup.tabContainer.parentNode;
       if (this.tabs.length >= visibilityThreshold) {
         el.classList.add("visible");
       } else {
