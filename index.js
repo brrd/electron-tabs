@@ -137,8 +137,8 @@ const TabGroupPrivate = {
 
   initVisibility: function () {
     function toggleTabsVisibility(tab, tabGroup) {
-      let visibilityThreshold = this.options.visibilityThreshold;
-      let el = tabGroup.tabContainer.parentNode;
+      var visibilityThreshold = this.options.visibilityThreshold;
+      var el = tabGroup.tabContainer.parentNode;
       if (this.tabs.length >= visibilityThreshold) {
         el.classList.add("visible");
       } else {
