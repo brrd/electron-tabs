@@ -1,7 +1,7 @@
 {
-  "name": "electron-tabs",
-  "version": "0.15.0",
-  "description": "Simple tabs for Electron applications",
+  "name": "demo-project-for-interview",
+  "version": "1.0.0",
+  "description": "assignement for tab makeing in electron",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   "author": "brrd",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^8.0.0"
+    "electron": "^8.5.5"
+  },
+  "dependencies": {
+    "electron-tabs": "^0.15.0"
   }
 }

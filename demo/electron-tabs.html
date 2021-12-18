@@ -16,7 +16,9 @@
 
 <script>
   //const TabGroup = require('electron-tabs') normally but for demo :
-  const TabGroup = require("../index");
+  const TabGroup = require('electron-tabs') ;
+const electron = require('electron') ;
+const {ipcRenderer} = electron;
 
   let tabGroup = new TabGroup({
     newTab: {
@@ -25,16 +27,22 @@
   });
 
   tabGroup.addTab({
-    title: 'Google',
-    src: 'http://google.com',
+    title: 'view 1',
+    src: './tab.html',
   });
 
   tabGroup.addTab({
-    title: "Electron",
-    src: "http://electron.atom.io",
+    title: "view 2",
+    src: "./view1.html",
     visible: true,
     active: true
   });
+  var webContentsID = tabGroup.getTabByPosition(-1);;
+  console.log(webContentsID);
+ // ipcRenderer.sendTo(webContentsID,'testMessage')
+  
+  //ipcRenderer.sendTo(webContentsID,'testMessage');
+  
 
 </script>
 </body>
