@@ -246,7 +246,7 @@ npm install dragula --save
 Don't forget to add a link to its stylesheet in the header:
 
 ```html
-<link rel="stylesheet" href="node_modules/dist/dragula.css">
+<link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
 ```
 
 Then call Dragula in your script once tabGroup is ready:
