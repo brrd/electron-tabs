@@ -5,6 +5,7 @@ app.on('ready', function () {
   const mainWindow = new electron.BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
       webviewTag: true
     }
   });
