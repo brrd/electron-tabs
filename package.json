@@ -20,6 +20,6 @@
   "author": "brrd",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^17.1.2"
+    "electron": "^13.6.6"
   }
 }
