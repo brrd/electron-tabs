@@ -1,4 +1,57 @@
-import {EventEmitter} from 'events';
+declare class EventEmitter extends EventTarget {
+
+  emit(event: string, ...args: any[]): boolean;
+  emit(event: "tab-added", tab: ElectronTabs.Tab, tabGroup: ElectronTabs): boolean;
+  emit(event: "tab-removed", tab: ElectronTabs.Tab, tabGroup: ElectronTabs): boolean;
+  emit(event: "tab-active", tab: ElectronTabs.Tab, tabGroup: ElectronTabs): boolean;
+
+  emit(event: "webview-ready", tab: ElectronTabs.Tab): boolean;
+  emit(event: "webview-dom-ready", tab: ElectronTabs.Tab): boolean;
+  emit(event: "title-changed", title: string, tab: ElectronTabs.Tab): boolean;
+  emit(event: "badge-changed", badge: string, tab: ElectronTabs.Tab): boolean;
+  emit(event: "icon-changed", icon: string, tab: ElectronTabs.Tab): boolean;
+  emit(event: "active", tab: ElectronTabs.Tab): boolean;
+  emit(event: "inactive", tab: ElectronTabs.Tab): boolean;
+  emit(event: "visible", tab: ElectronTabs.Tab): boolean;
+  emit(event: "hidden", tab: ElectronTabs.Tab): boolean;
+  emit(event: "flash", tab: ElectronTabs.Tab): boolean;
+  emit(event: "unflash", tab: ElectronTabs.Tab): boolean;
+  emit(event: "close", tab: ElectronTabs.Tab, abort: () => void): boolean;
+  emit(event: "closing", tab: ElectronTabs.Tab, abort: () => void): boolean;
+
+  on(event: string, listener: (...args: any[]) => void): this;
+  on(event: "tab-added", listener: (tab: ElectronTabs.Tab, tabGroup: ElectronTabs) => void): this;
+  on(event: "tab-removed", listener: (tab: ElectronTabs.Tab, tabGroup: ElectronTabs) => void): this;
+  on(event: "tab-active", listener: (tab: ElectronTabs.Tab, tabGroup: ElectronTabs) => void): this;
+
+  on(event: "webview-ready", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "webview-dom-ready", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "title-changed", listener: (title: string, tab: ElectronTabs.Tab) => void): this;
+  on(event: "badge-changed", listener: (badge: string, tab: ElectronTabs.Tab) => void): this;
+  on(event: "icon-changed", listener: (icon: string, tab: ElectronTabs.Tab) => void): this;
+  on(event: "active", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "inactive", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "visible", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "hidden", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "flash", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "unflash", listener: (tab: ElectronTabs.Tab) => void): this;
+  on(event: "close", listener: (tab: ElectronTabs.Tab, abort: () => void) => void): this;
+  on(event: "closing", listener: (tab: ElectronTabs.Tab, abort: () => void) => void): this;
+
+  once(event: "webview-ready", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "webview-dom-ready", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "title-changed", listener: (title: string, tab: ElectronTabs.Tab) => void): this;
+  once(event: "badge-changed", listener: (badge: string, tab: ElectronTabs.Tab) => void): this;
+  once(event: "icon-changed", listener: (icon: string, tab: ElectronTabs.Tab) => void): this;
+  once(event: "active", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "inactive", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "visible", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "hidden", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "flash", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "unflash", listener: (tab: ElectronTabs.Tab) => void): this;
+  once(event: "close", listener: (tab: ElectronTabs.Tab, abort: () => void) => void): this;
+  once(event: "closing", listener: (tab: ElectronTabs.Tab, abort: () => void) => void): this;
+}
 
 declare class ElectronTabs extends EventEmitter {
   constructor(options?: ElectronTabs.TabGroupOptions);

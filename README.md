@@ -224,6 +224,7 @@ The following events are available:
 * `tab.on("webview-ready", (tab) => { ... });`
 * `tab.on("webview-dom-ready", (tab) => { ... });`
 * `tab.on("title-changed", (title, tab) => { ... });`
+* `tab.on("badge-changed", (badge, tab) => { ... });`
 * `tab.on("icon-changed", (icon, tab) => { ... });`
 * `tab.on("active", (tab) => { ... });`
 * `tab.on("inactive", (tab) => { ... });`
@@ -233,6 +234,11 @@ The following events are available:
 * `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
 * `tab.on("closing", (tab, abort) => { ... });` (Use `abort()` function to cancel closing)
+
+You can also use `tab.once` to automatically remove the listener when invoked:
+
+* `tab.once("webview-ready", (tab) => { ... });`
+* `tab.once("webview-dom-ready", (tab) => { ... });`
 
 ## Drag and drop support
 
