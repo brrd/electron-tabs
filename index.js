@@ -31,6 +31,10 @@ class EventEmitter extends EventTarget {
   on (type, fn) {
     this.addEventListener(type, ({ detail }) => fn.apply(this, detail));
   }
+
+  once (type, fn) {
+    this.addEventListener(type, ({ detail }) => fn.apply(this, detail), { once: true });
+  }
 }
 
 class TabGroup extends EventEmitter {
