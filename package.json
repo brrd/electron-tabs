@@ -2,14 +2,16 @@
   "name": "electron-tabs",
   "version": "1.0.0-dev",
   "description": "Simple tabs for Electron applications",
-  "main": "index.js",
+  "source": "src/index.js",
+  "main": "dist/electron-tabs.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/brrd/electron-tabs"
   },
   "scripts": {
     "demo": "electron ./demo",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "parcel watch",
+    "build": "parcel build"
   },
   "keywords": [
     "electron",
@@ -20,6 +22,10 @@
   "author": "brrd",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^17.1.2"
+    "cssnano": "^5.1.9",
+    "electron": "^17.1.2",
+    "parcel": "^2.5.0",
+    "parcel-transformer-css-to-string": "^0.9.1",
+    "postcss": "^8.4.14"
   }
 }
