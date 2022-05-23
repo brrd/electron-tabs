@@ -3,26 +3,17 @@
 
 <head>
   <title>electron-tabs-demo</title>
-  <link rel="stylesheet" href="../electron-tabs.css">
 </head>
 <body style="margin:0">
 
-<div class="etabs-tabgroup">
-  <div class="etabs-tabs"></div>
-  <div class="etabs-buttons"></div>
-</div>
-<div class="etabs-views"></div>
+<tab-group></tab-group>
 
-
+<script src="../index.js"></script>
 <script>
-  //const TabGroup = require('electron-tabs') normally but for demo :
-  const TabGroup = require("../index");
-
-  let tabGroup = new TabGroup({
-    newTab: {
-      title: 'New Tab'
-    }
-  });
+  const tabGroup = document.querySelector("tab-group");
+  tabGroup.newTab = {
+    title: "New Tab"
+  }
 
   tabGroup.addTab({
     title: 'Google',

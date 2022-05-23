@@ -1,59 +1,211 @@
+// TODO: move into a CSS file
+// We need a bundler here :-/
+const css = `
+.etabs-tabgroup {
+  width: 100%;
+  height: 32px;
+  background-color: #ccc;
+  cursor: default;
+  font: caption;
+  font-size: 14px;
+  -webkit-user-select: none;
+  user-select: none;
+  display: none;
+}
+
+.etabs-tabgroup.visible {
+	display: block;
+}
+
+.etabs-tabs {
+}
+
+.etabs-tab {
+  display: none;
+  position: relative;
+  color: #333;
+  height: 22px;
+  padding: 6px 8px 4px;
+  border: 1px solid #aaa;
+  border-bottom: none;
+  border-left: none;
+  background: linear-gradient(to bottom, rgba(234,234,234,1) 0%,rgba(204,204,204,1) 100%);
+  font: caption;
+  font-size: 14px;
+  background-color: #ccc;
+  cursor: default;
+}
+
+/* Dragula */
+.etabs-tab.gu-mirror {
+  padding-bottom: 0;
+}
+
+.etabs-tab:first-child {
+  border-left: none;
+}
+
+.etabs-tab.visible {
+  display: inline-block;
+  float: left;
+}
+
+.etabs-tab.active {
+  background: #fff;
+}
+
+.etabs-tab.flash {
+  background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);
+}
+
+.etabs-buttons {
+  float: left;
+}
+
+.etabs-buttons button {
+  float: left;
+  color: #333;
+  background: none;
+  border: none;
+  font-size: 12px;
+  margin-top: 6px;
+  border-radius: 2px;
+  margin-left: 4px;
+  width: 20px;
+  text-align: center;
+  padding: 4px 0;
+}
+
+.etabs-buttons button:hover {
+  color: #eee;
+  background-color: #aaa;
+}
+
+.etabs-tab-badge {
+  position: absolute;
+  right: 0;
+  top: -7px;
+  background: red;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 10px;
+  padding: 0 5px;
+}
+
+.etabs-tab-badge.hidden {
+  display: none;
+}
+
+.etabs-tab-icon {
+  display: inline-block;
+  height: 16px;
+}
+
+.etabs-tab-icon img {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+.etabs-tab-title {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.etabs-tab-buttons {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.etabs-tab-buttons button {
+  display: inline-block;
+  color: #333;
+  background: none;
+  border: none;
+  width: 20px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.etabs-tab-buttons button:hover {
+  color: #eee;
+  background-color: #aaa;
+}
+
+.etabs-views {
+  position: relative;
+  border-top: 1px solid #aaa;
+  height: calc(100vh - 33px);
+}
+
+.etab-view {
+  position: relative;
+}
+
+webview {
+  position: absolute;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+webview.visible {
+  visibility: visible;
+}
+`
+
 if (!document) {
   throw Error("electron-tabs module must be called in renderer process");
 }
 
-// Inject styles
-(function () {
-  const styles = `
-    webview {
-      position: absolute;
-      visibility: hidden;
-      width: 100%;
-      height: 100%;
-    }
-    webview.visible {
-      visibility: visible;
-    }
-  `;
-  let styleTag = document.createElement("style");
-  styleTag.innerHTML = styles;
-  document.getElementsByTagName("head")[0].appendChild(styleTag);
-})();
-
-/**
- * This makes the browser EventTarget API work similar to EventEmitter
- */
-class EventEmitter extends EventTarget {
-  emit (type, ...args) {
-    this.dispatchEvent(new CustomEvent(type, { detail: args }));
-  }
-
-  on (type, fn) {
-    this.addEventListener(type, ({ detail }) => fn.apply(this, detail));
-  }
-
-  once (type, fn) {
-    this.addEventListener(type, ({ detail }) => fn.apply(this, detail), { once: true });
-  }
-}
-
-class TabGroup extends EventEmitter {
-  constructor (args = {}) {
+class TabGroup extends HTMLElement {
+  constructor () {
     super();
-    let options = this.options = {
-      tabContainerSelector: args.tabContainerSelector || ".etabs-tabs",
-      buttonsContainerSelector: args.buttonsContainerSelector || ".etabs-buttons",
-      viewContainerSelector: args.viewContainerSelector || ".etabs-views",
-      tabClass: args.tabClass || "etabs-tab",
-      viewClass: args.viewClass || "etabs-view",
-      closeButtonText: args.closeButtonText || "&#215;",
-      newTab: args.newTab,
-      newTabButtonText: args.newTabButtonText || "&#65291;",
-      visibilityThreshold: args.visibilityThreshold || 0,
-      ready: args.ready
+
+    // Options
+    this.options = {
+      closeButtonText: this.getAttribute("close-button-text") || "&#215;",
+      newTabButtonText: this.getAttribute("new-tab-button-text") || "&#65291;",
+      visibilityThreshold: this.getAttribute("visibility-threshold") || 0,
+      tabClass: this.getAttribute("tab-class") || "etabs-tab",
+      viewClass: this.getAttribute("view-class") || "etabs-view"
+      // TODO: replace this callback
+      // ready: args.ready
     };
-    this.tabContainer = document.querySelector(options.tabContainerSelector);
-    this.viewContainer = document.querySelector(options.viewContainerSelector);
+
+    // Create custom element
+    const shadow = this.attachShadow({mode: "open"});
+
+    const wrapper = document.createElement("div");
+    wrapper.setAttribute("class", "etabs");
+
+    const tabgroup = document.createElement("div");
+    tabgroup.setAttribute("class", "etabs-tabgroup");
+    wrapper.appendChild(tabgroup);
+
+    const tabContainer = document.createElement("div");
+    tabContainer.setAttribute("class", "etabs-tabs");
+    tabgroup.appendChild(tabContainer);
+    this.tabContainer = tabContainer;
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.setAttribute("class", "etabs-buttons");
+    tabgroup.appendChild(buttonContainer);
+    this.buttonContainer = buttonContainer;
+
+    const viewContainer = document.createElement("div");
+    viewContainer.setAttribute("class", "etabs-views");
+    wrapper.appendChild(viewContainer);
+    this.viewContainer = viewContainer;
+
+    // const style = document.createElement("link");
+    // style.setAttribute("rel", "stylesheet");
+    // style.setAttribute("href", "style.css");
+
+    const style = document.createElement("style");
+    style.textContent = css;
+
+    shadow.appendChild(style);
+    shadow.appendChild(wrapper);
+
     this.tabs = [];
     this.newTabId = 0;
     TabGroupPrivate.initNewTabButton.bind(this)();
@@ -132,8 +284,7 @@ class TabGroup extends EventEmitter {
 const TabGroupPrivate = {
   initNewTabButton: function () {
     if (!this.options.newTab) return;
-    let container = document.querySelector(this.options.buttonsContainerSelector);
-    let button = container.appendChild(document.createElement("button"));
+    let button = this.buttonContainer.appendChild(document.createElement("button"));
     button.classList.add(`${this.options.tabClass}-button-new`);
     button.innerHTML = this.options.newTabButtonText;
     button.addEventListener("click", this.addTab.bind(this, undefined), false);
@@ -183,7 +334,7 @@ const TabGroupPrivate = {
   }
 };
 
-class Tab extends EventEmitter {
+class Tab extends EventTarget {
   constructor (tabGroup, id, args) {
     super();
     this.tabGroup = tabGroup;
@@ -468,5 +619,24 @@ const TabPrivate = {
   }
 };
 
-module.exports = TabGroup;
+/**
+ * This makes the browser EventTarget API work similar to EventEmitter
+ */
+ const eventEmitterMixin = {
+  emit (type, ...args) {
+    this.dispatchEvent(new CustomEvent(type, { detail: args }));
+  },
 
+  on (type, fn) {
+    this.addEventListener(type, ({ detail }) => fn.apply(this, detail));
+  },
+
+  once (type, fn) {
+    this.addEventListener(type, ({ detail }) => fn.apply(this, detail), { once: true });
+  }
+};
+
+Object.assign(TabGroup.prototype, eventEmitterMixin);
+Object.assign(Tab.prototype, eventEmitterMixin);
+
+customElements.define("tab-group", TabGroup);

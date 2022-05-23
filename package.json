@@ -1,6 +1,6 @@
 {
   "name": "electron-tabs",
-  "version": "0.17.0",
+  "version": "1.0.0-dev",
   "description": "Simple tabs for Electron applications",
   "main": "index.js",
   "repository": {
