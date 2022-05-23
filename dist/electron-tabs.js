@@ -1,4 +1,4 @@
-var $5580883c37846f86$export$2e2bcd8739ae039 = ".etabs-tabgroup {\n  width: 100%;\n  height: 32px;\n  background-color: #ccc;\n  cursor: default;\n  font: caption;\n  font-size: 14px;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n}\n\n.etabs-tabgroup.visible {\n\tdisplay: block;\n}\n\n.etabs-tab {\n  display: none;\n  position: relative;\n  color: #333;\n  height: 22px;\n  padding: 6px 8px 4px;\n  border: 1px solid #aaa;\n  border-bottom: none;\n  border-left: none;\n  background: linear-gradient(to bottom, rgba(234,234,234,1) 0%,rgba(204,204,204,1) 100%);\n  font: caption;\n  font-size: 14px;\n  background-color: #ccc;\n  cursor: default;\n}\n\n/* Dragula */\n.etabs-tab.gu-mirror {\n  padding-bottom: 0;\n}\n\n.etabs-tab:first-child {\n  border-left: none;\n}\n\n.etabs-tab.visible {\n  display: inline-block;\n}\n\n.etabs-tab.active {\n  background: #fff;\n}\n\n.etabs-tab.flash {\n  background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);\n}\n\n.etabs-buttons {\n  float: left;\n}\n\n.etabs-buttons button {\n  float: left;\n  color: #333;\n  background: none;\n  border: none;\n  font-size: 12px;\n  margin-top: 6px;\n  border-radius: 2px;\n  margin-left: 4px;\n  width: 20px;\n  text-align: center;\n  padding: 4px 0;\n}\n\n.etabs-buttons button:hover {\n  color: #eee;\n  background-color: #aaa;\n}\n\n.etabs-tab-badge {\n  position: absolute;\n  right: 0;\n  top: -7px;\n  background: red;\n  border-radius: 100%;\n  text-align: center;\n  font-size: 10px;\n  padding: 0 5px;\n}\n\n.etabs-tab-badge.hidden {\n  display: none;\n}\n\n.etabs-tab-icon {\n  display: inline-block;\n  height: 16px;\n}\n\n.etabs-tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.etabs-tab-title {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons button {\n  display: inline-block;\n  color: #333;\n  background: none;\n  border: none;\n  width: 20px;\n  text-align: center;\n  border-radius: 2px;\n}\n\n.etabs-tab-buttons button:hover {\n  color: #eee;\n  background-color: #aaa;\n}\n\n.etabs-views {\n  position: relative;\n  border-top: 1px solid #aaa;\n  height: calc(100vh - 33px);\n}\n\n.etab-view {\n  position: relative;\n}\n\nwebview {\n  position: absolute;\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n";
+var $5580883c37846f86$export$2e2bcd8739ae039 = ".etabs-tabgroup {\n  width: 100%;\n  height: 32px;\n  background-color: #ccc;\n  cursor: default;\n  font: caption;\n  font-size: 14px;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n}\n\n.etabs-tabgroup.visible {\n\tdisplay: block;\n}\n\n.etabs-tab {\n  display: none;\n  position: relative;\n  color: #333;\n  height: 22px;\n  padding: 6px 8px 4px;\n  border: 1px solid #aaa;\n  border-bottom: none;\n  border-left: none;\n  background: linear-gradient(to bottom, rgba(234,234,234,1) 0%,rgba(204,204,204,1) 100%);\n  font: caption;\n  font-size: 14px;\n  background-color: #ccc;\n  cursor: default;\n}\n\n/* Dragula */\n.etabs-tab.gu-mirror {\n  padding-bottom: 0;\n}\n\n.etabs-tab:first-child {\n  border-left: none;\n}\n\n.etabs-tab.visible {\n  display: inline-block;\n}\n\n.etabs-tab.active {\n  background: #fff;\n}\n\n.etabs-tab.flash {\n  background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);\n}\n\n/* TODO: fix it */\n.etabs-buttons {\n  float: left;\n}\n\n.etabs-buttons button {\n  float: left;\n  color: #333;\n  background: none;\n  border: none;\n  font-size: 12px;\n  margin-top: 6px;\n  border-radius: 2px;\n  margin-left: 4px;\n  width: 20px;\n  text-align: center;\n  padding: 4px 0;\n}\n\n.etabs-buttons button:hover {\n  color: #eee;\n  background-color: #aaa;\n}\n\n.etabs-tab-badge {\n  position: absolute;\n  right: 0;\n  top: -7px;\n  background: red;\n  border-radius: 100%;\n  text-align: center;\n  font-size: 10px;\n  padding: 0 5px;\n}\n\n.etabs-tab-badge.hidden {\n  display: none;\n}\n\n.etabs-tab-icon {\n  display: inline-block;\n  height: 16px;\n}\n\n.etabs-tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.etabs-tab-title {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons button {\n  display: inline-block;\n  color: #333;\n  background: none;\n  border: none;\n  width: 20px;\n  text-align: center;\n  border-radius: 2px;\n}\n\n.etabs-tab-buttons button:hover {\n  color: #eee;\n  background-color: #aaa;\n}\n\n.etabs-views {\n  position: relative;\n  border-top: 1px solid #aaa;\n  height: calc(100vh - 33px);\n}\n\n.etab-view {\n  position: relative;\n}\n\nwebview {\n  position: absolute;\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n";
 
 
 if (!document) throw Error("electron-tabs module must be called in renderer process");
@@ -11,7 +11,12 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
             newTabButtonText: this.getAttribute("new-tab-button-text") || "&#65291;",
             visibilityThreshold: this.getAttribute("visibility-threshold") || 0,
             tabClass: this.getAttribute("tab-class") || "etabs-tab",
-            viewClass: this.getAttribute("view-class") || "etabs-view"
+            viewClass: this.getAttribute("view-class") || "etabs-view",
+            newTabButton: this.getAttribute("new-tab-button") || false,
+            defaultTab: {
+                title: "New Tab",
+                active: true
+            }
         };
         // Create custom element
         const shadow = this.attachShadow({
@@ -44,10 +49,10 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
         $4fa36e821943b400$var$TabGroupPrivate.initVisibility.bind(this)();
         if (typeof this.options.ready === "function") this.options.ready(this);
     }
-    setNewTab(newTab) {
-        this.options.newTab = newTab;
+    setDefaultTab(tab) {
+        this.options.defaultTab = tab;
     }
-    addTab(args = this.options.newTab) {
+    addTab(args = this.options.defaultTab) {
         if (typeof args === "function") args = args(this);
         let id = this.newTabId;
         this.newTabId++;
@@ -96,7 +101,7 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
 }
 const $4fa36e821943b400$var$TabGroupPrivate = {
     initNewTabButton: function() {
-        if (!this.options.newTab) return;
+        if (!this.options.newTabButton) return;
         let button = this.buttonContainer.appendChild(document.createElement("button"));
         button.classList.add(`${this.options.tabClass}-button-new`);
         button.innerHTML = this.options.newTabButtonText;

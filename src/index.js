@@ -14,7 +14,9 @@ class TabGroup extends HTMLElement {
       newTabButtonText: this.getAttribute("new-tab-button-text") || "&#65291;",
       visibilityThreshold: this.getAttribute("visibility-threshold") || 0,
       tabClass: this.getAttribute("tab-class") || "etabs-tab",
-      viewClass: this.getAttribute("view-class") || "etabs-view"
+      viewClass: this.getAttribute("view-class") || "etabs-view",
+      newTabButton: this.getAttribute("new-tab-button") || false,
+      defaultTab: { title: "New Tab", active: true }
       // TODO: replace this callback
       // ready: args.ready
     };
@@ -59,11 +61,11 @@ class TabGroup extends HTMLElement {
     }
   }
 
-  setNewTab (newTab) {
-    this.options.newTab = newTab;
+  setDefaultTab (tab) {
+    this.options.defaultTab = tab;
   }
 
-  addTab (args = this.options.newTab) {
+  addTab (args = this.options.defaultTab) {
     if (typeof args === "function") {
       args = args(this);
     }
@@ -131,7 +133,7 @@ class TabGroup extends HTMLElement {
 
 const TabGroupPrivate = {
   initNewTabButton: function () {
-    if (!this.options.newTab) return;
+    if (!this.options.newTabButton) return;
     let button = this.buttonContainer.appendChild(document.createElement("button"));
     button.classList.add(`${this.options.tabClass}-button-new`);
     button.innerHTML = this.options.newTabButtonText;

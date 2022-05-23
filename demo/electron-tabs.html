@@ -6,16 +6,15 @@
 </head>
 <body style="margin:0">
 
-<tab-group></tab-group>
+<tab-group new-tab-button="true"></tab-group>
 
 <script src="../dist/electron-tabs.js"></script>
 <script>
   const tabGroup = document.querySelector("tab-group");
 
-  // TODO: fix this
-  // newTab must be defined when the component is created ("add" button visibility)
-  tabGroup.setNewTab({
-    title: "New Tab"
+  tabGroup.setDefaultTab({
+    title: "Wikipedia",
+    src: "https://www.wikipedia.org/"
   });
 
   tabGroup.addTab({
@@ -30,7 +29,7 @@
     active: true
   });
 
-  tabGroup.addTab({});
+  tabGroup.addTab();
 
 </script>
 </body>
