@@ -11,21 +11,26 @@
 <script src="../dist/electron-tabs.js"></script>
 <script>
   const tabGroup = document.querySelector("tab-group");
-  tabGroup.newTab = {
-    title: "New Tab"
-  }
 
-  tabGroup.addTab({
-    title: 'Google',
-    src: 'http://google.com',
+  // TODO: fix this
+  // newTab must be defined when the component is created ("add" button visibility)
+  tabGroup.setNewTab({
+    title: "New Tab"
   });
 
   tabGroup.addTab({
-    title: "Electron",
-    src: "http://electron.atom.io",
+    title: "electron-tabs on NPM",
+    src: "https://www.npmjs.com/package/electron-tabs",
+  });
+
+  tabGroup.addTab({
+    title: "electron-tabs on Github",
+    src: "https://github.com/brrd/electron-tabs",
     visible: true,
     active: true
   });
+
+  tabGroup.addTab({});
 
 </script>
 </body>

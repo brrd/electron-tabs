@@ -59,6 +59,10 @@ class TabGroup extends HTMLElement {
     }
   }
 
+  setNewTab (newTab) {
+    this.options.newTab = newTab;
+  }
+
   addTab (args = this.options.newTab) {
     if (typeof args === "function") {
       args = args(this);
