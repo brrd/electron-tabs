@@ -14,9 +14,6 @@
 	display: block;
 }
 
-.etabs-tabs {
-}
-
 .etabs-tab {
   display: none;
   position: relative;
@@ -44,7 +41,6 @@
 
 .etabs-tab.visible {
   display: inline-block;
-  float: left;
 }
 
 .etabs-tab.active {
@@ -144,6 +140,7 @@ webview {
   width: 100%;
   height: 100%;
 }
+
 webview.visible {
   visibility: visible;
 }

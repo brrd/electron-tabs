@@ -223,9 +223,9 @@ class Tab extends EventTarget {
 
     if (badge) {
       span.innerHTML = badge;
-      span.classList.remove('hidden');
+      span.classList.remove("hidden");
     } else {
-      span.classList.add('hidden');
+      span.classList.add("hidden");
     }
 
     this.emit("badge-changed", badge, this);
@@ -466,7 +466,7 @@ const TabPrivate = {
 /**
  * This makes the browser EventTarget API work similar to EventEmitter
  */
- const eventEmitterMixin = {
+const eventEmitterMixin = {
   emit (type, ...args) {
     this.dispatchEvent(new CustomEvent(type, { detail: args }));
   },
