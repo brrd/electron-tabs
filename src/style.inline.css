@@ -1,38 +1,64 @@
+/* TODO: use custom properties */
+
+webview {
+  position: absolute;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+webview.visible {
+  visibility: visible;
+}
+
+.etabs {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga', 'clig', 'kern';
+}
+
 .etabs-tabgroup {
   width: 100%;
   height: 32px;
-  background-color: #ccc;
   cursor: default;
   font: caption;
   font-size: 14px;
   -webkit-user-select: none;
   user-select: none;
   display: none;
+  background: #E7EAED;
+  box-shadow: inset 0 -1px #DADCE0;
+  border-top: 1px solid #DADCE0;
 }
 
 .etabs-tabgroup.visible {
-	display: block;
+  display: flex;
+}
+
+.etabs-tabs {
+  height: 100%;
 }
 
 .etabs-tab {
   display: none;
   position: relative;
-  color: #333;
-  height: 22px;
-  padding: 6px 8px 4px;
-  border: 1px solid #aaa;
-  border-bottom: none;
-  border-left: none;
-  background: linear-gradient(to bottom, rgba(234,234,234,1) 0%,rgba(204,204,204,1) 100%);
+  height: 100%;
+  background: #E7EAED;
+  color: #696A6C;
+  padding: 5px 9px;
+  transition: background-color 150ms ease-out;
+  box-shadow: inset 0 -1px #DADCE0;
   font: caption;
-  font-size: 14px;
-  background-color: #ccc;
-  cursor: default;
+  font-size: 13px;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 /* Dragula */
 .etabs-tab.gu-mirror {
   padding-bottom: 0;
+  cursor: grab;
+	border: none;
 }
 
 .etabs-tab:first-child {
@@ -45,34 +71,51 @@
 
 .etabs-tab.active {
   background: #fff;
+  box-shadow: none;
+	border-left: 1px solid #DADCE0;
+	border-right: 1px solid #DADCE0;
+	padding-left: 8px;
+	padding-right: 8px;
 }
 
 .etabs-tab.flash {
   background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);
 }
 
-/* TODO: fix it */
+.etabs-tab.visible:not(.active)+.etabs-tab.visible:not(.active) {
+	border-left: 1px solid #B4B6B8;
+	padding-left: 8px;
+}
+
+.etabs-tab:not(.active):hover {
+	background: #F1F3F4;
+}
+
 .etabs-buttons {
-  float: left;
+  border-left: 1px solid #B4B6B8;
 }
 
 .etabs-buttons button {
-  float: left;
-  color: #333;
+  display: block;
+  color: #777;
   background: none;
   border: none;
-  font-size: 12px;
-  margin-top: 6px;
-  border-radius: 2px;
+  font-size: 16px;
+  font-family: inherit;
+  margin-top: 5px;
+  border-radius: 50%;
   margin-left: 4px;
   width: 20px;
+  height: 20px;
   text-align: center;
-  padding: 4px 0;
+  line-height: 14px;
+  padding: 1px 0 0 0;
+	cursor: pointer;
 }
 
 .etabs-buttons button:hover {
-  color: #eee;
-  background-color: #aaa;
+  color: #333;
+  background-color: #bbb;
 }
 
 .etabs-tab-badge {
@@ -112,36 +155,28 @@
 
 .etabs-tab-buttons button {
   display: inline-block;
-  color: #333;
+  color: #777;
   background: none;
   border: none;
   width: 20px;
+  height: 20px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 1px 0 0 0;
+  font-size: 16px;
 }
 
 .etabs-tab-buttons button:hover {
-  color: #eee;
-  background-color: #aaa;
+  color: #333;
+  background-color: #bbb;
 }
 
 .etabs-views {
   position: relative;
-  border-top: 1px solid #aaa;
   height: calc(100vh - 33px);
 }
 
 .etab-view {
   position: relative;
-}
-
-webview {
-  position: absolute;
-  visibility: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-webview.visible {
-  visibility: visible;
 }
