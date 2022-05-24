@@ -3131,6 +3131,7 @@ class TabGroup extends HTMLElement {
             if (window.Sortable) initSortable();
             else document.addEventListener("DOMContentLoaded", initSortable);
         }
+        this.emit("ready", this);
     }
     setDefaultTab(tab) {
         this.options.defaultTab = tab;
@@ -3237,6 +3238,7 @@ class Tab extends EventTarget {
         TabPrivate.initWebview.bind(this)();
         if (args.visible !== false) this.show();
         if (typeof args.ready === "function") args.ready(this);
+        else this.emit("ready", this);
     }
     setTitle(title) {
         if (this.isClosed) return;
@@ -3450,15 +3452,22 @@ const TabPrivate = {
  * This makes the browser EventTarget API work similar to EventEmitter
  */ const eventEmitterMixin = {
     emit (type, ...args) {
+        if (type === "ready") this.isReady = true;
         this.dispatchEvent(new CustomEvent(type, {
             detail: args
         }));
     },
     on (type, fn) {
+        if (type === "ready" && this.isReady === true) fn.apply(this, [
+            this
+        ]);
         this.addEventListener(type, ({ detail  })=>fn.apply(this, detail)
         );
     },
     once (type, fn) {
+        if (type === "ready" && this.isReady === true) fn.apply(this, [
+            this
+        ]);
         this.addEventListener(type, ({ detail  })=>fn.apply(this, detail)
         , {
             once: true

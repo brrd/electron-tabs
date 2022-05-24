@@ -11,11 +11,13 @@
 <script src="../dist/electron-tabs.sortable.js"></script>
 <script>
   const tabGroup = document.querySelector("tab-group");
+  tabGroup.on("ready", () => console.info("TabGroup is ready"));
 
   tabGroup.setDefaultTab({
     title: "Wikipedia",
     src: "https://www.wikipedia.org/",
-    active: true
+    active: true,
+    ready: () => console.info("New Tab is ready")
   });
 
   tabGroup.addTab({

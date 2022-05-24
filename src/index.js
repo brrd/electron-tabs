@@ -18,8 +18,6 @@ class TabGroup extends HTMLElement {
       newTabButton: this.getAttribute("new-tab-button") || false,
       defaultTab: { title: "New Tab", active: true },
       sortable: this.getAttribute("sortable") || false
-      // TODO: replace this callback
-      // ready: args.ready
     };
 
     // Create custom element
@@ -75,6 +73,8 @@ class TabGroup extends HTMLElement {
         document.addEventListener("DOMContentLoaded", initSortable);
       }
     }
+
+    this.emit("ready", this);
   }
 
   setDefaultTab (tab) {
@@ -220,6 +220,8 @@ class Tab extends EventTarget {
     }
     if (typeof args.ready === "function") {
       args.ready(this);
+    } else {
+      this.emit("ready", this);
     }
   }
 
@@ -490,14 +492,23 @@ const TabPrivate = {
  */
 const eventEmitterMixin = {
   emit (type, ...args) {
+    if (type === "ready") {
+      this.isReady = true;
+    }
     this.dispatchEvent(new CustomEvent(type, { detail: args }));
   },
 
   on (type, fn) {
+    if (type === "ready" && this.isReady === true) {
+      fn.apply(this, [this]);
+    }
     this.addEventListener(type, ({ detail }) => fn.apply(this, detail));
   },
 
   once (type, fn) {
+    if (type === "ready" && this.isReady === true) {
+      fn.apply(this, [this]);
+    }
     this.addEventListener(type, ({ detail }) => fn.apply(this, detail), { once: true });
   }
 };
