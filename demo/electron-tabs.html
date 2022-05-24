@@ -6,7 +6,14 @@
 </head>
 <body style="margin:0">
 
-<tab-group new-tab-button="true" sortable="true"></tab-group>
+<tab-group new-tab-button="true" sortable="true">
+  <style>
+    /* Add custom style */
+    .etabs-tab:hover .etabs-tab-title {
+      text-decoration: underline;
+    }
+  </style>
+</tab-group>
 
 <script src="../dist/electron-tabs.sortable.js"></script>
 <script>

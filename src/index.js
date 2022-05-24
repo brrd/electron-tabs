@@ -22,6 +22,7 @@ class TabGroup extends HTMLElement {
 
     // Create custom element
     const shadow = this.attachShadow({mode: "open"});
+    this.shadow = shadow;
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("class", "etabs");
@@ -75,6 +76,14 @@ class TabGroup extends HTMLElement {
     }
 
     this.emit("ready", this);
+  }
+
+  connectedCallback () {
+    const style = this.querySelector("style");
+    if (style) {
+      const clone = style.cloneNode(this);
+      this.shadow.appendChild(clone);
+    }
   }
 
   setDefaultTab (tab) {

@@ -3093,6 +3093,7 @@ class TabGroup extends HTMLElement {
         const shadow = this.attachShadow({
             mode: "open"
         });
+        this.shadow = shadow;
         const wrapper = document.createElement("div");
         wrapper.setAttribute("class", "etabs");
         const tabgroup = document.createElement("div");
@@ -3132,6 +3133,13 @@ class TabGroup extends HTMLElement {
             else document.addEventListener("DOMContentLoaded", initSortable);
         }
         this.emit("ready", this);
+    }
+    connectedCallback() {
+        const style = this.querySelector("style");
+        if (style) {
+            const clone = style.cloneNode(this);
+            this.shadow.appendChild(clone);
+        }
     }
     setDefaultTab(tab) {
         this.options.defaultTab = tab;
