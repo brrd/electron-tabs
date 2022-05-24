@@ -1,7 +1,7 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.inline.css": [
+    "*.css": [
       "parcel-transformer-css-to-string"
     ]
   }

@@ -1,4 +1,4 @@
-import styles from "./style.inline.css";
+import styles from "./style.css";
 
 if (!document) {
   throw Error("electron-tabs module must be called in renderer process");
@@ -16,7 +16,8 @@ class TabGroup extends HTMLElement {
       tabClass: this.getAttribute("tab-class") || "etabs-tab",
       viewClass: this.getAttribute("view-class") || "etabs-view",
       newTabButton: this.getAttribute("new-tab-button") || false,
-      defaultTab: { title: "New Tab", active: true }
+      defaultTab: { title: "New Tab", active: true },
+      draggable: this.getAttribute("draggable") || false
       // TODO: replace this callback
       // ready: args.ready
     };
@@ -56,8 +57,23 @@ class TabGroup extends HTMLElement {
     this.newTabId = 0;
     TabGroupPrivate.initNewTabButton.bind(this)();
     TabGroupPrivate.initVisibility.bind(this)();
-    if (typeof this.options.ready === "function") {
-      this.options.ready(this);
+
+    // Init draggable tabs
+    if (this.options.draggable) {
+      const initDragula = () => {
+        // FIXME: dragula doesnt support shadow dom :-(
+        console.log(this.tabContainer);
+        const d =window.dragula([this.tabContainer], {
+          direction: "horizontal"
+        });
+        console.log(d);
+      };
+
+      if (window.dragula) {
+        initDragula();
+      } else {
+        document.addEventListener("DOMContentLoaded", initDragula);
+      }
     }
   }
 

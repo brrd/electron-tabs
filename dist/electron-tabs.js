@@ -1,4 +1,4 @@
-var $5580883c37846f86$export$2e2bcd8739ae039 = "/* TODO: use custom properties */\n\nwebview {\n  position: absolute;\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n\n.etabs {\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  text-rendering: optimizeLegibility;\n  font-feature-settings: 'liga', 'clig', 'kern';\n}\n\n.etabs-tabgroup {\n  width: 100%;\n  height: 32px;\n  cursor: default;\n  font: caption;\n  font-size: 14px;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n  background: #E7EAED;\n  box-shadow: inset 0 -1px #DADCE0;\n  border-top: 1px solid #DADCE0;\n}\n\n.etabs-tabgroup.visible {\n  display: flex;\n}\n\n.etabs-tabs {\n  height: 100%;\n}\n\n.etabs-tab {\n  display: none;\n  position: relative;\n  height: 100%;\n  background: #E7EAED;\n  color: #696A6C;\n  padding: 5px 9px;\n  transition: background-color 150ms ease-out;\n  box-shadow: inset 0 -1px #DADCE0;\n  font: caption;\n  font-size: 13px;\n  cursor: pointer;\n  box-sizing: border-box;\n}\n\n/* Dragula */\n.etabs-tab.gu-mirror {\n  padding-bottom: 0;\n  cursor: grab;\n\tborder: none;\n}\n\n.etabs-tab:first-child {\n  border-left: none;\n}\n\n.etabs-tab.visible {\n  display: inline-block;\n}\n\n.etabs-tab.active {\n  background: #fff;\n  box-shadow: none;\n\tborder-left: 1px solid #DADCE0;\n\tborder-right: 1px solid #DADCE0;\n\tpadding-left: 8px;\n\tpadding-right: 8px;\n}\n\n.etabs-tab.flash {\n  background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);\n}\n\n.etabs-tab.visible:not(.active)+.etabs-tab.visible:not(.active) {\n\tborder-left: 1px solid #B4B6B8;\n\tpadding-left: 8px;\n}\n\n.etabs-tab:not(.active):hover {\n\tbackground: #F1F3F4;\n}\n\n.etabs-buttons {\n  border-left: 1px solid #B4B6B8;\n}\n\n.etabs-buttons button {\n  display: block;\n  color: #777;\n  background: none;\n  border: none;\n  font-size: 16px;\n  font-family: inherit;\n  margin-top: 5px;\n  border-radius: 50%;\n  margin-left: 4px;\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  line-height: 14px;\n  padding: 1px 0 0 0;\n\tcursor: pointer;\n}\n\n.etabs-buttons button:hover {\n  color: #333;\n  background-color: #bbb;\n}\n\n.etabs-tab-badge {\n  position: absolute;\n  right: 0;\n  top: -7px;\n  background: red;\n  border-radius: 100%;\n  text-align: center;\n  font-size: 10px;\n  padding: 0 5px;\n}\n\n.etabs-tab-badge.hidden {\n  display: none;\n}\n\n.etabs-tab-icon {\n  display: inline-block;\n  height: 16px;\n}\n\n.etabs-tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.etabs-tab-title {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons button {\n  display: inline-block;\n  color: #777;\n  background: none;\n  border: none;\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border-radius: 50%;\n  cursor: pointer;\n  padding: 1px 0 0 0;\n  font-size: 16px;\n}\n\n.etabs-tab-buttons button:hover {\n  color: #333;\n  background-color: #bbb;\n}\n\n.etabs-views {\n  position: relative;\n  height: calc(100vh - 33px);\n}\n\n.etab-view {\n  position: relative;\n}\n";
+var $4866f6bbac7a0ed7$export$2e2bcd8739ae039 = "/* TODO: use custom properties */\n\nwebview {\n  position: absolute;\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n\n.etabs {\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  text-rendering: optimizeLegibility;\n  font-feature-settings: 'liga', 'clig', 'kern';\n}\n\n.etabs-tabgroup {\n  width: 100%;\n  height: 32px;\n  cursor: default;\n  font: caption;\n  font-size: 14px;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n  background: #E7EAED;\n  box-shadow: inset 0 -1px #DADCE0;\n  border-top: 1px solid #DADCE0;\n}\n\n.etabs-tabgroup.visible {\n  display: flex;\n}\n\n.etabs-tabs {\n  height: 100%;\n}\n\n.etabs-tab {\n  display: none;\n  position: relative;\n  height: 100%;\n  background: #E7EAED;\n  color: #696A6C;\n  padding: 5px 9px;\n  transition: background-color 150ms ease-out;\n  box-shadow: inset 0 -1px #DADCE0;\n  font: caption;\n  font-size: 13px;\n  cursor: pointer;\n  box-sizing: border-box;\n}\n\n/* Dragula */\n.etabs-tab.gu-mirror {\n  padding-bottom: 0;\n  cursor: grab;\n\tborder: none;\n}\n\n.etabs-tab:first-child {\n  border-left: none;\n}\n\n.etabs-tab.visible {\n  display: inline-block;\n}\n\n.etabs-tab.active {\n  background: #fff;\n  box-shadow: none;\n\tborder-left: 1px solid #DADCE0;\n\tborder-right: 1px solid #DADCE0;\n\tpadding-left: 8px;\n\tpadding-right: 8px;\n}\n\n.etabs-tab.flash {\n  background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);\n}\n\n.etabs-tab.visible:not(.active)+.etabs-tab.visible:not(.active) {\n\tborder-left: 1px solid #B4B6B8;\n\tpadding-left: 8px;\n}\n\n.etabs-tab:not(.active):hover {\n\tbackground: #F1F3F4;\n}\n\n.etabs-buttons {\n  border-left: 1px solid #B4B6B8;\n}\n\n.etabs-buttons button {\n  display: block;\n  color: #777;\n  background: none;\n  border: none;\n  font-size: 16px;\n  font-family: inherit;\n  margin-top: 5px;\n  border-radius: 50%;\n  margin-left: 4px;\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  line-height: 14px;\n  padding: 1px 0 0 0;\n\tcursor: pointer;\n}\n\n.etabs-buttons button:hover {\n  color: #333;\n  background-color: #bbb;\n}\n\n.etabs-tab-badge {\n  position: absolute;\n  right: 0;\n  top: -7px;\n  background: red;\n  border-radius: 100%;\n  text-align: center;\n  font-size: 10px;\n  padding: 0 5px;\n}\n\n.etabs-tab-badge.hidden {\n  display: none;\n}\n\n.etabs-tab-icon {\n  display: inline-block;\n  height: 16px;\n}\n\n.etabs-tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.etabs-tab-title {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons {\n  display: inline-block;\n  margin-left: 10px;\n}\n\n.etabs-tab-buttons button {\n  display: inline-block;\n  color: #777;\n  background: none;\n  border: none;\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border-radius: 50%;\n  cursor: pointer;\n  padding: 1px 0 0 0;\n  font-size: 16px;\n}\n\n.etabs-tab-buttons button:hover {\n  color: #333;\n  background-color: #bbb;\n}\n\n.etabs-views {\n  position: relative;\n  height: calc(100vh - 33px);\n}\n\n.etab-view {\n  position: relative;\n}\n";
 
 
 if (!document) throw Error("electron-tabs module must be called in renderer process");
@@ -16,7 +16,8 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
             defaultTab: {
                 title: "New Tab",
                 active: true
-            }
+            },
+            draggable: this.getAttribute("draggable") || false
         };
         // Create custom element
         const shadow = this.attachShadow({
@@ -40,14 +41,28 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
         wrapper.appendChild(viewContainer);
         this.viewContainer = viewContainer;
         const style = document.createElement("style");
-        style.textContent = $5580883c37846f86$export$2e2bcd8739ae039;
+        style.textContent = $4866f6bbac7a0ed7$export$2e2bcd8739ae039;
         shadow.appendChild(style);
         shadow.appendChild(wrapper);
         this.tabs = [];
         this.newTabId = 0;
         $4fa36e821943b400$var$TabGroupPrivate.initNewTabButton.bind(this)();
         $4fa36e821943b400$var$TabGroupPrivate.initVisibility.bind(this)();
-        if (typeof this.options.ready === "function") this.options.ready(this);
+        // Init draggable tabs
+        if (this.options.draggable) {
+            const initDragula = ()=>{
+                // FIXME: dragula doesnt support shadow dom :-(
+                console.log(this.tabContainer);
+                const d = window.dragula([
+                    this.tabContainer
+                ], {
+                    direction: "horizontal"
+                });
+                console.log(d);
+            };
+            if (window.dragula) initDragula();
+            else document.addEventListener("DOMContentLoaded", initDragula);
+        }
     }
     setDefaultTab(tab) {
         this.options.defaultTab = tab;
