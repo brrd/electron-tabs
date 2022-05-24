@@ -50,18 +50,16 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
         $4fa36e821943b400$var$TabGroupPrivate.initVisibility.bind(this)();
         // Init draggable tabs
         if (this.options.draggable) {
-            const initDragula = ()=>{
-                // FIXME: dragula doesnt support shadow dom :-(
-                console.log(this.tabContainer);
-                const d = window.dragula([
-                    this.tabContainer
-                ], {
-                    direction: "horizontal"
-                });
-                console.log(d);
+            const initSortable = ()=>{
+                const options = Object.assign({
+                    direction: "horizontal",
+                    animation: 150,
+                    swapThreshold: 0.20
+                }, this.options.draggableOptions);
+                new window.Sortable(this.tabContainer, options);
             };
-            if (window.dragula) initDragula();
-            else document.addEventListener("DOMContentLoaded", initDragula);
+            if (window.Sortable) initSortable();
+            else document.addEventListener("DOMContentLoaded", initSortable);
         }
     }
     setDefaultTab(tab) {

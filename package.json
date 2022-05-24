@@ -31,10 +31,10 @@
   "license": "MIT",
   "devDependencies": {
     "cssnano": "^5.1.9",
-    "dragula": "^3.7.3",
     "electron": "^17.1.2",
     "parcel": "^2.5.0",
     "parcel-transformer-css-to-string": "^0.9.1",
-    "postcss": "^8.4.14"
+    "postcss": "^8.4.14",
+    "sortablejs": "^1.15.0"
   }
 }
