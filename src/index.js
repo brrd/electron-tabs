@@ -17,7 +17,7 @@ class TabGroup extends HTMLElement {
       viewClass: this.getAttribute("view-class") || "etabs-view",
       newTabButton: this.getAttribute("new-tab-button") || false,
       defaultTab: { title: "New Tab", active: true },
-      draggable: this.getAttribute("draggable") || false
+      sortable: this.getAttribute("sortable") || false
       // TODO: replace this callback
       // ready: args.ready
     };
@@ -58,14 +58,14 @@ class TabGroup extends HTMLElement {
     TabGroupPrivate.initNewTabButton.bind(this)();
     TabGroupPrivate.initVisibility.bind(this)();
 
-    // Init draggable tabs
-    if (this.options.draggable) {
+    // Init sortable tabs
+    if (this.options.sortable) {
       const initSortable = () => {
         const options = Object.assign({
           direction: "horizontal",
           animation: 150,
           swapThreshold: 0.20
-        }, this.options.draggableOptions);
+        }, this.options.sortableOptions);
         new window.Sortable(this.tabContainer, options);
       };
 

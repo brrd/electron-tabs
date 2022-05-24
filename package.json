@@ -3,13 +3,13 @@
   "version": "1.0.0-dev",
   "description": "Simple tabs for Electron applications",
   "main": "dist/electron-tabs.js",
-  "draggable": "dist/electron-tabs.draggable.js",
+  "sortable": "dist/electron-tabs.sortable.js",
   "targets": {
     "main": {
       "source": "src/index.js"
     },
-    "draggable": {
-      "source": "src/draggable.js"
+    "sortable": {
+      "source": "src/sortable.js"
     }
   },
   "repository": {

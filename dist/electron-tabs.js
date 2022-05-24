@@ -17,7 +17,7 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
                 title: "New Tab",
                 active: true
             },
-            draggable: this.getAttribute("draggable") || false
+            sortable: this.getAttribute("sortable") || false
         };
         // Create custom element
         const shadow = this.attachShadow({
@@ -48,14 +48,14 @@ class $4fa36e821943b400$var$TabGroup extends HTMLElement {
         this.newTabId = 0;
         $4fa36e821943b400$var$TabGroupPrivate.initNewTabButton.bind(this)();
         $4fa36e821943b400$var$TabGroupPrivate.initVisibility.bind(this)();
-        // Init draggable tabs
-        if (this.options.draggable) {
+        // Init sortable tabs
+        if (this.options.sortable) {
             const initSortable = ()=>{
                 const options = Object.assign({
                     direction: "horizontal",
                     animation: 150,
                     swapThreshold: 0.20
-                }, this.options.draggableOptions);
+                }, this.options.sortableOptions);
                 new window.Sortable(this.tabContainer, options);
             };
             if (window.Sortable) initSortable();
