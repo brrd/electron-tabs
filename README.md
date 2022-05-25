@@ -2,7 +2,7 @@
 
 > Simple tabs for Electron applications
 
-![Electron Tab Demo](screenshot.jpg)
+![Electron Tab Demo](image.jpg)
 
 ## Features
 
