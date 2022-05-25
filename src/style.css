@@ -79,6 +79,7 @@ webview.visible {
   box-sizing: border-box;
   height: 100%;
   padding: 5px 9px;
+  align-items: center;
 }
 
 .tab:first-child {
@@ -86,7 +87,7 @@ webview.visible {
 }
 
 .tab.visible {
-  display: inline-block;
+  display: inline-flex;
 }
 
 .tab.active {
