@@ -156,9 +156,9 @@ class TabGroup extends HTMLElement {
 
   private initVisibility() {
     function toggleTabsVisibility(tab: Tab, tabGroup: TabGroup) {
-      const visibilityThreshold = this.options.visibilityThreshold;
+      const visibilityThreshold = tabGroup.options.visibilityThreshold;
       const el = tabGroup.tabContainer.parentElement;
-      if (this.tabs.length >= visibilityThreshold) {
+      if (tabGroup.tabs.length >= visibilityThreshold) {
         el.classList.add("visible");
       } else {
         el.classList.remove("visible");
@@ -167,6 +167,7 @@ class TabGroup extends HTMLElement {
 
     this.on("tab-added", toggleTabsVisibility);
     this.on("tab-removed", toggleTabsVisibility);
+    toggleTabsVisibility(null, this);
   }
 
   initSortable() {
