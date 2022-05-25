@@ -81,7 +81,7 @@ export class Tab extends EventTarget {
     getBadge(): string;
     setIcon(iconURL: string, icon: string): this;
     getIcon(): string;
-    setPosition(newPosition: number): this;
+    setPosition(newPosition: number): void;
     getPosition(fromRight?: boolean): number;
     activate(): this;
     show(flag?: boolean): this;

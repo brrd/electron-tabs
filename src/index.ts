@@ -460,29 +460,23 @@ class Tab extends EventTarget {
 
   setPosition(newPosition: number) {
     const tabContainer = this.tabGroup.tabContainer;
-    const tabs = tabContainer.children;
-    const oldPosition = this.getPosition() - 1;
+    const length = tabContainer.childElementCount;
+    const thisPosition = this.getPosition();
+    const tabs = Array.from(tabContainer.children)
+    tabs.splice(thisPosition, 1);
 
     if (newPosition < 0) {
-      newPosition += tabContainer.childElementCount;
-
+      newPosition += length;
       if (newPosition < 0) {
         newPosition = 0;
       }
+    }
+
+    if (newPosition < length) {
+      tabContainer.insertBefore(this.tab, tabs[newPosition]);
     } else {
-      if (newPosition > tabContainer.childElementCount) {
-        newPosition = tabContainer.childElementCount;
-      }
-
-      // Make 1 be leftmost position
-      newPosition--;
+      tabContainer.appendChild(this.tab);
     }
-
-    if (newPosition > oldPosition) {
-      newPosition++;
-    }
-
-    tabContainer.insertBefore(tabs[oldPosition], tabs[newPosition]);
 
     return this;
   }
@@ -494,10 +488,6 @@ class Tab extends EventTarget {
 
     if (fromRight === true) {
       position -= this.tabGroup.tabContainer.childElementCount;
-    }
-
-    if (position >= 0) {
-      position++;
     }
 
     return position;

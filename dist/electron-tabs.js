@@ -2831,18 +2831,16 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
     }
     setPosition(newPosition) {
         const tabContainer = this.tabGroup.tabContainer;
-        const tabs = tabContainer.children;
-        const oldPosition = this.getPosition() - 1;
+        const length = tabContainer.childElementCount;
+        const thisPosition = this.getPosition();
+        const tabs = Array.from(tabContainer.children);
+        tabs.splice(thisPosition, 1);
         if (newPosition < 0) {
-            newPosition += tabContainer.childElementCount;
+            newPosition += length;
             if (newPosition < 0) newPosition = 0;
-        } else {
-            if (newPosition > tabContainer.childElementCount) newPosition = tabContainer.childElementCount;
-            // Make 1 be leftmost position
-            newPosition--;
         }
-        if (newPosition > oldPosition) newPosition++;
-        tabContainer.insertBefore(tabs[oldPosition], tabs[newPosition]);
+        if (newPosition < length) tabContainer.insertBefore(this.tab, tabs[newPosition]);
+        else tabContainer.appendChild(this.tab);
         return this;
     }
     getPosition(fromRight = false) {
@@ -2850,7 +2848,6 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         let tab = this.tab;
         while((tab = tab.previousSibling) != null)position++;
         if (fromRight === true) position -= this.tabGroup.tabContainer.childElementCount;
-        if (position >= 0) position++;
         return position;
     }
     activate() {
