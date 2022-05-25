@@ -101,7 +101,7 @@ Add a new tab and returns the related `Tab` instance.
 * `ready`: a callback function to call once the tab is ready. The `Tab` instance is passed as the only parameter.
 * `webviewAttributes`: attributes to add to the webview tag. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#tag-attributes).
 
-### `tabGroup.setDefaultTab(options)`
+#### `tabGroup.setDefaultTab(options)`
 
 Define default options to use for creating the tab when the "New Tab" button is clicked or when calling `tabGroup.addTab()` with no parameter.
 
