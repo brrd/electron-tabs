@@ -89,8 +89,6 @@ export class Tab extends EventTarget {
     activate(): this;
     show(flag?: boolean): this;
     hide(): this;
-    flash(flag?: boolean): this;
-    unflash(): this;
     hasClass(classname: string): boolean;
     close(force: boolean): void;
 }

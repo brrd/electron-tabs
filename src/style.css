@@ -14,10 +14,6 @@
   --tab-active-background: #FFF;
   --tag-hover-color: currentcolor;
   --tag-hover-background: #F1F3F4;
-  --tab-flash-color: #696A6C;
-  --tab-flash-background: #fff3aa;
-  --tab-flash-hover-color: #696A6C;
-  --tab-flash-hover-background: #ffe325;
   --button-font-size: 15px;
   --button-background: none;
   --button-color: #696A6C;
@@ -105,16 +101,6 @@ webview.visible {
 
 .tab.active:last-child {
   border-right: none;
-}
-
-.tab.flash {
-  background: var(--tab-flash-background);
-  color: var(--tab-flash-color);
-}
-
-.tab.tab.flash:hover {
-  background: var(--tab-flash-hover-background);
-  color: var(--tab-flash-hover-color);
 }
 
 .tab.visible:not(.active)+.tab.visible:not(.active) {

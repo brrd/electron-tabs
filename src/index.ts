@@ -534,22 +534,6 @@ class Tab extends EventTarget {
     return this.show(false);
   }
 
-  flash(flag = true) {
-    if (this.isClosed) return;
-    if (flag !== false) {
-      this.element.classList.add("flash");
-      this.emit("flash", this);
-    } else {
-      this.element.classList.remove("flash");
-      this.emit("unflash", this);
-    }
-    return this;
-  }
-
-  unflash() {
-    return this.flash(false);
-  }
-
   hasClass(classname: string) {
     return this.element.classList.contains(classname);
   }
