@@ -18,7 +18,7 @@ interface TabGroupOptions {
 
 interface TabOptions {
   active?: boolean;
-  badge?: string;
+  badge?: Badge;
   closable?: boolean;
   icon?: string;
   iconURL?: string;
@@ -27,6 +27,11 @@ interface TabOptions {
   title?: string;
   visible?: boolean;
   webviewAttributes?: { [key: string]: any };
+}
+
+interface Badge {
+  text: string,
+  classname: string
 }
 
 const CLASSNAMES = {
@@ -272,7 +277,7 @@ class TabGroup extends HTMLElement {
 }
 
 class Tab extends EventTarget {
-  badge: string;
+  badge: Badge;
   closable: boolean;
   icon: string;
   iconURL: string;
@@ -329,7 +334,7 @@ class Tab extends EventTarget {
   private initTab() {
     const tab = this.tab = document.createElement("div");
     tab.classList.add(CLASSNAMES.TAB);
-    for (let el of ["icon", "title", "close", "badge"]) {
+    for (let el of ["icon", "title", "badge", "close"]) {
       const span = tab.appendChild(document.createElement("span"));
       span.classList.add(`${CLASSNAMES.TAB}-${el}`);
       this.tabElements[el] = span;
@@ -419,13 +424,14 @@ class Tab extends EventTarget {
     return this.title;
   }
 
-  setBadge(badge: string) {
+  setBadge(badge?: Badge) {
     if (this.isClosed) return;
     const span = this.tabElements.badge;
     this.badge = badge;
 
     if (badge) {
-      span.innerHTML = badge;
+      span.innerHTML = badge.text;
+      span.classList.add(badge.classname);
       span.classList.remove("hidden");
     } else {
       span.classList.add("hidden");

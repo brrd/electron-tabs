@@ -23,7 +23,8 @@
   --button-hover-color: #383a3e;
   --button-border-radius: 50%;
   --button-cursor: pointer;
-  --badge-background: red;
+  --badge-background: #383a3e;
+  --badge-color: #fff;
 }
 
 /* STYLES */
@@ -121,13 +122,14 @@ webview.visible {
 
 .tab-badge {
   background: var(--badge-background);
-  position: absolute;
-  right: 0;
-  top: -7px;
-  border-radius: 50%;
+  color: var(--badge-color);
   text-align: center;
-  font-size: 10px;
-  padding: 0 5px;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 1px 4px;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 .tab-badge.hidden {

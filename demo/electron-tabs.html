@@ -9,8 +9,8 @@
 <tab-group new-tab-button="true" sortable="true">
   <style>
     /* Add custom style */
-    .tab:hover .tab-title {
-      text-decoration: underline;
+    .my-badge {
+      background-color: #327BB1;
     }
   </style>
 </tab-group>
@@ -30,11 +30,16 @@
   tabGroup.addTab({
     title: "electron-tabs on NPM",
     src: "https://www.npmjs.com/package/electron-tabs",
+    badge: {
+      text: "5",
+      classname: "my-badge"
+    }
   });
 
   tabGroup.addTab({
     title: "electron-tabs on Github",
     src: "https://github.com/brrd/electron-tabs",
+    iconURL: "mark-github.svg",
     visible: true,
     active: true
   });

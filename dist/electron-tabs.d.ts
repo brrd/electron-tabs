@@ -10,7 +10,7 @@ interface TabGroupOptions {
 }
 interface TabOptions {
     active?: boolean;
-    badge?: string;
+    badge?: Badge;
     closable?: boolean;
     icon?: string;
     iconURL?: string;
@@ -21,6 +21,10 @@ interface TabOptions {
     webviewAttributes?: {
         [key: string]: any;
     };
+}
+interface Badge {
+    text: string;
+    classname: string;
 }
 export class TabGroup extends HTMLElement {
     buttonContainer: HTMLDivElement;
@@ -52,7 +56,7 @@ export class TabGroup extends HTMLElement {
     activateRecentTab(): void;
 }
 export class Tab extends EventTarget {
-    badge: string;
+    badge: Badge;
     closable: boolean;
     icon: string;
     iconURL: string;
@@ -76,8 +80,8 @@ export class Tab extends EventTarget {
     initWebview(): void;
     setTitle(title: string): this;
     getTitle(): string;
-    setBadge(badge: string): void;
-    getBadge(): string;
+    setBadge(badge?: Badge): void;
+    getBadge(): Badge;
     setIcon(iconURL: string, icon: string): this;
     getIcon(): string;
     setPosition(newPosition: number): this;
