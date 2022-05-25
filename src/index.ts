@@ -279,13 +279,13 @@ class TabGroup extends HTMLElement {
 class Tab extends EventTarget {
   badge: Badge;
   closable: boolean;
+  element: HTMLDivElement;
   icon: string;
   iconURL: string;
   id: number;
   isClosed: boolean;
   isReady: boolean;
-  tab: HTMLDivElement;
-  tabElements: { [key: string]: HTMLSpanElement };
+  spans: { [key: string]: HTMLSpanElement };
   tabGroup: TabGroup;
   title: string;
   webview: HTMLElement;
@@ -300,7 +300,7 @@ class Tab extends EventTarget {
     this.id = id;
     this.isClosed = false;
     this.isReady = false;
-    this.tabElements = {};
+    this.spans = {};
     this.tabGroup = tabGroup;
     this.title = args.title;
     this.webviewAttributes = args.webviewAttributes || {};
@@ -332,12 +332,12 @@ class Tab extends EventTarget {
   }
 
   private initTab() {
-    const tab = this.tab = document.createElement("div");
+    const tab = this.element = document.createElement("div");
     tab.classList.add(CLASSNAMES.TAB);
     for (let el of ["icon", "title", "badge", "close"]) {
       const span = tab.appendChild(document.createElement("span"));
       span.classList.add(`${CLASSNAMES.TAB}-${el}`);
-      this.tabElements[el] = span;
+      this.spans[el] = span;
     }
 
     this.setTitle(this.title);
@@ -346,11 +346,11 @@ class Tab extends EventTarget {
     this.initTabCloseButton();
     this.initTabClickHandler();
 
-    this.tabGroup.tabContainer.appendChild(this.tab);
+    this.tabGroup.tabContainer.appendChild(this.element);
   }
 
   private initTabCloseButton() {
-    const container = this.tabElements.close;
+    const container = this.spans.close;
     if (this.closable) {
       const button = container.appendChild(document.createElement("button"));
       button.innerHTML = this.tabGroup.options.closeButtonText;
@@ -366,7 +366,7 @@ class Tab extends EventTarget {
         this.close();
       }
     };
-    this.tab.addEventListener("mouseup", tabClickHandler.bind(this), false);
+    this.element.addEventListener("mouseup", tabClickHandler.bind(this), false);
     // Mouse down
     const tabMouseDownHandler = function(e: KeyboardEvent) {
       if (this.isClosed) return;
@@ -375,7 +375,7 @@ class Tab extends EventTarget {
         this.activate();
       }
     };
-    this.tab.addEventListener("mousedown", tabMouseDownHandler.bind(this), false);
+    this.element.addEventListener("mousedown", tabMouseDownHandler.bind(this), false);
   }
 
   initWebview() {
@@ -411,7 +411,7 @@ class Tab extends EventTarget {
 
   setTitle(title: string) {
     if (this.isClosed) return;
-    const span = this.tabElements.title;
+    const span = this.spans.title;
     span.innerHTML = title;
     span.title = title;
     this.title = title;
@@ -426,7 +426,7 @@ class Tab extends EventTarget {
 
   setBadge(badge?: Badge) {
     if (this.isClosed) return;
-    const span = this.tabElements.badge;
+    const span = this.spans.badge;
     this.badge = badge;
 
     if (badge) {
@@ -449,7 +449,7 @@ class Tab extends EventTarget {
     if (this.isClosed) return;
     this.iconURL = iconURL;
     this.icon = icon;
-    const span = this.tabElements.icon;
+    const span = this.spans.icon;
     if (iconURL) {
       span.innerHTML = `<img src="${iconURL}" />`;
       this.emit("icon-changed", iconURL, this);
@@ -482,9 +482,9 @@ class Tab extends EventTarget {
     }
 
     if (newPosition < length) {
-      tabContainer.insertBefore(this.tab, tabs[newPosition]);
+      tabContainer.insertBefore(this.element, tabs[newPosition]);
     } else {
-      tabContainer.appendChild(this.tab);
+      tabContainer.appendChild(this.element);
     }
 
     return this;
@@ -492,7 +492,7 @@ class Tab extends EventTarget {
 
   getPosition(fromRight = false) {
     let position = 0;
-    let tab = this.tab;
+    let tab = this.element;
     while ((tab = tab.previousSibling as HTMLDivElement) != null) position++;
 
     if (fromRight === true) {
@@ -506,12 +506,12 @@ class Tab extends EventTarget {
     if (this.isClosed) return;
     const activeTab = this.tabGroup.getActiveTab();
     if (activeTab) {
-      activeTab.tab.classList.remove("active");
+      activeTab.element.classList.remove("active");
       activeTab.webview.classList.remove("visible");
       activeTab.emit("inactive", activeTab);
     }
     this.tabGroup.setActiveTab(this);
-    this.tab.classList.add("active");
+    this.element.classList.add("active");
     this.webview.classList.add("visible");
     this.webview.focus();
     this.emit("active", this);
@@ -521,10 +521,10 @@ class Tab extends EventTarget {
   show(flag = true) {
     if (this.isClosed) return;
     if (flag) {
-      this.tab.classList.add("visible");
+      this.element.classList.add("visible");
       this.emit("visible", this);
     } else {
-      this.tab.classList.remove("visible");
+      this.element.classList.remove("visible");
       this.emit("hidden", this);
     }
     return this;
@@ -537,10 +537,10 @@ class Tab extends EventTarget {
   flash(flag = true) {
     if (this.isClosed) return;
     if (flag !== false) {
-      this.tab.classList.add("flash");
+      this.element.classList.add("flash");
       this.emit("flash", this);
     } else {
-      this.tab.classList.remove("flash");
+      this.element.classList.remove("flash");
       this.emit("unflash", this);
     }
     return this;
@@ -551,7 +551,7 @@ class Tab extends EventTarget {
   }
 
   hasClass(classname: string) {
-    return this.tab.classList.contains(classname);
+    return this.element.classList.contains(classname);
   }
 
   close(force: boolean) {
@@ -564,7 +564,7 @@ class Tab extends EventTarget {
 
     this.isClosed = true;
     const tabGroup = this.tabGroup;
-    tabGroup.tabContainer.removeChild(this.tab);
+    tabGroup.tabContainer.removeChild(this.element);
     tabGroup.viewContainer.removeChild(this.webview);
     const activeTab = this.tabGroup.getActiveTab();
     tabGroup.removeTab(this, true);

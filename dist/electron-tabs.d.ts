@@ -58,13 +58,13 @@ export class TabGroup extends HTMLElement {
 export class Tab extends EventTarget {
     badge: Badge;
     closable: boolean;
+    element: HTMLDivElement;
     icon: string;
     iconURL: string;
     id: number;
     isClosed: boolean;
     isReady: boolean;
-    tab: HTMLDivElement;
-    tabElements: {
+    spans: {
         [key: string]: HTMLSpanElement;
     };
     tabGroup: TabGroup;

@@ -2499,7 +2499,7 @@ var $64afbd09cd65a300$export$2e2bcd8739ae039 = $64afbd09cd65a300$export$31b3ca70
 
 
 var $0648b347057451f2$exports = {};
-$0648b347057451f2$exports = ":host {\n  --tabgroup-background: #e7eaed;\n  --tab-font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  --tab-font-size: 13px;\n  --tab-background: #e7eaed;\n  --tab-color: #696a6c;\n  --tab-border-color: #dadce0;\n  --tab-transition: background-color 150ms ease-out;\n  --tab-cursor: pointer;\n  --tab-active-color: currentcolor;\n  --tab-active-background: #fff;\n  --tag-hover-color: currentcolor;\n  --tag-hover-background: #f1f3f4;\n  --tab-flash-color: #696a6c;\n  --tab-flash-background: #fff3aa;\n  --tab-flash-hover-color: #696a6c;\n  --tab-flash-hover-background: #ffe325;\n  --button-font-size: 15px;\n  --button-background: none;\n  --button-color: #696a6c;\n  --button-hover-background: #dadce0;\n  --button-hover-color: #383a3e;\n  --button-border-radius: 50%;\n  --button-cursor: pointer;\n  --badge-background: #383a3e;\n  --badge-color: #fff;\n}\n\nwebview {\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n\n.etabs {\n  font-family: var(--tab-font-family);\n  text-rendering: optimizelegibility;\n  font-feature-settings: \"liga\", \"clig\", \"kern\";\n}\n\n.nav {\n  background: var(--tabgroup-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  border-top: 1px solid var(--tab-border-color);\n  font-size: var(--tab-font-size);\n  width: 100%;\n  height: 32px;\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n}\n\n.nav.visible {\n  display: flex;\n}\n\n.tabs {\n  height: 100%;\n}\n\n.tab {\n  background: var(--tab-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  color: var(--tab-color);\n  cursor: var(--tab-cursor);\n  font-size: var(--tab-font-size);\n  transition: var(--tab-transition);\n  box-sizing: border-box;\n  height: 100%;\n  align-items: center;\n  padding: 5px 9px;\n  display: none;\n  position: relative;\n}\n\n.tab:first-child {\n  border-left: none;\n}\n\n.tab.visible {\n  display: inline-flex;\n}\n\n.tab.active {\n  color: var(--tab-active-color);\n  background: var(--tab-active-background);\n  border-left: 1px solid var(--tab-border-color);\n  border-right: 1px solid var(--tab-border-color);\n  box-shadow: none;\n  padding-left: 8px;\n  padding-right: 8px;\n}\n\n.tab.active:last-child {\n  border-right: none;\n}\n\n.tab.flash {\n  background: var(--tab-flash-background);\n  color: var(--tab-flash-color);\n  transition: all .5s linear;\n}\n\n.tab.tab.flash:hover {\n  background: var(--tab-flash-hover-background);\n  color: var(--tab-flash-hover-color);\n}\n\n.tab.visible:not(.active) + .tab.visible:not(.active) {\n  border-left: 1px solid var(--tab-border-color);\n  padding-left: 8px;\n}\n\n.tab:not(.active):hover {\n  background: var(--tab-hover-background);\n  color: var(--tab-hover-color);\n}\n\n.tab-badge {\n  background: var(--badge-background);\n  color: var(--badge-color);\n  text-align: center;\n  border-radius: 5px;\n  margin-left: 5px;\n  padding: 1px 4px;\n  font-size: 8px;\n  font-weight: bold;\n  line-height: 1.2;\n}\n\n.tab-badge.hidden {\n  display: none;\n}\n\n.tab-icon {\n  height: 16px;\n  display: inline-block;\n}\n\n.tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.tab-title, .tab-close {\n  margin-left: 10px;\n  display: inline-block;\n}\n\n.tab-close button {\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  color: var(--button-color);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  padding: 1px 0 0;\n  display: inline-block;\n}\n\n.tab-close button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.buttons {\n  border-left: 1px solid var(--tab-border-color);\n  padding: 5px;\n  display: flex;\n}\n\n.buttons button {\n  color: var(--button-color);\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  margin: 0;\n  padding: 1px 0 0;\n  font-family: inherit;\n  line-height: 1;\n  display: block;\n}\n\n.buttons button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.views {\n  height: calc(100vh - 33px);\n  position: relative;\n}\n\n";
+$0648b347057451f2$exports = ":host {\n  --tabgroup-background: #e7eaed;\n  --tab-font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  --tab-font-size: 13px;\n  --tab-background: #e7eaed;\n  --tab-color: #696a6c;\n  --tab-border-color: #dadce0;\n  --tab-transition: background-color 200ms ease-out, color 200ms ease-out;\n  --tab-cursor: pointer;\n  --tab-active-color: currentcolor;\n  --tab-active-background: #fff;\n  --tag-hover-color: currentcolor;\n  --tag-hover-background: #f1f3f4;\n  --tab-flash-color: #696a6c;\n  --tab-flash-background: #fff3aa;\n  --tab-flash-hover-color: #696a6c;\n  --tab-flash-hover-background: #ffe325;\n  --button-font-size: 15px;\n  --button-background: none;\n  --button-color: #696a6c;\n  --button-hover-background: #dadce0;\n  --button-hover-color: #383a3e;\n  --button-border-radius: 50%;\n  --button-cursor: pointer;\n  --badge-background: #383a3e;\n  --badge-color: #fff;\n}\n\nwebview {\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n\n.etabs {\n  font-family: var(--tab-font-family);\n  text-rendering: optimizelegibility;\n  font-feature-settings: \"liga\", \"clig\", \"kern\";\n}\n\n.nav {\n  background: var(--tabgroup-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  border-top: 1px solid var(--tab-border-color);\n  font-size: var(--tab-font-size);\n  width: 100%;\n  height: 32px;\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n}\n\n.nav.visible {\n  display: flex;\n}\n\n.tabs {\n  height: 100%;\n}\n\n.tab {\n  background: var(--tab-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  color: var(--tab-color);\n  cursor: var(--tab-cursor);\n  font-size: var(--tab-font-size);\n  transition: var(--tab-transition);\n  box-sizing: border-box;\n  height: 100%;\n  align-items: center;\n  padding: 5px 9px;\n  display: none;\n  position: relative;\n}\n\n.tab:first-child {\n  border-left: none;\n}\n\n.tab.visible {\n  display: inline-flex;\n}\n\n.tab.active {\n  color: var(--tab-active-color);\n  background: var(--tab-active-background);\n  border-left: 1px solid var(--tab-border-color);\n  border-right: 1px solid var(--tab-border-color);\n  box-shadow: none;\n  padding-left: 8px;\n  padding-right: 8px;\n}\n\n.tab.active:last-child {\n  border-right: none;\n}\n\n.tab.flash {\n  background: var(--tab-flash-background);\n  color: var(--tab-flash-color);\n}\n\n.tab.tab.flash:hover {\n  background: var(--tab-flash-hover-background);\n  color: var(--tab-flash-hover-color);\n}\n\n.tab.visible:not(.active) + .tab.visible:not(.active) {\n  border-left: 1px solid var(--tab-border-color);\n  padding-left: 8px;\n}\n\n.tab:not(.active):hover {\n  background: var(--tab-hover-background);\n  color: var(--tab-hover-color);\n}\n\n.tab-badge {\n  background: var(--badge-background);\n  color: var(--badge-color);\n  text-align: center;\n  border-radius: 5px;\n  margin-left: 5px;\n  padding: 1px 4px;\n  font-size: 8px;\n  font-weight: bold;\n  line-height: 1.2;\n}\n\n.tab-badge.hidden {\n  display: none;\n}\n\n.tab-icon {\n  height: 16px;\n  display: inline-block;\n}\n\n.tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.tab-title, .tab-close {\n  margin-left: 10px;\n  display: inline-block;\n}\n\n.tab-close button {\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  color: var(--button-color);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  padding: 1px 0 0;\n  display: inline-block;\n}\n\n.tab-close button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.buttons {\n  border-left: 1px solid var(--tab-border-color);\n  padding: 5px;\n  display: flex;\n}\n\n.buttons button {\n  color: var(--button-color);\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  margin: 0;\n  padding: 1px 0 0;\n  font-family: inherit;\n  line-height: 1;\n  display: block;\n}\n\n.buttons button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.views {\n  height: calc(100vh - 33px);\n  position: relative;\n}\n\n";
 
 
 if (!document) throw Error("electron-tabs module must be called in renderer process");
@@ -2692,7 +2692,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         this.id = id;
         this.isClosed = false;
         this.isReady = false;
-        this.tabElements = {};
+        this.spans = {};
         this.tabGroup = tabGroup;
         this.title = args.title;
         this.webviewAttributes = args.webviewAttributes || {};
@@ -2715,7 +2715,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         });
     }
     initTab() {
-        const tab = this.tab = document.createElement("div");
+        const tab = this.element = document.createElement("div");
         tab.classList.add($eda442ba39f881a8$var$CLASSNAMES.TAB);
         for (let el of [
             "icon",
@@ -2725,17 +2725,17 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         ]){
             const span = tab.appendChild(document.createElement("span"));
             span.classList.add(`${$eda442ba39f881a8$var$CLASSNAMES.TAB}-${el}`);
-            this.tabElements[el] = span;
+            this.spans[el] = span;
         }
         this.setTitle(this.title);
         this.setBadge(this.badge);
         this.setIcon(this.iconURL, this.icon);
         this.initTabCloseButton();
         this.initTabClickHandler();
-        this.tabGroup.tabContainer.appendChild(this.tab);
+        this.tabGroup.tabContainer.appendChild(this.element);
     }
     initTabCloseButton() {
-        const container = this.tabElements.close;
+        const container = this.spans.close;
         if (this.closable) {
             const button = container.appendChild(document.createElement("button"));
             button.innerHTML = this.tabGroup.options.closeButtonText;
@@ -2748,7 +2748,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
             if (this.isClosed) return;
             if (e.which === 2) this.close();
         };
-        this.tab.addEventListener("mouseup", tabClickHandler.bind(this), false);
+        this.element.addEventListener("mouseup", tabClickHandler.bind(this), false);
         // Mouse down
         const tabMouseDownHandler = function(e) {
             if (this.isClosed) return;
@@ -2757,7 +2757,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
                 this.activate();
             }
         };
-        this.tab.addEventListener("mousedown", tabMouseDownHandler.bind(this), false);
+        this.element.addEventListener("mousedown", tabMouseDownHandler.bind(this), false);
     }
     initWebview() {
         const webview = this.webview = document.createElement("webview");
@@ -2785,7 +2785,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
     }
     setTitle(title) {
         if (this.isClosed) return;
-        const span = this.tabElements.title;
+        const span = this.spans.title;
         span.innerHTML = title;
         span.title = title;
         this.title = title;
@@ -2798,7 +2798,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
     }
     setBadge(badge) {
         if (this.isClosed) return;
-        const span = this.tabElements.badge;
+        const span = this.spans.badge;
         this.badge = badge;
         if (badge) {
             span.innerHTML = badge.text;
@@ -2815,7 +2815,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         if (this.isClosed) return;
         this.iconURL = iconURL;
         this.icon = icon;
-        const span = this.tabElements.icon;
+        const span = this.spans.icon;
         if (iconURL) {
             span.innerHTML = `<img src="${iconURL}" />`;
             this.emit("icon-changed", iconURL, this);
@@ -2840,13 +2840,13 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
             newPosition += length;
             if (newPosition < 0) newPosition = 0;
         }
-        if (newPosition < length) tabContainer.insertBefore(this.tab, tabs[newPosition]);
-        else tabContainer.appendChild(this.tab);
+        if (newPosition < length) tabContainer.insertBefore(this.element, tabs[newPosition]);
+        else tabContainer.appendChild(this.element);
         return this;
     }
     getPosition(fromRight = false) {
         let position = 0;
-        let tab = this.tab;
+        let tab = this.element;
         while((tab = tab.previousSibling) != null)position++;
         if (fromRight === true) position -= this.tabGroup.tabContainer.childElementCount;
         return position;
@@ -2855,12 +2855,12 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         if (this.isClosed) return;
         const activeTab = this.tabGroup.getActiveTab();
         if (activeTab) {
-            activeTab.tab.classList.remove("active");
+            activeTab.element.classList.remove("active");
             activeTab.webview.classList.remove("visible");
             activeTab.emit("inactive", activeTab);
         }
         this.tabGroup.setActiveTab(this);
-        this.tab.classList.add("active");
+        this.element.classList.add("active");
         this.webview.classList.add("visible");
         this.webview.focus();
         this.emit("active", this);
@@ -2869,10 +2869,10 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
     show(flag = true) {
         if (this.isClosed) return;
         if (flag) {
-            this.tab.classList.add("visible");
+            this.element.classList.add("visible");
             this.emit("visible", this);
         } else {
-            this.tab.classList.remove("visible");
+            this.element.classList.remove("visible");
             this.emit("hidden", this);
         }
         return this;
@@ -2883,10 +2883,10 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
     flash(flag = true) {
         if (this.isClosed) return;
         if (flag !== false) {
-            this.tab.classList.add("flash");
+            this.element.classList.add("flash");
             this.emit("flash", this);
         } else {
-            this.tab.classList.remove("flash");
+            this.element.classList.remove("flash");
             this.emit("unflash", this);
         }
         return this;
@@ -2895,7 +2895,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         return this.flash(false);
     }
     hasClass(classname) {
-        return this.tab.classList.contains(classname);
+        return this.element.classList.contains(classname);
     }
     close(force) {
         const abortController = new AbortController();
@@ -2906,7 +2906,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         if (this.isClosed || !this.closable && !force || abortSignal.aborted) return;
         this.isClosed = true;
         const tabGroup = this.tabGroup;
-        tabGroup.tabContainer.removeChild(this.tab);
+        tabGroup.tabContainer.removeChild(this.element);
         tabGroup.viewContainer.removeChild(this.webview);
         const activeTab = this.tabGroup.getActiveTab();
         tabGroup.removeTab(this, true);
