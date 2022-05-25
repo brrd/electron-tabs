@@ -1,0 +1,208 @@
+/* CUSTOM PROPERTIES */
+/* ================= */
+
+:host {
+  --tabgroup-background: #E7EAED;
+  --tab-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --tab-font-size: 13px;
+  --tab-background: #E7EAED;
+  --tab-color: #696A6C;
+  --tab-border-color: #DADCE0;
+  --tab-transition: background-color 200ms ease-out, color 200ms ease-out;
+  --tab-cursor: pointer;
+  --tab-active-color: currentcolor;
+  --tab-active-background: #FFF;
+  --tag-hover-color: currentcolor;
+  --tag-hover-background: #F1F3F4;
+  --button-font-size: 15px;
+  --button-background: none;
+  --button-color: #696A6C;
+  --button-hover-background: #DADCE0;
+  --button-hover-color: #383a3e;
+  --button-border-radius: 50%;
+  --button-cursor: pointer;
+  --badge-background: #383a3e;
+  --badge-color: #fff;
+  --close-button-visibility: visible;
+}
+
+/* STYLES */
+/* ====== */
+
+webview {
+  position: absolute;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+webview.visible {
+  visibility: visible;
+}
+
+.etabs {
+  font-family: var(--tab-font-family);
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga', 'clig', 'kern';
+}
+
+.nav {
+  background: var(--tabgroup-background);
+  box-shadow: inset 0 -1px var(--tab-border-color);
+  border-top: 1px solid var(--tab-border-color);
+  font-size: var(--tab-font-size);
+  display: none;
+  width: 100%;
+  height: 32px;
+  cursor: default;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nav.visible {
+  display: flex;
+}
+
+.tabs {
+  height: 100%;
+}
+
+.tab {
+  background: var(--tab-background);
+  box-shadow: inset 0 -1px var(--tab-border-color);
+  color: var(--tab-color);
+  cursor: var(--tab-cursor);
+  font-size: var(--tab-font-size);
+  transition: var(--tab-transition);
+  display: none;
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 5px 9px;
+  align-items: center;
+}
+
+.tab:first-child {
+  border-left: none;
+}
+
+.tab.visible {
+  display: inline-flex;
+}
+
+.tab.active {
+  color: var(--tab-active-color);
+  background: var(--tab-active-background);
+	border-left: 1px solid var(--tab-border-color);
+	border-right: 1px solid var(--tab-border-color);
+	padding-left: 8px;
+	padding-right: 8px;
+  box-shadow: none;
+}
+
+.tab.active:last-child {
+  border-right: none;
+}
+
+.tab.visible:not(.active)+.tab.visible:not(.active) {
+	border-left: 1px solid var(--tab-border-color);
+	padding-left: 8px;
+}
+
+.tab:not(.active):hover {
+	background: var(--tab-hover-background);
+  color: var(--tab-hover-color);
+}
+
+.tab-badge {
+  background: var(--badge-background);
+  color: var(--badge-color);
+  text-align: center;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 1px 4px;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.tab-badge.hidden {
+  display: none;
+}
+
+.tab-icon {
+  display: inline-block;
+  height: 16px;
+}
+
+.tab-icon img {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+.tab-title {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.tab-close {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.tab-close button {
+  background: var(--button-background);
+  border-radius: var(--button-border-radius);
+  color: var(--button-color);
+  cursor: var(--button-cursor);
+  font-size: var(--button-font-size);
+  display: inline-block;
+  border: none;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 1px 0 0 0;
+  visibility: var(--close-button-visibility);
+}
+
+.tab.active .tab-close button {
+  visibility: visible;
+}
+
+.tab-close button:hover {
+  color: var(--button-hover-color);
+  background: var(--button-hover-background);
+}
+
+.buttons {
+  display: flex;
+  padding: 5px;
+  border-left: 1px solid var(--tab-border-color);
+}
+
+.buttons button {
+  color: var(--button-color);
+  background: var(--button-background);
+  border-radius: var(--button-border-radius);
+	cursor: var(--button-cursor);
+  font-size: var(--button-font-size);
+  display: block;
+  font-family: inherit;
+  border: none;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 1;
+  padding: 1px 0 0 0;
+}
+
+.buttons button:hover {
+  color: var(--button-hover-color);
+  background: var(--button-hover-background);
+}
+
+.views {
+  position: relative;
+  height: calc(100vh - 33px);
+}

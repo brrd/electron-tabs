@@ -4,104 +4,114 @@
 
 ![Electron Tab Demo](screenshot.jpg)
 
+## Features
+
+* :electron: Compatible with Electron ≥ 17.
+* :lock: Compliant with [Electron security recommendations](https://www.electronjs.org/docs/latest/tutorial/security) (works without `nodeIntegration: true`).
+* :toolbox: Written with TypeScript and Web Components.
+* :hand: Supports drag and drop out of the box.
+* :art: Easily customizable.
+
 ## Installation
 
-```
-$ npm install --save electron-tabs
-```
-
-## Demo
-
-```
-$ npm run demo
+```bash
+npm install --save electron-tabs
 ```
 
-## Usage
+## Getting started
 
-Electron-tabs uses webviews, so you first need to use the following `webPreferences` options in the main process:
+Define the following `webPreferences` options in the main process:
 
 ```js
 const mainWindow = new electron.BrowserWindow({
   webPreferences: {
-    nodeIntegration: true,
-    contextIsolation: false, // needed for Electron >= 12.x
     webviewTag: true
   }
 });
 ```
 
-Then add the following elements to the app page:
+Then add the following markup where you want the tabs to display:
 
 ```html
-<div class="etabs-tabgroup">
-  <div class="etabs-tabs"></div>
-  <div class="etabs-buttons"></div>
-</div>
-<div class="etabs-views"></div>
+<tab-group></tab-group>
+
+<script src="node_modules/electron-tabs/dist/electron-tabs.js"></script>
 ```
 
-And call the module in the renderer process:
+## Options
 
-```javascript
-const TabGroup = require("electron-tabs");
-```
-
-Now you can initialize a tab group and add tabs to it:
-
-```javascript
-let tabGroup = new TabGroup();
-let tab = tabGroup.addTab({
-  title: "Electron",
-  src: "http://electron.atom.io",
-  visible: true
-});
-```
-
-If you don't want to write your own styles, you can also insert the sample electron-tabs stylesheet in the page header:
+You can add options by setting `<tab-group>` element attributes:
 
 ```html
-<link rel="stylesheet" href="node_modules/electron-tabs/electron-tabs.css">
+<tab-group new-tab-button="true" sortable="true"></tab-group>
 ```
 
-### Note
+The following attributes are supported:
 
-Please note, there is a known issue in some versions of Electron that prevents the process to completely shut down and it remains hanging in Background Processes (Windows 10). If you encounter that issue please use the workaround provided at https://github.com/electron/electron/issues/13939
+* `close-button-text` (string): text of the tabs "Close" button.
+* `new-tab-button` (boolean): set it to true to display the "New Tab" button.
+* `new-tab-button-text` (string): text of the "New Tab" button.
+* `sortable` (boolean): set it to true to make the tabs sortable by drag and drop.
+* `visibility-threshold` (number): the minimum number of tabs necessary for the tab bar to be displayed. 0 (default) means that it will always remain visible.
 
-## API
+## Methods
 
-### Tab Group
+Use `TabGroup` methods and manipulate tabs in a script after calling `electron-tabs.js`.
 
-Represents the main tab container.
+```html
+<tab-group new-tab-button="true"></tab-group>
 
-#### `new TabGroup(options)`
+<script src="path/to/electron-tabs.js"></script>
 
-`options` must be an object. The following options are available:
+<script>
+  // Select tab-group
+  const tabGroup = document.querySelector("tab-group");
 
-* `tabContainerSelector` (default: `".etabs-tabs"`): CSS selector to target the element where tabs are inserted.
-* `buttonsContainerSelector` (default: `".etabs-buttons"`): CSS selector to target the element where the "New Tab" button are inserted.
-* `viewContainerSelector` (default: `".etabs-views"`): CSS selector to target the element where the view are inserted.
-* `tabClass` (default: `"etabs-tab"`): class to add to tab elements.
-* `viewClass` (default: `"etabs-view"`): class to add to webview elements.
-* `closeButtonText` (default: `"&#10006;"`): "close tab" button text.
-* `newTabButtonText` (default: `"&#65291;"`): "New Tab" button text.
-* `newTab` (default: `undefined`): arguments to use when `.addTab()` is called without parameters. It can be an object or a function which returns an object. It determines the options to use when the "New Tab" button is triggered. If you leave it undefined then the "New Tab" button won't be displayed.
-* `visibilityThreshold` (default: `0`): the minimum number of tabs necessary for the tabGroup to be displayed. `0` means tabGround will always remain visible.
-* `ready` (default: `undefined`): a callback function to call once the tab group is ready. The `TabGroup` instance is passed as the only parameter.
+  // Setup the default tab which is created when the "New Tab" button is clicked
+  tabGroup.setDefaultTab({
+    title: "New Page",
+    src: "path/to/new-page.html",
+    active: true
+  });
+
+  // Do stuff
+  const tab = tabGroup.addTab({
+    title: "electron-tabs on NPM",
+    src: "https://www.npmjs.com/package/electron-tabs"
+  });
+  const pos = tab.getPosition();
+  console.log("Tab position is " + pos);
+</script>
+```
+
+### TabGroup
 
 #### `tabGroup.addTab(options)`
 
-Add a new tab to the tab group and returns a `Tab` instance.
+Add a new tab and returns the related `Tab` instance.
 
 * `title`: tab title.
 * `src`: URL to the page which will be loaded into the view. This is actually the same than `options.webview.src`.
-* `badge`: optional text to put into a badge, badge will be hidden if it's falsey
+* `badge`: optional text to put into a badge, badge will be hidden if false.
 * `iconURL`: optional URL to the tab icon.
 * `icon`: optional code for a tab icon. Can be used with symbol libraries (example with Font Awesome: `icon: 'fa fa-icon-name'`). This attribute is ignored if an `iconURL` was given.
 * `closable` (default: `true`): if set to `true` the close button won't be displayed and the user won't be able to close the tab. See also `tab.close()`.
-* `webviewAttributes`: attributes to add to the webview tag. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#tag-attributes).
 * `visible` (default: `true`): set this to `false` if you don't want to display the tab once it is loaded. If set to `false` then you will need to call `tab.show()` to display the tab.
 * `active` (default: `false`): set this to `true` if you want to activate the tab once it is loaded. Otherwise you will need to call `tab.activate()`.
 * `ready`: a callback function to call once the tab is ready. The `Tab` instance is passed as the only parameter.
+* `webviewAttributes`: attributes to add to the webview tag. See [webview documentation](http://electron.atom.io/docs/api/web-view-tag/#tag-attributes).
+
+### `tabGroup.setDefaultTab(options)`
+
+Define default options to use for creating the tab when the "New Tab" button is clicked or when calling `tabGroup.addTab()` with no parameter.
+
+```javascript
+tabGroup.setDefaultTab({
+  title: "New Page",
+  src: "path/to/new-page.html",
+  active: true
+});
+```
 
 #### `tabGroup.getTab(id)`
 
@@ -123,17 +133,17 @@ To get the tab in the rightmost position:
 tabGroup.getTabByPosition(-1);
 ```
 
-> Note: Position 0 does not contain a tab.
-
 #### `tabGroup.getTabByRelPosition(position)`
 
 Retrieve an instance of `Tab` from this `position` relative to the active tab (return `null` if not found).
+
 `tabGroup.getNextTab()` is an alias to `tabGroup.getTabByRelPosition(1)`.
+
 `tabGroup.getPreviousTab()` is an alias to `tabGroup.getTabByRelPosition(-1)`.
 
 #### `tabGroup.getActiveTab()`
 
-Return the currently active tab (otherwise return `null`).
+Return the active tab (return `null` if none).
 
 #### `tabGroup.getTabs()`
 
@@ -179,7 +189,7 @@ Get current tab icon URL / icon.
 
 #### `tab.setPosition(newPosition)`
 
-Move tab to the specified position. If `position` is 0 then `null` is returned and nothing happens. See [`tabGroup.getTabByPosition`](#tabgroupgettabbypositionposition) for information about positions.
+Move tab to the specified position. See [`tabGroup.getTabByPosition`](#tabgroupgettabbypositionposition) for information about positions.
 
 #### `tab.getPosition(fromRight)`
 
@@ -193,30 +203,17 @@ Activate this tab. The class "active" is added to the active tab.
 
 Toggle the "visible" class on the tab. `tab.hide()` is an alias to `tab.show(false)`.
 
-#### `tab.flash(flag)`
-
-Toggle the "flash" class on the tab. `tab.unflash()` is an alias to `tab.flash(false)`.
-
 #### `tab.hasClass(classname)`
 
-Return `true` if the tab element has the specified classname. Useful for checking if a tab is "active", "visible" of "flash".
+Return `true` if the tab element has the specified classname. Useful for checking if a tab is "active" or "visible".
 
 #### `tab.close(force)`
 
 Close the tab (and activate another tab if relevant). When `force` is set to `true` the tab will be closed even if it is not `closable`.
 
-### Access webview element
+## Events
 
-You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](https://electronjs.org/docs/api/webview-tag#methods).
-
-```javascript
-let webview = tab.webview;
-webview.loadURL("file://path/to/new/page.html");
-```
-
-### Events
-
-The following events are available:
+The following events are emitted:
 
 * `tabGroup.on("tab-added", (tab, tabGroup) => { ... });`
 * `tabGroup.on("tab-removed", (tab, tabGroup) => { ... });`
@@ -230,8 +227,6 @@ The following events are available:
 * `tab.on("inactive", (tab) => { ... });`
 * `tab.on("visible", (tab) => { ... });`
 * `tab.on("hidden", (tab) => { ... });`
-* `tab.on("flash", (tab) => { ... });`
-* `tab.on("unflash", (tab) => { ... });`
 * `tab.on("close", (tab) => { ... });`
 * `tab.on("closing", (tab, abort) => { ... });` (Use `abort()` function to cancel closing)
 
@@ -240,37 +235,100 @@ You can also use `tab.once` to automatically remove the listener when invoked:
 * `tab.once("webview-ready", (tab) => { ... });`
 * `tab.once("webview-dom-ready", (tab) => { ... });`
 
-## Drag and drop support
+## Access Electron webview element
 
-Electron-tabs is compatible with [Dragula](https://github.com/bevacqua/dragula) so you can easily make your tabs draggable.
-
-Install Dragula:
-
-```
-npm install dragula --save
-```
-
-Don't forget to add a link to its stylesheet in the header:
-
-```html
-<link rel="stylesheet" href="node_modules/dragula/dist/dragula.css">
-```
-
-Then call Dragula in your script once tabGroup is ready:
+You can access the webview element and use its methods with through the `Tab.webview` attribute. See [webview documentation](https://electronjs.org/docs/api/webview-tag#methods).
 
 ```javascript
-const TabGroup = require("electron-tabs");
-const dragula = require("dragula");
+let webview = tab.webview;
+webview.loadURL("file://path/to/new/page.html");
+```
 
-var tabGroup = new TabGroup({
-  ready: function (tabGroup) {
-    dragula([tabGroup.tabContainer], {
-      direction: "horizontal"
-    });
-  }
-});
+## Custom styles
+
+To customize tab-group styles, set new values to [electron-tabs CSS variables](https://github.com/brrd/electron-tabs/blob/master/src/style.css) in your application stylesheet.
+
+Since `TabGroup` is a Web Component you won't be able to change its styles directly from your app stylesheet. If you need more control over it then you can add a `<style>` tag inside the `<tab-group >` element:
+
+```html
+<tab-group new-tab-button="true" sortable="true">
+  <style>
+    /* Write your own CSS rules here... */
+  </style>
+</tab-group>
+```
+
+This method is particularly useful when you need to define custom badges or tab styles:
+
+```html
+<tab-group new-tab-button="true" sortable="true">
+  <style>
+    /* Add custom styles */
+    .my-badge {
+      background-color: orange;
+    }
+    .my-custom-tab {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</tab-group>
+
+<script src="path/to/electron-tabs.js"></script>
+
+<script>
+  const tabGroup = document.querySelector("tab-group");
+
+  tabGroup.addTab({
+    title: "Tab with custom badge",
+    src: "page.html",
+    badge: {
+      text: "5",
+      classname: "my-badge"
+    }
+  });
+
+  tabGroup.addTab({
+    title: "Tab with custom style",
+    src: "page.html",
+    ready: function(tab) {
+      tab.element.classList.add("my-custom-tab");
+    }
+  });
+</script>
+```
+
+## Development
+
+`electron-tabs` uses TypeScript and Parcel under the hood.
+
+### Requirements
+
+Git and Node 12+.
+
+### Build
+
+```bash
+# Clone this repo
+git clone git@github.com:brrd/electron-tabs.git
+cd electron-tabs
+
+# Install dependencies
+npm install
+
+# Build
+npm run build
+
+# ...or watch
+npm run watch
+```
+
+### Demo
+
+```bash
+npm run demo
 ```
 
 ## License
 
-The MIT License (MIT) - Copyright (c) 2016 Thomas Brouard
+The MIT License (MIT) - Copyright (c) 2022 Thomas Brouard

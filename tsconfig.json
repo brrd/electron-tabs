@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "noImplicitAny": true,
+    "noUnusedParameters": false,
+    "allowSyntheticDefaultImports": true
+  }
+}

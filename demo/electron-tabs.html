@@ -3,39 +3,58 @@
 
 <head>
   <title>electron-tabs-demo</title>
-  <link rel="stylesheet" href="../electron-tabs.css">
 </head>
 <body style="margin:0">
 
-<div class="etabs-tabgroup">
-  <div class="etabs-tabs"></div>
-  <div class="etabs-buttons"></div>
-</div>
-<div class="etabs-views"></div>
+<tab-group new-tab-button="true" sortable="true">
+  <style>
+    /* Add custom styles */
+    .my-badge {
+      background-color: #327BB1;
+    }
+    .my-custom-tab {
+      color: #d135d1;
+      font-style: italic;
+      font-weight: bold;
+    }
+  </style>
+</tab-group>
 
-
+<script src="../dist/electron-tabs.js"></script>
 <script>
-  //const TabGroup = require('electron-tabs') normally but for demo :
-  const TabGroup = require("../index");
+  const tabGroup = document.querySelector("tab-group");
+  tabGroup.on("ready", () => console.info("TabGroup is ready"));
 
-  let tabGroup = new TabGroup({
-    newTab: {
-      title: 'New Tab'
+  tabGroup.setDefaultTab({
+    title: "Wikipedia",
+    src: "https://www.wikipedia.org/",
+    active: true,
+    ready: () => console.info("New Tab is ready")
+  });
+
+  tabGroup.addTab({
+    title: "electron-tabs on NPM",
+    src: "https://www.npmjs.com/package/electron-tabs",
+    badge: {
+      text: "5",
+      classname: "my-badge"
     }
   });
 
   tabGroup.addTab({
-    title: 'Google',
-    src: 'http://google.com',
-  });
-
-  tabGroup.addTab({
-    title: "Electron",
-    src: "http://electron.atom.io",
-    visible: true,
+    title: "electron-tabs on Github",
+    src: "https://github.com/brrd/electron-tabs",
+    iconURL: "mark-github.svg",
     active: true
   });
 
+  tabGroup.addTab({
+    title: "My Custom Tab",
+    src: "page.html",
+    ready: function(tab) {
+      tab.element.classList.add("my-custom-tab");
+    }
+  });
 </script>
 </body>
 </html>
