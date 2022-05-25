@@ -46,7 +46,7 @@ webview.visible {
   font-feature-settings: 'liga', 'clig', 'kern';
 }
 
-.etabs-tabgroup {
+.nav {
   background: var(--tabgroup-background);
   box-shadow: inset 0 -1px var(--tab-border-color);
   border-top: 1px solid var(--tab-border-color);
@@ -59,15 +59,15 @@ webview.visible {
   user-select: none;
 }
 
-.etabs-tabgroup.visible {
+.nav.visible {
   display: flex;
 }
 
-.etabs-tabs {
+.tabs {
   height: 100%;
 }
 
-.etabs-tab {
+.tab {
   background: var(--tab-background);
   box-shadow: inset 0 -1px var(--tab-border-color);
   color: var(--tab-color);
@@ -81,15 +81,15 @@ webview.visible {
   padding: 5px 9px;
 }
 
-.etabs-tab:first-child {
+.tab:first-child {
   border-left: none;
 }
 
-.etabs-tab.visible {
+.tab.visible {
   display: inline-block;
 }
 
-.etabs-tab.active {
+.tab.active {
   color: var(--tab-active-color);
   background: var(--tab-active-background);
 	border-left: 1px solid var(--tab-border-color);
@@ -99,26 +99,26 @@ webview.visible {
   box-shadow: none;
 }
 
-.etabs-tab.active:last-child {
+.tab.active:last-child {
   border-right: none;
 }
 
-.etabs-tab.flash {
+.tab.flash {
   background: var(--tab-flash-background);
   color: var(--tab-flash-color);
 }
 
-.etabs-tab.visible:not(.active)+.etabs-tab.visible:not(.active) {
+.tab.visible:not(.active)+.tab.visible:not(.active) {
 	border-left: 1px solid var(--tab-border-color);
 	padding-left: 8px;
 }
 
-.etabs-tab:not(.active):hover {
+.tab:not(.active):hover {
 	background: var(--tab-hover-background);
   color: var(--tab-hover-color);
 }
 
-.etabs-tab-badge {
+.tab-badge {
   background: var(--badge-background);
   position: absolute;
   right: 0;
@@ -129,32 +129,31 @@ webview.visible {
   padding: 0 5px;
 }
 
-.etabs-tab-badge.hidden {
+.tab-badge.hidden {
   display: none;
 }
 
-.etabs-tab-icon {
+.tab-icon {
   display: inline-block;
   height: 16px;
 }
 
-.etabs-tab-icon img {
+.tab-icon img {
   max-width: 16px;
   max-height: 16px;
 }
 
-.etabs-tab-title {
+.tab-title {
   display: inline-block;
   margin-left: 10px;
 }
 
-/* tab buttons */
-.etabs-tab-buttons {
+.tab-close {
   display: inline-block;
   margin-left: 10px;
 }
 
-.etabs-tab-buttons button {
+.tab-close button {
   background: var(--button-background);
   border-radius: var(--button-border-radius);
   color: var(--button-color);
@@ -168,19 +167,18 @@ webview.visible {
   padding: 1px 0 0 0;
 }
 
-.etabs-tab-buttons button:hover {
+.tab-close button:hover {
   color: var(--button-hover-color);
   background: var(--button-hover-background);
 }
 
-/* tab bar buttons */
-.etabs-buttons {
+.buttons {
   display: flex;
   padding: 5px;
   border-left: 1px solid var(--tab-border-color);
 }
 
-.etabs-buttons button {
+.buttons button {
   color: var(--button-color);
   background: var(--button-background);
   border-radius: var(--button-border-radius);
@@ -197,16 +195,12 @@ webview.visible {
   padding: 1px 0 0 0;
 }
 
-.etabs-buttons button:hover {
+.buttons button:hover {
   color: var(--button-hover-color);
   background: var(--button-hover-background);
 }
 
-.etabs-views {
+.views {
   position: relative;
   height: calc(100vh - 33px);
-}
-
-.etab-view {
-  position: relative;
 }

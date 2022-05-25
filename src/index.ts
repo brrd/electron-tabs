@@ -13,8 +13,6 @@ interface TabGroupOptions {
   newTabButtonText: string,
   sortable: boolean,
   sortableOptions?: Sortable.Options
-  tabClass: string,
-  viewClass: string,
   visibilityThreshold: number,
 }
 
@@ -29,6 +27,16 @@ interface TabOptions {
   title?: string;
   visible?: boolean;
   webviewAttributes?: { [key: string]: any };
+}
+
+const CLASSNAMES = {
+  ROOT: "etabs",
+  NAV: "nav",
+  TABS: "tabs",
+  TAB: "tab",
+  BUTTONS: "buttons",
+  VIEWS: "views",
+  VIEW: "view"
 }
 
 function emit(emitter: TabGroup | Tab, type: string, args: any[]) {
@@ -67,8 +75,6 @@ class TabGroup extends HTMLElement {
       newTabButton: !!this.getAttribute("new-tab-button") === true || false,
       newTabButtonText: this.getAttribute("new-tab-button-text") || "&#65291;",
       sortable: !!this.getAttribute("sortable") === true || false,
-      tabClass: this.getAttribute("tab-class") || "etabs-tab",
-      viewClass: this.getAttribute("view-class") || "etabs-view",
       visibilityThreshold: Number(this.getAttribute("visibility-threshold")) || 0
     };
 
@@ -109,31 +115,30 @@ class TabGroup extends HTMLElement {
     this.shadow = shadow;
 
     const wrapper = document.createElement("div");
-    wrapper.setAttribute("class", "etabs");
+    wrapper.setAttribute("class", CLASSNAMES.ROOT);
 
-    const tabgroup = document.createElement("div");
-    tabgroup.setAttribute("class", "etabs-tabgroup");
+    const tabgroup = document.createElement("nav");
+    tabgroup.setAttribute("class", CLASSNAMES.NAV);
     wrapper.appendChild(tabgroup);
 
     const tabContainer = document.createElement("div");
-    tabContainer.setAttribute("class", "etabs-tabs");
+    tabContainer.setAttribute("class", CLASSNAMES.TABS);
     tabgroup.appendChild(tabContainer);
     this.tabContainer = tabContainer;
 
     const buttonContainer = document.createElement("div");
-    buttonContainer.setAttribute("class", "etabs-buttons");
+    buttonContainer.setAttribute("class", CLASSNAMES.BUTTONS);
     tabgroup.appendChild(buttonContainer);
     this.buttonContainer = buttonContainer;
 
     if (this.options.newTabButton) {
       const button = this.buttonContainer.appendChild(document.createElement("button"));
-      button.classList.add(`${this.options.tabClass}-button-new`);
       button.innerHTML = this.options.newTabButtonText;
       button.addEventListener("click", this.addTab.bind(this, undefined), false);
     }
 
     const viewContainer = document.createElement("div");
-    viewContainer.setAttribute("class", "etabs-views");
+    viewContainer.setAttribute("class", CLASSNAMES.VIEWS);
     wrapper.appendChild(viewContainer);
     this.viewContainer = viewContainer;
 
@@ -322,32 +327,27 @@ class Tab extends EventTarget {
   }
 
   private initTab() {
-    const tabClass = this.tabGroup.options.tabClass;
-
-    // Create tab element
     const tab = this.tab = document.createElement("div");
-    tab.classList.add(tabClass);
-    for (let el of ["icon", "title", "buttons", "badge"]) {
+    tab.classList.add(CLASSNAMES.TAB);
+    for (let el of ["icon", "title", "close", "badge"]) {
       const span = tab.appendChild(document.createElement("span"));
-      span.classList.add(`${tabClass}-${el}`);
+      span.classList.add(`${CLASSNAMES.TAB}-${el}`);
       this.tabElements[el] = span;
     }
 
     this.setTitle(this.title);
     this.setBadge(this.badge);
     this.setIcon(this.iconURL, this.icon);
-    this.initTabButtons();
+    this.initTabCloseButton();
     this.initTabClickHandler();
 
     this.tabGroup.tabContainer.appendChild(this.tab);
   }
 
-  private initTabButtons() {
-    const container = this.tabElements.buttons;
-    const tabClass = this.tabGroup.options.tabClass;
+  private initTabCloseButton() {
+    const container = this.tabElements.close;
     if (this.closable) {
       const button = container.appendChild(document.createElement("button"));
-      button.classList.add(`${tabClass}-button-close`);
       button.innerHTML = this.tabGroup.options.closeButtonText;
       button.addEventListener("click", this.close.bind(this, false), false);
     }
@@ -391,7 +391,7 @@ class Tab extends EventTarget {
 
     this.webview.addEventListener("dom-ready", tabWebviewDomReadyHandler.bind(this), false);
 
-    this.webview.classList.add(this.tabGroup.options.viewClass);
+    this.webview.classList.add(CLASSNAMES.VIEW);
     if (this.webviewAttributes) {
       const attrs = this.webviewAttributes;
       for (let key in attrs) {

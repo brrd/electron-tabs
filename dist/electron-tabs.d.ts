@@ -6,8 +6,6 @@ interface TabGroupOptions {
     newTabButtonText: string;
     sortable: boolean;
     sortableOptions?: Sortable.Options;
-    tabClass: string;
-    viewClass: string;
     visibilityThreshold: number;
 }
 interface TabOptions {

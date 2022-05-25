@@ -2499,10 +2499,19 @@ var $64afbd09cd65a300$export$2e2bcd8739ae039 = $64afbd09cd65a300$export$31b3ca70
 
 
 var $0648b347057451f2$exports = {};
-$0648b347057451f2$exports = ":host {\n  --tabgroup-background: #e7eaed;\n  --tab-font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  --tab-font-size: 13px;\n  --tab-background: #e7eaed;\n  --tab-color: #696a6c;\n  --tab-border-color: #dadce0;\n  --tab-transition: background-color 150ms ease-out;\n  --tab-cursor: pointer;\n  --tab-active-color: currentcolor;\n  --tab-active-background: #fff;\n  --tag-hover-color: currentcolor;\n  --tag-hover-background: #f1f3f4;\n  --tab-flash-color: #696a6c;\n  --tab-flash-background: linear-gradient(to bottom, #fff3aa 0%, #ffe325 100%);\n  --button-font-size: 15px;\n  --button-background: none;\n  --button-color: #696a6c;\n  --button-hover-background: #dadce0;\n  --button-hover-color: #383a3e;\n  --button-border-radius: 50%;\n  --button-cursor: pointer;\n  --badge-background: red;\n}\n\nwebview {\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n\n.etabs {\n  font-family: var(--tab-font-family);\n  text-rendering: optimizelegibility;\n  font-feature-settings: \"liga\", \"clig\", \"kern\";\n}\n\n.etabs-tabgroup {\n  background: var(--tabgroup-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  border-top: 1px solid var(--tab-border-color);\n  font-size: var(--tab-font-size);\n  width: 100%;\n  height: 32px;\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n}\n\n.etabs-tabgroup.visible {\n  display: flex;\n}\n\n.etabs-tabs {\n  height: 100%;\n}\n\n.etabs-tab {\n  background: var(--tab-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  color: var(--tab-color);\n  cursor: var(--tab-cursor);\n  font-size: var(--tab-font-size);\n  transition: var(--tab-transition);\n  box-sizing: border-box;\n  height: 100%;\n  padding: 5px 9px;\n  display: none;\n  position: relative;\n}\n\n.etabs-tab:first-child {\n  border-left: none;\n}\n\n.etabs-tab.visible {\n  display: inline-block;\n}\n\n.etabs-tab.active {\n  color: var(--tab-active-color);\n  background: var(--tab-active-background);\n  border-left: 1px solid var(--tab-border-color);\n  border-right: 1px solid var(--tab-border-color);\n  box-shadow: none;\n  padding-left: 8px;\n  padding-right: 8px;\n}\n\n.etabs-tab.active:last-child {\n  border-right: none;\n}\n\n.etabs-tab.flash {\n  background: var(--tab-flash-background);\n  color: var(--tab-flash-color);\n}\n\n.etabs-tab.visible:not(.active) + .etabs-tab.visible:not(.active) {\n  border-left: 1px solid var(--tab-border-color);\n  padding-left: 8px;\n}\n\n.etabs-tab:not(.active):hover {\n  background: var(--tab-hover-background);\n  color: var(--tab-hover-color);\n}\n\n.etabs-tab-badge {\n  background: var(--badge-background);\n  text-align: center;\n  border-radius: 50%;\n  padding: 0 5px;\n  font-size: 10px;\n  position: absolute;\n  top: -7px;\n  right: 0;\n}\n\n.etabs-tab-badge.hidden {\n  display: none;\n}\n\n.etabs-tab-icon {\n  height: 16px;\n  display: inline-block;\n}\n\n.etabs-tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.etabs-tab-title, .etabs-tab-buttons {\n  margin-left: 10px;\n  display: inline-block;\n}\n\n.etabs-tab-buttons button {\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  color: var(--button-color);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  padding: 1px 0 0;\n  display: inline-block;\n}\n\n.etabs-tab-buttons button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.etabs-buttons {\n  border-left: 1px solid var(--tab-border-color);\n  padding: 5px;\n  display: flex;\n}\n\n.etabs-buttons button {\n  color: var(--button-color);\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  margin: 0;\n  padding: 1px 0 0;\n  font-family: inherit;\n  line-height: 1;\n  display: block;\n}\n\n.etabs-buttons button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.etabs-views {\n  height: calc(100vh - 33px);\n  position: relative;\n}\n\n.etab-view {\n  position: relative;\n}\n\n";
+$0648b347057451f2$exports = ":host {\n  --tabgroup-background: #e7eaed;\n  --tab-font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  --tab-font-size: 13px;\n  --tab-background: #e7eaed;\n  --tab-color: #696a6c;\n  --tab-border-color: #dadce0;\n  --tab-transition: background-color 150ms ease-out;\n  --tab-cursor: pointer;\n  --tab-active-color: currentcolor;\n  --tab-active-background: #fff;\n  --tag-hover-color: currentcolor;\n  --tag-hover-background: #f1f3f4;\n  --tab-flash-color: #696a6c;\n  --tab-flash-background: linear-gradient(to bottom, #fff3aa 0%, #ffe325 100%);\n  --button-font-size: 15px;\n  --button-background: none;\n  --button-color: #696a6c;\n  --button-hover-background: #dadce0;\n  --button-hover-color: #383a3e;\n  --button-border-radius: 50%;\n  --button-cursor: pointer;\n  --badge-background: red;\n}\n\nwebview {\n  visibility: hidden;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n\nwebview.visible {\n  visibility: visible;\n}\n\n.etabs {\n  font-family: var(--tab-font-family);\n  text-rendering: optimizelegibility;\n  font-feature-settings: \"liga\", \"clig\", \"kern\";\n}\n\n.nav {\n  background: var(--tabgroup-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  border-top: 1px solid var(--tab-border-color);\n  font-size: var(--tab-font-size);\n  width: 100%;\n  height: 32px;\n  cursor: default;\n  -webkit-user-select: none;\n  user-select: none;\n  display: none;\n}\n\n.nav.visible {\n  display: flex;\n}\n\n.tabs {\n  height: 100%;\n}\n\n.tab {\n  background: var(--tab-background);\n  box-shadow: inset 0 -1px var(--tab-border-color);\n  color: var(--tab-color);\n  cursor: var(--tab-cursor);\n  font-size: var(--tab-font-size);\n  transition: var(--tab-transition);\n  box-sizing: border-box;\n  height: 100%;\n  padding: 5px 9px;\n  display: none;\n  position: relative;\n}\n\n.tab:first-child {\n  border-left: none;\n}\n\n.tab.visible {\n  display: inline-block;\n}\n\n.tab.active {\n  color: var(--tab-active-color);\n  background: var(--tab-active-background);\n  border-left: 1px solid var(--tab-border-color);\n  border-right: 1px solid var(--tab-border-color);\n  box-shadow: none;\n  padding-left: 8px;\n  padding-right: 8px;\n}\n\n.tab.active:last-child {\n  border-right: none;\n}\n\n.tab.flash {\n  background: var(--tab-flash-background);\n  color: var(--tab-flash-color);\n}\n\n.tab.visible:not(.active) + .tab.visible:not(.active) {\n  border-left: 1px solid var(--tab-border-color);\n  padding-left: 8px;\n}\n\n.tab:not(.active):hover {\n  background: var(--tab-hover-background);\n  color: var(--tab-hover-color);\n}\n\n.tab-badge {\n  background: var(--badge-background);\n  text-align: center;\n  border-radius: 50%;\n  padding: 0 5px;\n  font-size: 10px;\n  position: absolute;\n  top: -7px;\n  right: 0;\n}\n\n.tab-badge.hidden {\n  display: none;\n}\n\n.tab-icon {\n  height: 16px;\n  display: inline-block;\n}\n\n.tab-icon img {\n  max-width: 16px;\n  max-height: 16px;\n}\n\n.tab-title, .tab-close {\n  margin-left: 10px;\n  display: inline-block;\n}\n\n.tab-close button {\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  color: var(--button-color);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  padding: 1px 0 0;\n  display: inline-block;\n}\n\n.tab-close button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.buttons {\n  border-left: 1px solid var(--tab-border-color);\n  padding: 5px;\n  display: flex;\n}\n\n.buttons button {\n  color: var(--button-color);\n  background: var(--button-background);\n  border-radius: var(--button-border-radius);\n  cursor: var(--button-cursor);\n  font-size: var(--button-font-size);\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  border: none;\n  margin: 0;\n  padding: 1px 0 0;\n  font-family: inherit;\n  line-height: 1;\n  display: block;\n}\n\n.buttons button:hover {\n  color: var(--button-hover-color);\n  background: var(--button-hover-background);\n}\n\n.views {\n  height: calc(100vh - 33px);\n  position: relative;\n}\n\n";
 
 
 if (!document) throw Error("electron-tabs module must be called in renderer process");
+const $eda442ba39f881a8$var$CLASSNAMES = {
+    ROOT: "etabs",
+    NAV: "nav",
+    TABS: "tabs",
+    TAB: "tab",
+    BUTTONS: "buttons",
+    VIEWS: "views",
+    VIEW: "view"
+};
 function $eda442ba39f881a8$var$emit(emitter, type, args) {
     if (type === "ready") emitter.isReady = true;
     emitter.dispatchEvent(new CustomEvent(type, {
@@ -2530,8 +2539,6 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
             newTabButton: !!this.getAttribute("new-tab-button") === true || false,
             newTabButtonText: this.getAttribute("new-tab-button-text") || "&#65291;",
             sortable: !!this.getAttribute("sortable") === true || false,
-            tabClass: this.getAttribute("tab-class") || "etabs-tab",
-            viewClass: this.getAttribute("view-class") || "etabs-view",
             visibilityThreshold: Number(this.getAttribute("visibility-threshold")) || 0
         };
         this.tabs = [];
@@ -2563,26 +2570,25 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
         });
         this.shadow = shadow;
         const wrapper = document.createElement("div");
-        wrapper.setAttribute("class", "etabs");
-        const tabgroup = document.createElement("div");
-        tabgroup.setAttribute("class", "etabs-tabgroup");
+        wrapper.setAttribute("class", $eda442ba39f881a8$var$CLASSNAMES.ROOT);
+        const tabgroup = document.createElement("nav");
+        tabgroup.setAttribute("class", $eda442ba39f881a8$var$CLASSNAMES.NAV);
         wrapper.appendChild(tabgroup);
         const tabContainer = document.createElement("div");
-        tabContainer.setAttribute("class", "etabs-tabs");
+        tabContainer.setAttribute("class", $eda442ba39f881a8$var$CLASSNAMES.TABS);
         tabgroup.appendChild(tabContainer);
         this.tabContainer = tabContainer;
         const buttonContainer = document.createElement("div");
-        buttonContainer.setAttribute("class", "etabs-buttons");
+        buttonContainer.setAttribute("class", $eda442ba39f881a8$var$CLASSNAMES.BUTTONS);
         tabgroup.appendChild(buttonContainer);
         this.buttonContainer = buttonContainer;
         if (this.options.newTabButton) {
             const button = this.buttonContainer.appendChild(document.createElement("button"));
-            button.classList.add(`${this.options.tabClass}-button-new`);
             button.innerHTML = this.options.newTabButtonText;
             button.addEventListener("click", this.addTab.bind(this, undefined), false);
         }
         const viewContainer = document.createElement("div");
-        viewContainer.setAttribute("class", "etabs-views");
+        viewContainer.setAttribute("class", $eda442ba39f881a8$var$CLASSNAMES.VIEWS);
         wrapper.appendChild(viewContainer);
         this.viewContainer = viewContainer;
         const style = document.createElement("style");
@@ -2709,33 +2715,29 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
         });
     }
     initTab() {
-        const tabClass = this.tabGroup.options.tabClass;
-        // Create tab element
         const tab = this.tab = document.createElement("div");
-        tab.classList.add(tabClass);
+        tab.classList.add($eda442ba39f881a8$var$CLASSNAMES.TAB);
         for (let el of [
             "icon",
             "title",
-            "buttons",
+            "close",
             "badge"
         ]){
             const span = tab.appendChild(document.createElement("span"));
-            span.classList.add(`${tabClass}-${el}`);
+            span.classList.add(`${$eda442ba39f881a8$var$CLASSNAMES.TAB}-${el}`);
             this.tabElements[el] = span;
         }
         this.setTitle(this.title);
         this.setBadge(this.badge);
         this.setIcon(this.iconURL, this.icon);
-        this.initTabButtons();
+        this.initTabCloseButton();
         this.initTabClickHandler();
         this.tabGroup.tabContainer.appendChild(this.tab);
     }
-    initTabButtons() {
-        const container = this.tabElements.buttons;
-        const tabClass = this.tabGroup.options.tabClass;
+    initTabCloseButton() {
+        const container = this.tabElements.close;
         if (this.closable) {
             const button = container.appendChild(document.createElement("button"));
-            button.classList.add(`${tabClass}-button-close`);
             button.innerHTML = this.tabGroup.options.closeButtonText;
             button.addEventListener("click", this.close.bind(this, false), false);
         }
@@ -2770,7 +2772,7 @@ class $eda442ba39f881a8$var$Tab extends EventTarget {
             this.emit("webview-dom-ready", this);
         };
         this.webview.addEventListener("dom-ready", tabWebviewDomReadyHandler.bind(this), false);
-        this.webview.classList.add(this.tabGroup.options.viewClass);
+        this.webview.classList.add($eda442ba39f881a8$var$CLASSNAMES.VIEW);
         if (this.webviewAttributes) {
             const attrs = this.webviewAttributes;
             for(let key in attrs){
