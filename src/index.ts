@@ -1,4 +1,5 @@
 import Sortable from "sortablejs";
+// @ts-ignore
 import styles from "bundle-text:./style.css";
 
 if (!document) {
