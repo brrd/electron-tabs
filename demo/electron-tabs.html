@@ -44,8 +44,11 @@
   });
 
   tabGroup.addTab({
-    title: "Local Page",
-    src: "page.html"
+    title: "Flashed Tab",
+    src: "page.html",
+    ready: function(tab) {
+      tab.flash();
+    }
   });
 </script>
 </body>

@@ -8,14 +8,16 @@
   --tab-background: #E7EAED;
   --tab-color: #696A6C;
   --tab-border-color: #DADCE0;
-  --tab-transition: background-color 150ms ease-out;
+  --tab-transition: background-color 200ms ease-out, color 200ms ease-out;
   --tab-cursor: pointer;
   --tab-active-color: currentcolor;
   --tab-active-background: #FFF;
   --tag-hover-color: currentcolor;
   --tag-hover-background: #F1F3F4;
   --tab-flash-color: #696A6C;
-  --tab-flash-background: linear-gradient(to bottom, rgba(255,243,170,1) 0%,rgba(255,227,37,1) 100%);
+  --tab-flash-background: #fff3aa;
+  --tab-flash-hover-color: #696A6C;
+  --tab-flash-hover-background: #ffe325;
   --button-font-size: 15px;
   --button-background: none;
   --button-color: #696A6C;
@@ -108,6 +110,11 @@ webview.visible {
 .tab.flash {
   background: var(--tab-flash-background);
   color: var(--tab-flash-color);
+}
+
+.tab.tab.flash:hover {
+  background: var(--tab-flash-hover-background);
+  color: var(--tab-flash-hover-color);
 }
 
 .tab.visible:not(.active)+.tab.visible:not(.active) {
