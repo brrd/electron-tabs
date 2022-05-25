@@ -8,9 +8,14 @@
 
 <tab-group new-tab-button="true" sortable="true">
   <style>
-    /* Add custom style */
+    /* Add custom styles */
     .my-badge {
       background-color: #327BB1;
+    }
+    .my-custom-tab {
+      color: red;
+      font-style: italic;
+      font-weight: bold;
     }
   </style>
 </tab-group>
@@ -48,6 +53,14 @@
     src: "page.html",
     ready: function(tab) {
       tab.flash();
+    }
+  });
+
+  tabGroup.addTab({
+    title: "My Custom Class",
+    src: "page.html",
+    ready: function(tab) {
+      tab.element.classList.add("my-custom-tab");
     }
   });
 </script>
