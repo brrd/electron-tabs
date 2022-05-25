@@ -38,6 +38,7 @@ export class TabGroup extends HTMLElement {
     on(type: string, fn: (...detail: any[]) => void): void;
     once(type: string, fn: (detail: string) => void): void;
     connectedCallback(): void;
+    initSortable(): void;
     setDefaultTab(tab: TabOptions): void;
     addTab(args?: TabOptions | ((tabGroup: TabGroup) => TabOptions)): Tab;
     getTab(id: number): Tab;
@@ -81,7 +82,7 @@ export class Tab extends EventTarget {
     getBadge(): string;
     setIcon(iconURL: string, icon: string): this;
     getIcon(): string;
-    setPosition(newPosition: number): void;
+    setPosition(newPosition: number): this;
     getPosition(fromRight?: boolean): number;
     activate(): this;
     show(flag?: boolean): this;

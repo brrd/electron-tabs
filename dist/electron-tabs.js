@@ -2534,7 +2534,33 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
             viewClass: this.getAttribute("view-class") || "etabs-view",
             visibilityThreshold: Number(this.getAttribute("visibility-threshold")) || 0
         };
-        // Create custom element
+        this.tabs = [];
+        this.newTabId = 0;
+        this.createComponent();
+        this.initVisibility();
+        if (this.options.sortable) this.initSortable();
+        this.emit("ready", this);
+    }
+    emit(type, ...args) {
+        return $eda442ba39f881a8$var$emit(this, type, args);
+    }
+    on(type, fn) {
+        return $eda442ba39f881a8$var$on(this, type, fn);
+    }
+    once(type, fn) {
+        return $eda442ba39f881a8$var$on(this, type, fn, {
+            once: true
+        });
+    }
+    connectedCallback() {
+        // Support custom styles
+        const style = this.querySelector("style");
+        if (style) {
+            const clone = style.cloneNode(true);
+            this.shadow.appendChild(clone);
+        }
+    }
+    createComponent() {
         const shadow = this.attachShadow({
             mode: "open"
         });
@@ -2552,6 +2578,12 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
         buttonContainer.setAttribute("class", "etabs-buttons");
         tabgroup.appendChild(buttonContainer);
         this.buttonContainer = buttonContainer;
+        if (this.options.newTabButton) {
+            const button = this.buttonContainer.appendChild(document.createElement("button"));
+            button.classList.add(`${this.options.tabClass}-button-new`);
+            button.innerHTML = this.options.newTabButtonText;
+            button.addEventListener("click", this.addTab.bind(this, undefined), false);
+        }
         const viewContainer = document.createElement("div");
         viewContainer.setAttribute("class", "etabs-views");
         wrapper.appendChild(viewContainer);
@@ -2560,49 +2592,6 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
         style.textContent = (/*@__PURE__*/$parcel$interopDefault($0648b347057451f2$exports));
         shadow.appendChild(style);
         shadow.appendChild(wrapper);
-        this.tabs = [];
-        this.newTabId = 0;
-        this.initNewTabButton();
-        this.initVisibility();
-        // Init sortable tabs
-        if (this.options.sortable) {
-            const initSortable = ()=>{
-                const options = Object.assign({
-                    direction: "horizontal",
-                    animation: 150,
-                    swapThreshold: 0.20
-                }, this.options.sortableOptions);
-                new $64afbd09cd65a300$export$2e2bcd8739ae039(this.tabContainer, options);
-            };
-            if ($64afbd09cd65a300$export$2e2bcd8739ae039) initSortable();
-            else document.addEventListener("DOMContentLoaded", initSortable);
-        }
-        this.emit("ready", this);
-    }
-    emit(type, ...args) {
-        return $eda442ba39f881a8$var$emit(this, type, args);
-    }
-    on(type, fn) {
-        return $eda442ba39f881a8$var$on(this, type, fn);
-    }
-    once(type, fn) {
-        return $eda442ba39f881a8$var$on(this, type, fn, {
-            once: true
-        });
-    }
-    connectedCallback() {
-        const style = this.querySelector("style");
-        if (style) {
-            const clone = style.cloneNode(true);
-            this.shadow.appendChild(clone);
-        }
-    }
-    initNewTabButton() {
-        if (!this.options.newTabButton) return;
-        const button = this.buttonContainer.appendChild(document.createElement("button"));
-        button.classList.add(`${this.options.tabClass}-button-new`);
-        button.innerHTML = this.options.newTabButtonText;
-        button.addEventListener("click", this.addTab.bind(this, undefined), false);
     }
     initVisibility() {
         function toggleTabsVisibility(tab, tabGroup) {
@@ -2613,6 +2602,18 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
         }
         this.on("tab-added", toggleTabsVisibility);
         this.on("tab-removed", toggleTabsVisibility);
+    }
+    initSortable() {
+        const createNewSortable = ()=>{
+            const options = Object.assign({
+                direction: "horizontal",
+                animation: 150,
+                swapThreshold: 0.20
+            }, this.options.sortableOptions);
+            new $64afbd09cd65a300$export$2e2bcd8739ae039(this.tabContainer, options);
+        };
+        if ($64afbd09cd65a300$export$2e2bcd8739ae039) createNewSortable();
+        else document.addEventListener("DOMContentLoaded", createNewSortable);
     }
     setDefaultTab(tab) {
         this.options.defaultTab = tab;

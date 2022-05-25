@@ -72,7 +72,40 @@ class TabGroup extends HTMLElement {
       visibilityThreshold: Number(this.getAttribute("visibility-threshold")) || 0
     };
 
-    // Create custom element
+    this.tabs = [];
+    this.newTabId = 0;
+
+    this.createComponent();
+    this.initVisibility();
+    if (this.options.sortable) {
+      this.initSortable();
+    }
+
+    this.emit("ready", this);
+  }
+
+  emit(type: string, ...args: any[]) {
+    return emit(this, type, args);
+  }
+
+  on(type: string, fn: (...detail: any[]) => void) {
+    return on(this, type, fn);
+  }
+
+  once(type: string, fn: (detail: string) => void) {
+    return on(this, type, fn, { once: true });
+  }
+
+  connectedCallback() {
+    // Support custom styles
+    const style = this.querySelector("style");
+    if (style) {
+      const clone = style.cloneNode(true);
+      this.shadow.appendChild(clone);
+    }
+  }
+
+  private createComponent() {
     const shadow = this.attachShadow({mode: "open"});
     this.shadow = shadow;
 
@@ -93,6 +126,13 @@ class TabGroup extends HTMLElement {
     tabgroup.appendChild(buttonContainer);
     this.buttonContainer = buttonContainer;
 
+    if (this.options.newTabButton) {
+      const button = this.buttonContainer.appendChild(document.createElement("button"));
+      button.classList.add(`${this.options.tabClass}-button-new`);
+      button.innerHTML = this.options.newTabButtonText;
+      button.addEventListener("click", this.addTab.bind(this, undefined), false);
+    }
+
     const viewContainer = document.createElement("div");
     viewContainer.setAttribute("class", "etabs-views");
     wrapper.appendChild(viewContainer);
@@ -103,59 +143,6 @@ class TabGroup extends HTMLElement {
 
     shadow.appendChild(style);
     shadow.appendChild(wrapper);
-
-    this.tabs = [];
-    this.newTabId = 0;
-    this.initNewTabButton();
-    this.initVisibility();
-
-    // Init sortable tabs
-    if (this.options.sortable) {
-      const initSortable = () => {
-        const options = Object.assign({
-          direction: "horizontal",
-          animation: 150,
-          swapThreshold: 0.20
-        }, this.options.sortableOptions);
-        new Sortable(this.tabContainer, options);
-      };
-
-      if (Sortable) {
-        initSortable();
-      } else {
-        document.addEventListener("DOMContentLoaded", initSortable);
-      }
-    }
-
-    this.emit("ready", this);
-  }
-
-  emit(type: string, ...args: any[]) {
-    return emit(this, type, args);
-  }
-
-  on(type: string, fn: (...detail: any[]) => void) {
-    return on(this, type, fn);
-  }
-
-  once(type: string, fn: (detail: string) => void) {
-    return on(this, type, fn, { once: true });
-  }
-
-  connectedCallback() {
-    const style = this.querySelector("style");
-    if (style) {
-      const clone = style.cloneNode(true);
-      this.shadow.appendChild(clone);
-    }
-  }
-
-  private initNewTabButton() {
-    if (!this.options.newTabButton) return;
-    const button = this.buttonContainer.appendChild(document.createElement("button"));
-    button.classList.add(`${this.options.tabClass}-button-new`);
-    button.innerHTML = this.options.newTabButtonText;
-    button.addEventListener("click", this.addTab.bind(this, undefined), false);
   }
 
   private initVisibility() {
@@ -171,6 +158,23 @@ class TabGroup extends HTMLElement {
 
     this.on("tab-added", toggleTabsVisibility);
     this.on("tab-removed", toggleTabsVisibility);
+  }
+
+  initSortable() {
+    const createNewSortable = () => {
+      const options = Object.assign({
+        direction: "horizontal",
+        animation: 150,
+        swapThreshold: 0.20
+      }, this.options.sortableOptions);
+      new Sortable(this.tabContainer, options);
+    };
+
+    if (Sortable) {
+      createNewSortable();
+    } else {
+      document.addEventListener("DOMContentLoaded", createNewSortable);
+    }
   }
 
   setDefaultTab(tab: TabOptions) {
