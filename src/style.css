@@ -23,6 +23,7 @@
   --button-cursor: pointer;
   --badge-background: #383a3e;
   --badge-color: #fff;
+  --close-button-visibility: visible;
 }
 
 /* STYLES */
@@ -161,6 +162,11 @@ webview.visible {
   height: 20px;
   text-align: center;
   padding: 1px 0 0 0;
+  visibility: var(--close-button-visibility);
+}
+
+.tab.active .tab-close button {
+  visibility: visible;
 }
 
 .tab-close button:hover {
