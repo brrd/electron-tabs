@@ -578,3 +578,5 @@ class Tab extends EventTarget {
 }
 
 customElements.define("tab-group", TabGroup);
+
+export type { TabGroup, Tab };
