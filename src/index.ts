@@ -100,8 +100,7 @@ class TabGroup extends HTMLElement {
     // Support custom styles
     const style = this.querySelector("style");
     if (style) {
-      const clone = style.cloneNode(true);
-      this.shadow.appendChild(clone);
+      this.shadow.appendChild(style);
     }
   }
 

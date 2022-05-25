@@ -2555,10 +2555,7 @@ class $eda442ba39f881a8$var$TabGroup extends HTMLElement {
     connectedCallback() {
         // Support custom styles
         const style = this.querySelector("style");
-        if (style) {
-            const clone = style.cloneNode(true);
-            this.shadow.appendChild(clone);
-        }
+        if (style) this.shadow.appendChild(style);
     }
     createComponent() {
         const shadow = this.attachShadow({
