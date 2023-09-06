@@ -228,7 +228,7 @@ class TabGroup extends HTMLElement {
 
   getTabByRelPosition(position: number) {
     position = this.getActiveTab().getPosition() + position;
-    if (position <= 0) {
+    if (position < 0) {
       return null;
     }
     return this.getTabByPosition(position);
