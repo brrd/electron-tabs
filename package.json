@@ -1,6 +1,6 @@
 {
   "name": "electron-tabs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple tabs for Electron applications",
   "main": "dist/electron-tabs.js",
   "types": "dist/electron-tabs.d.ts",
