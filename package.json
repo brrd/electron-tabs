@@ -32,7 +32,7 @@
     "@parcel/transformer-inline-string": "^2.5.0",
     "@parcel/transformer-typescript-types": "^2.5.0",
     "@types/sortablejs": "^1.13.0",
-    "electron": "^17.1.2",
+    "electron": "^18.3.7",
     "parcel": "^2.5.0",
     "postcss": "^8.4.14",
     "sortablejs": "^1.15.0",
