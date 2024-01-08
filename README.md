@@ -1,3 +1,9 @@
+# electron-tabs is discontinued
+
+Thank you for your support and contributions all these years.
+
+---
+
 # electron-tabs
 
 > Simple tabs for Electron applications
